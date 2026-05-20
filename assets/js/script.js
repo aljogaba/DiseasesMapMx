@@ -17,12 +17,22 @@ Promise.all([
         skipEmptyLines: true
     });
 
+    // Normalize function
+    function normalizeText(text) {
+        return text
+            ?.trim()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+    }
+
     // Count sequences per municipality
     const municipalityCounts = {};
 
     parsed.data.forEach(row => {
 
-        const municipality = row.municipality?.trim();
+        const municipality =
+            normalizeText(row.municipality);
 
         if (municipality) {
 
@@ -33,7 +43,9 @@ Promise.all([
 
     });
 
-    // Function for color scale
+    console.log(municipalityCounts);
+
+    // Color scale
     function getColor(count) {
         return count > 15 ? '#08306b' :
                count > 10 ? '#2171b5' :
@@ -42,13 +54,13 @@ Promise.all([
                             '#f7fbff';
     }
 
-    // Add GeoJSON layer
+    // Add GeoJSON
     L.geoJSON(geojsonData, {
 
         style: function(feature) {
 
             const municipality =
-                feature.properties.NOMGEO;
+                normalizeText(feature.properties.NOMGEO);
 
             const count =
                 municipalityCounts[municipality] || 0;
@@ -65,14 +77,17 @@ Promise.all([
 
         onEachFeature: function(feature, layer) {
 
-            const municipality =
+            const municipalityOriginal =
                 feature.properties.NOMGEO;
+
+            const municipality =
+                normalizeText(municipalityOriginal);
 
             const count =
                 municipalityCounts[municipality] || 0;
 
             layer.bindPopup(`
-                <strong>${municipality}</strong><br>
+                <strong>${municipalityOriginal}</strong><br>
                 Sequences: ${count}
             `);
 
