@@ -51,3 +51,19 @@ nav a {
     margin: auto;
     line-height: 1.6;
 }
+
+.page-content {
+    padding: 80px 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.page-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.page-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
