@@ -29,18 +29,52 @@
 
 <main>
 
-    <section class="page-content">
+    <section class="dashboard-container">
 
-        <h2>Interactive Dashboard</h2>
+    <div class="stats-grid">
 
-        <p>
-            Geographic visualization of swine viral surveillance
-            in Jalisco, Mexico.
-        </p>
+        <div class="stat-card">
+            <h3>Total Sequences</h3>
+            <p id="totalSequences">0</p>
+        </div>
 
-        <div id="map"></div>
+        <div class="stat-card">
+            <h3>Municipalities</h3>
+            <p id="totalMunicipalities">0</p>
+        </div>
 
-    </section>
+        <div class="stat-card">
+            <h3>Most Common Lineage</h3>
+            <p id="topLineage">-</p>
+        </div>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="map-panel">
+            <h2>Geographic Surveillance</h2>
+            <div id="map"></div>
+        </div>
+
+        <div class="chart-panel">
+            <h2>Sequences by Lineage</h2>
+            <div id="lineageChart"></div>
+        </div>
+
+        <div class="chart-panel">
+            <h2>Sequences by Year</h2>
+            <div id="yearChart"></div>
+        </div>
+
+        <div class="chart-panel">
+            <h2>Sequences by Production Stage</h2>
+            <div id="stageChart"></div>
+        </div>
+
+    </div>
+
+</section>
 
 </main>
 
@@ -49,6 +83,8 @@
 
 <!-- PapaParse -->
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <!-- Custom JS -->
 <script src="assets/js/script.js"></script>
