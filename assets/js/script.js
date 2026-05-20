@@ -4,30 +4,80 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-fetch('maps/jalisco_municipios.geojson')
-    .then(response => response.json())
-    .then(data => {
+Promise.all([
+    fetch('maps/jalisco_municipios.geojson').then(res => res.json()),
+    fetch('assets/data/sequences.csv').then(res => res.text())
+])
 
-        L.geoJSON(data, {
-            style: {
-                color: '#1e3a8a',
-                weight: 1,
-                fillColor: '#60a5fa',
-                fillOpacity: 0.5
-            },
+.then(([geojsonData, csvData]) => {
 
-            onEachFeature: function(feature, layer) {
+    // Parse CSV
+    const parsed = Papa.parse(csvData, {
+        header: true,
+        skipEmptyLines: true
+    });
 
-                if (feature.properties) {
+    // Count sequences per municipality
+    const municipalityCounts = {};
 
-                    layer.bindPopup(
-                        `<strong>${feature.properties.NOMGEO || "Municipio"}</strong>`
-                    );
+    parsed.data.forEach(row => {
 
-                }
+        const municipality = row.municipality?.trim();
 
-            }
+        if (municipality) {
 
-        }).addTo(map);
+            municipalityCounts[municipality] =
+                (municipalityCounts[municipality] || 0) + 1;
+
+        }
 
     });
+
+    // Function for color scale
+    function getColor(count) {
+        return count > 15 ? '#08306b' :
+               count > 10 ? '#2171b5' :
+               count > 5  ? '#6baed6' :
+               count > 0  ? '#c6dbef' :
+                            '#f7fbff';
+    }
+
+    // Add GeoJSON layer
+    L.geoJSON(geojsonData, {
+
+        style: function(feature) {
+
+            const municipality =
+                feature.properties.NOMGEO;
+
+            const count =
+                municipalityCounts[municipality] || 0;
+
+            return {
+                fillColor: getColor(count),
+                weight: 1,
+                opacity: 1,
+                color: '#1f2937',
+                fillOpacity: 0.7
+            };
+
+        },
+
+        onEachFeature: function(feature, layer) {
+
+            const municipality =
+                feature.properties.NOMGEO;
+
+            const count =
+                municipalityCounts[municipality] || 0;
+
+            layer.bindPopup(`
+                <strong>${municipality}</strong><br>
+                Sequences: ${count}
+            `);
+
+        }
+
+    }).addTo(map);
+
+});
