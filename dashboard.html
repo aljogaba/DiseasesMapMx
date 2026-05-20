@@ -6,6 +6,10 @@
     <title>Dashboard | DiseasesMapMx</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 
 <body>
@@ -30,13 +34,21 @@
         <h2>Interactive Dashboard</h2>
 
         <p>
-            Porcine Reproductive and Respiratory Syndrome Virus and Porcine Circovirus Type 2
-            surveillance and molecular epidemiology.
+            Geographic visualization of swine viral surveillance
+            in Jalisco, Mexico.
         </p>
+
+        <div id="map"></div>
 
     </section>
 
 </main>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Custom JS -->
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>
