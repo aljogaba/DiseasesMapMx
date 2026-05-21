@@ -170,6 +170,56 @@ Plotly.newPlot('stageChart', [
 
 });
 
+// ======================
+// DATA TABLE
+// ======================
+
+const tableData = parsed.data.map(row => [
+
+    row.accession,
+
+    row.municipality,
+
+    row.year,
+
+    row.lineage,
+
+    row.production_stage,
+
+    row.gene,
+
+    row.detection,
+
+    row.vaccine,
+
+    row.RFLP,
+
+    `<a href="${row.genbank_url}"
+        target="_blank">View</a>`
+
+]);
+
+$('#sequenceTable').DataTable({
+
+    data: tableData,
+
+    pageLength: 10,
+
+    columns: [
+        { title: "Accession" },
+        { title: "Municipality" },
+        { title: "Year" },
+        { title: "Lineage" },
+        { title: "Production Stage" },
+        { title: "Gene" },
+        { title: "Detection" },
+        { title: "Vaccine" },
+        { title: "RFLP" },
+        { title: "GenBank" }
+    ]
+
+});
+
     // Color scale
     function getColor(count) {
         return count > 15 ? '#08306b' :
