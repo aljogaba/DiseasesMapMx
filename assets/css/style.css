@@ -485,3 +485,25 @@ body {
     }
 
 }
+
+@media (max-width: 900px) {
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    #map {
+
+        height: 500px;
+
+    }
+
+}

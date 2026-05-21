@@ -303,6 +303,8 @@ Promise.all([
 
         $('#sequenceTable').DataTable({
 
+            responsive: true,
+            
             data: tableData,
 
             pageLength: 10,
