@@ -340,11 +340,44 @@ Promise.all([
 
     }
 
-    // ======================
-    // GEOJSON LAYER
-    // ======================
+// ======================
+// MAP LAYER
+// ======================
 
-    L.geoJSON(geojsonData, {
+let geojsonLayer;
+
+// ======================
+// RENDER MAP
+// ======================
+
+function renderMap(data) {
+
+    // Remove old layer
+    if (geojsonLayer) {
+
+        map.removeLayer(geojsonLayer);
+
+    }
+
+    // Municipality counts
+    const municipalityCounts = {};
+
+    data.forEach(row => {
+
+        const municipality =
+            normalizeText(row.municipality);
+
+        if (municipality) {
+
+            municipalityCounts[municipality] =
+                (municipalityCounts[municipality] || 0) + 1;
+
+        }
+
+    });
+
+    // Create new layer
+    geojsonLayer = L.geoJSON(geojsonData, {
 
         style: function(feature) {
 
@@ -355,11 +388,17 @@ Promise.all([
                 municipalityCounts[municipality] || 0;
 
             return {
+
                 fillColor: getColor(count),
+
                 weight: 1,
+
                 opacity: 1,
+
                 color: '#1f2937',
+
                 fillOpacity: 0.7
+
             };
 
         },
@@ -376,13 +415,18 @@ Promise.all([
                 municipalityCounts[municipality] || 0;
 
             layer.bindPopup(`
+
                 <strong>${municipalityOriginal}</strong><br>
+
                 Sequences: ${count}
+
             `);
 
         }
 
     }).addTo(map);
+
+}
 
     // ======================
     // INITIAL RENDER
@@ -393,5 +437,7 @@ Promise.all([
     renderCharts(allData);
 
     renderTable(allData);
+
+    renderMap(allData);
 
 });
