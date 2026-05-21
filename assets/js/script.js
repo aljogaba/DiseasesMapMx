@@ -102,16 +102,66 @@ Promise.all([
     console.log(municipalityCounts);
 
     // ======================
-    // KPI CALCULATIONS
+    // RENDER KPIs
     // ======================
 
-    const totalSequences = allData.length;
+    function renderKPIs(data) {
 
-    const totalMunicipalities =
-        Object.keys(municipalityCounts).length;
+        const municipalityCounts = {};
+
+        data.forEach(row => {
+
+            const municipality =
+                normalizeText(row.municipality);
+
+            if (municipality) {
+
+                municipalityCounts[municipality] =
+                    (municipalityCounts[municipality] || 0) + 1;
+
+            }
+
+        });
+
+        const totalSequences = data.length;
+
+        const totalMunicipalities =
+            Object.keys(municipalityCounts).length;
+
+        const lineageCounts = {};
+
+        data.forEach(row => {
+
+            const lineage = row.lineage;
+
+            if (lineage) {
+
+                lineageCounts[lineage] =
+                    (lineageCounts[lineage] || 0) + 1;
+
+            }
+
+        });
+
+        const topLineage =
+            Object.entries(lineageCounts)
+            .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
+
+        document.getElementById('totalSequences').innerText =
+            totalSequences;
+
+        document.getElementById('totalMunicipalities').innerText =
+            totalMunicipalities;
+
+        document.getElementById('topLineage').innerText =
+            topLineage;
+
+    }
+
+    renderKPIs(allData);
 
     // ======================
-    // LINEAGE COUNTS
+    // LINEAGE CHART
     // ======================
 
     const lineageCounts = {};
@@ -128,31 +178,6 @@ Promise.all([
         }
 
     });
-
-    // ======================
-    // TOP LINEAGE
-    // ======================
-
-    const topLineage =
-        Object.entries(lineageCounts)
-        .sort((a, b) => b[1] - a[1])[0][0];
-
-    // ======================
-    // UPDATE KPI CARDS
-    // ======================
-
-    document.getElementById('totalSequences').innerText =
-        totalSequences;
-
-    document.getElementById('totalMunicipalities').innerText =
-        totalMunicipalities;
-
-    document.getElementById('topLineage').innerText =
-        topLineage;
-
-    // ======================
-    // LINEAGE CHART
-    // ======================
 
     Plotly.newPlot('lineageChart', [
 
