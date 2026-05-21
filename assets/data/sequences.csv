@@ -63,72 +63,72 @@ PZ201052,Porcine reproductive and respiratory syndrome virus,Zapotlán el Grande
 PZ201053,Porcine reproductive and respiratory syndrome virus,Zapotlán el Grande,A,2020,June,Nursery,5A,Tissue,Pig,,,1365,WG,NGS,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
 PZ201054,Porcine reproductive and respiratory syndrome virus,Zapotlán el Grande,A,2023,September,Weaned,5A,Tissue,Pig,,,1365,WG,NGS,yes,1_4_1,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
 PV235521,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,January,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235522,Porcine Circovirus Type 3,Tepatitlán de Morelos,B2,2023,February,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235523,Porcine Circovirus Type 4,Tepatitlán de Morelos,B2,2023,April,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235524,Porcine Circovirus Type 5,Tepatitlán de Morelos,B2,2023,May,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235525,Porcine Circovirus Type 6,Tepatitlán de Morelos,B3,2023,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235526,Porcine Circovirus Type 7,Tepatitlán de Morelos,B3,2023,September,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235527,Porcine Circovirus Type 8,Tepatitlán de Morelos,B3,2023,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235528,Porcine Circovirus Type 9,Tepatitlán de Morelos,B1,2023,November,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235529,Porcine Circovirus Type 10,Tepatitlán de Morelos,B2,2023,January,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235530,Porcine Circovirus Type 11,Tepatitlán de Morelos,B2,2023,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235531,Porcine Circovirus Type 12,Tepatitlán de Morelos,B2,2023,April,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235532,Porcine Circovirus Type 13,Tepatitlán de Morelos,B2,2023,May,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235533,Porcine Circovirus Type 14,Tepatitlán de Morelos,B1,2023,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235534,Porcine Circovirus Type 15,San Juan de los Lagos,B1,2023,September,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235535,Porcine Circovirus Type 16,San Juan de los Lagos,B1,2023,October,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235536,Porcine Circovirus Type 17,San Juan de los Lagos,B3,2023,March,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235537,Porcine Circovirus Type 18,San Juan de los Lagos,A,2026,April,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235538,Porcine Circovirus Type 19,San Juan de los Lagos,B2,2026,May,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235539,Porcine Circovirus Type 20,San Juan de los Lagos,B3,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235540,Porcine Circovirus Type 21,San Juan de los Lagos,B3,2026,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235541,Porcine Circovirus Type 22,San Juan de los Lagos,B2,2026,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235542,Porcine Circovirus Type 23,San Juan de los Lagos,B2,2026,November,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235543,Porcine Circovirus Type 24,San Juan de los Lagos,A,2026,December,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235544,Porcine Circovirus Type 25,San Juan de los Lagos,A,2026,January,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235545,Porcine Circovirus Type 26,San Juan de los Lagos,A,2026,February,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235546,Porcine Circovirus Type 27,San Juan de los Lagos,A,2026,April,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235547,Porcine Circovirus Type 28,San Juan de los Lagos,B1,2026,May,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235548,Porcine Circovirus Type 29,San Juan de los Lagos,B1,2026,June,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235549,Porcine Circovirus Type 30,San Juan de los Lagos,A,2026,September,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235550,Porcine Circovirus Type 31,Cuquío,A,2026,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235551,Porcine Circovirus Type 32,Cuquío,B2,2026,November,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235552,Porcine Circovirus Type 33,Cuquío,B2,2026,January,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235553,Porcine Circovirus Type 34,Cuquío,B2,2026,February,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235554,Porcine Circovirus Type 35,Cuquío,B2,2026,April,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235555,Porcine Circovirus Type 36,Cuquío,B1,2026,May,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235556,Porcine Circovirus Type 37,Cuquío,B1,2026,June,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235557,Porcine Circovirus Type 38,Cuquío,B1,2026,September,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235558,Porcine Circovirus Type 39,Cuquío,B1,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235559,Porcine Circovirus Type 40,Cuquío,B1,2026,September,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235560,Porcine Circovirus Type 41,Cuquío,B2,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235561,Porcine Circovirus Type 42,Cuquío,B2,2026,January,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235562,Porcine Circovirus Type 43,Cuquío,A,2026,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235563,Porcine Circovirus Type 44,Cuquío,A,2026,April,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235564,Porcine Circovirus Type 45,Cañadas de Obregón,A,2026,May,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235565,Porcine Circovirus Type 46,Cañadas de Obregón,A,2026,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235566,Porcine Circovirus Type 47,Cañadas de Obregón,A,2026,September,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235567,Porcine Circovirus Type 48,Cañadas de Obregón,A,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235568,Porcine Circovirus Type 49,Cañadas de Obregón,A,2026,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235569,Porcine Circovirus Type 50,Cañadas de Obregón,A,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235570,Porcine Circovirus Type 51,Cañadas de Obregón,A,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235571,Porcine Circovirus Type 52,Cañadas de Obregón,A,2021,September,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235572,Porcine Circovirus Type 53,Cañadas de Obregón,A,2021,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235573,Porcine Circovirus Type 54,Cañadas de Obregón,B1,2021,September,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235574,Porcine Circovirus Type 55,Cañadas de Obregón,B1,2021,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235575,Porcine Circovirus Type 56,Cañadas de Obregón,B1,2021,May,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235576,Porcine Circovirus Type 57,Cañadas de Obregón,A,2021,June,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235577,Porcine Circovirus Type 58,Cañadas de Obregón,B3,2021,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235578,Porcine Circovirus Type 59,Cañadas de Obregón,B2,2021,October,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235579,Porcine Circovirus Type 60,Cañadas de Obregón,B2,2021,November,Grower,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235580,Porcine Circovirus Type 61,Cañadas de Obregón,B2,2021,January,Finishing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235581,Porcine Circovirus Type 62,Cañadas de Obregón,B1,2021,February,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235582,Porcine Circovirus Type 63,Cañadas de Obregón,B1,2021,April,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235583,Porcine Circovirus Type 64,Atotonilco el Alto,B1,2021,May,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235584,Porcine Circovirus Type 65,Atotonilco el Alto,B1,2021,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235585,Porcine Circovirus Type 66,Atotonilco el Alto,B1,2021,September,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235586,Porcine Circovirus Type 67,Atotonilco el Alto,B1,2021,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235587,Porcine Circovirus Type 68,Atotonilco el Alto,A,2021,September,Grower,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235588,Porcine Circovirus Type 69,Atotonilco el Alto,A,2021,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235589,Porcine Circovirus Type 70,Atotonilco el Alto,A,2021,January,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235590,Porcine Circovirus Type 71,Atotonilco el Alto,A,2021,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235522,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,February,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235523,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,April,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235524,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,May,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235525,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235526,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,September,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235527,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235528,Porcine Circovirus Type 2,Tepatitlán de Morelos,B1,2023,November,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235529,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,January,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235530,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235531,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,April,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235532,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,May,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235533,Porcine Circovirus Type 2,Tepatitlán de Morelos,B1,2023,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235534,Porcine Circovirus Type 2,San Juan de los Lagos,B1,2023,September,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235535,Porcine Circovirus Type 2,San Juan de los Lagos,B1,2023,October,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235536,Porcine Circovirus Type 2,San Juan de los Lagos,B3,2023,March,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235537,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,April,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235538,Porcine Circovirus Type 2,San Juan de los Lagos,B2,2026,May,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235539,Porcine Circovirus Type 2,San Juan de los Lagos,B3,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235540,Porcine Circovirus Type 2,San Juan de los Lagos,B3,2026,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235541,Porcine Circovirus Type 2,San Juan de los Lagos,B2,2026,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235542,Porcine Circovirus Type 2,San Juan de los Lagos,B2,2026,November,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235543,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,December,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235544,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,January,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235545,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,February,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235546,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,April,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235547,Porcine Circovirus Type 2,San Juan de los Lagos,B1,2026,May,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235548,Porcine Circovirus Type 2,San Juan de los Lagos,B1,2026,June,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235549,Porcine Circovirus Type 2,San Juan de los Lagos,A,2026,September,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235550,Porcine Circovirus Type 2,Cuquío,A,2026,October,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235551,Porcine Circovirus Type 2,Cuquío,B2,2026,November,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235552,Porcine Circovirus Type 2,Cuquío,B2,2026,January,Nursery,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235553,Porcine Circovirus Type 2,Cuquío,B2,2026,February,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235554,Porcine Circovirus Type 2,Cuquío,B2,2026,April,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235555,Porcine Circovirus Type 2,Cuquío,B1,2026,May,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235556,Porcine Circovirus Type 2,Cuquío,B1,2026,June,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235557,Porcine Circovirus Type 2,Cuquío,B1,2026,September,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235558,Porcine Circovirus Type 2,Cuquío,B1,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235559,Porcine Circovirus Type 2,Cuquío,B1,2026,September,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235560,Porcine Circovirus Type 2,Cuquío,B2,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235561,Porcine Circovirus Type 2,Cuquío,B2,2026,January,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235562,Porcine Circovirus Type 2,Cuquío,A,2026,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235563,Porcine Circovirus Type 2,Cuquío,A,2026,April,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235564,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,May,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235565,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235566,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,September,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235567,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235568,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235569,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235570,Porcine Circovirus Type 2,Cañadas de Obregón,A,2026,June,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235571,Porcine Circovirus Type 2,Cañadas de Obregón,A,2021,September,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235572,Porcine Circovirus Type 2,Cañadas de Obregón,A,2021,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235573,Porcine Circovirus Type 2,Cañadas de Obregón,B1,2021,September,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235574,Porcine Circovirus Type 2,Cañadas de Obregón,B1,2021,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235575,Porcine Circovirus Type 2,Cañadas de Obregón,B1,2021,May,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235576,Porcine Circovirus Type 2,Cañadas de Obregón,A,2021,June,Finishing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235577,Porcine Circovirus Type 2,Cañadas de Obregón,B3,2021,September,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235578,Porcine Circovirus Type 2,Cañadas de Obregón,B2,2021,October,Weaned,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235579,Porcine Circovirus Type 2,Cañadas de Obregón,B2,2021,November,Grower,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235580,Porcine Circovirus Type 2,Cañadas de Obregón,B2,2021,January,Finishing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235581,Porcine Circovirus Type 2,Cañadas de Obregón,B1,2021,February,Nursery,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235582,Porcine Circovirus Type 2,Cañadas de Obregón,B1,2021,April,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235583,Porcine Circovirus Type 2,Atotonilco el Alto,B1,2021,May,Weaned,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235584,Porcine Circovirus Type 2,Atotonilco el Alto,B1,2021,June,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235585,Porcine Circovirus Type 2,Atotonilco el Alto,B1,2021,September,Growing,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235586,Porcine Circovirus Type 2,Atotonilco el Alto,B1,2021,June,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235587,Porcine Circovirus Type 2,Atotonilco el Alto,A,2021,September,Grower,A,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235588,Porcine Circovirus Type 2,Atotonilco el Alto,A,2021,June,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235589,Porcine Circovirus Type 2,Atotonilco el Alto,A,2021,January,Grower,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235590,Porcine Circovirus Type 2,Atotonilco el Alto,A,2021,February,Growing,D,Serum,Pig,,,260,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
