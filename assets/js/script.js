@@ -13,6 +13,49 @@ Promise.all([
 
     // Parse CSV
     const parsed = Papa.parse(csvData, {
+        const allData = parsed.data;
+        // ======================
+// FILTER OPTIONS
+// ======================
+
+function populateFilter(id, values) {
+
+    const select = document.getElementById(id);
+
+    [...new Set(values)]
+        .sort()
+        .forEach(value => {
+
+            if (value) {
+
+                const option =
+                    document.createElement('option');
+
+                option.value = value;
+                option.textContent = value;
+
+                select.appendChild(option);
+
+            }
+
+        });
+
+}
+
+populateFilter(
+    'virusFilter',
+    allData.map(row => row.virus)
+);
+
+populateFilter(
+    'yearFilter',
+    allData.map(row => row.year)
+);
+
+populateFilter(
+    'lineageFilter',
+    allData.map(row => row.lineage)
+);
         header: true,
         skipEmptyLines: true
     });

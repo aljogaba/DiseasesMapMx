@@ -140,3 +140,18 @@ body {
     width: 100%;
     font-size: 0.9rem;
 }
+
+.filters-panel {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filters-panel select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: white;
+    font-size: 1rem;
+}
