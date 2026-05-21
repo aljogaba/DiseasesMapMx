@@ -29,20 +29,31 @@ Promise.all([
     function populateFilter(id, values) {
 
         const select = document.getElementById(id);
+// Default option
+    const defaultOption =
+        document.createElement('option');
 
-        [...new Set(values)]
-            .sort()
-            .forEach(value => {
+    defaultOption.value = "";
 
-                if (value) {
+    defaultOption.textContent = "All";
 
-                    const option =
-                        document.createElement('option');
+    select.appendChild(defaultOption);
 
-                    option.value = value;
-                    option.textContent = value;
+    // Unique values
+    [...new Set(values)]
+        .sort()
+        .forEach(value => {
 
-                    select.appendChild(option);
+            if (value) {
+
+                const option =
+                    document.createElement('option');
+
+                option.value = value;
+
+                option.textContent = value;
+
+                select.appendChild(option);
 
                 }
 
