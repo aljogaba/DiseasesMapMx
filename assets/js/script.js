@@ -11,68 +11,81 @@ Promise.all([
 
 .then(([geojsonData, csvData]) => {
 
-    // Parse CSV
+    // ======================
+    // PARSE CSV
+    // ======================
+
     const parsed = Papa.parse(csvData, {
-        const allData = parsed.data;
-        // ======================
-// FILTER OPTIONS
-// ======================
-
-function populateFilter(id, values) {
-
-    const select = document.getElementById(id);
-
-    [...new Set(values)]
-        .sort()
-        .forEach(value => {
-
-            if (value) {
-
-                const option =
-                    document.createElement('option');
-
-                option.value = value;
-                option.textContent = value;
-
-                select.appendChild(option);
-
-            }
-
-        });
-
-}
-
-populateFilter(
-    'virusFilter',
-    allData.map(row => row.virus)
-);
-
-populateFilter(
-    'yearFilter',
-    allData.map(row => row.year)
-);
-
-populateFilter(
-    'lineageFilter',
-    allData.map(row => row.lineage)
-);
         header: true,
         skipEmptyLines: true
     });
 
-    // Normalize function
+    const allData = parsed.data;
+
+    // ======================
+    // FILTER OPTIONS
+    // ======================
+
+    function populateFilter(id, values) {
+
+        const select = document.getElementById(id);
+
+        [...new Set(values)]
+            .sort()
+            .forEach(value => {
+
+                if (value) {
+
+                    const option =
+                        document.createElement('option');
+
+                    option.value = value;
+                    option.textContent = value;
+
+                    select.appendChild(option);
+
+                }
+
+            });
+
+    }
+
+    populateFilter(
+        'virusFilter',
+        allData.map(row => row.virus)
+    );
+
+    populateFilter(
+        'yearFilter',
+        allData.map(row => row.year)
+    );
+
+    populateFilter(
+        'lineageFilter',
+        allData.map(row => row.lineage)
+    );
+
+    // ======================
+    // NORMALIZE TEXT
+    // ======================
+
     function normalizeText(text) {
+
         return text
             ?.trim()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase();
+
     }
 
-    // Count sequences per municipality
+    // ======================
+    // MUNICIPALITY COUNTS
+    // ======================
+
     const municipalityCounts = {};
 
-    parsed.data.forEach(row => {
+    allData.forEach(row => {
 
         const municipality =
             normalizeText(row.municipality);
@@ -88,191 +101,208 @@ populateFilter(
 
     console.log(municipalityCounts);
 
-// ======================
-// KPI CALCULATIONS
-// ======================
+    // ======================
+    // KPI CALCULATIONS
+    // ======================
 
-const totalSequences = parsed.data.length;
+    const totalSequences = allData.length;
 
-const totalMunicipalities =
-    Object.keys(municipalityCounts).length;
+    const totalMunicipalities =
+        Object.keys(municipalityCounts).length;
 
-// Lineage counts
-const lineageCounts = {};
+    // ======================
+    // LINEAGE COUNTS
+    // ======================
 
-parsed.data.forEach(row => {
+    const lineageCounts = {};
 
-    const lineage = row.lineage;
+    allData.forEach(row => {
 
-    if (lineage) {
+        const lineage = row.lineage;
 
-        lineageCounts[lineage] =
-            (lineageCounts[lineage] || 0) + 1;
+        if (lineage) {
 
-    }
+            lineageCounts[lineage] =
+                (lineageCounts[lineage] || 0) + 1;
 
-});
+        }
 
-// Top lineage
-const topLineage =
-    Object.entries(lineageCounts)
-    .sort((a, b) => b[1] - a[1])[0][0];
+    });
 
-// Update dashboard KPIs
-document.getElementById('totalSequences').innerText =
-    totalSequences;
+    // ======================
+    // TOP LINEAGE
+    // ======================
 
-document.getElementById('totalMunicipalities').innerText =
-    totalMunicipalities;
+    const topLineage =
+        Object.entries(lineageCounts)
+        .sort((a, b) => b[1] - a[1])[0][0];
 
-document.getElementById('topLineage').innerText =
-    topLineage;
+    // ======================
+    // UPDATE KPI CARDS
+    // ======================
 
-// ======================
-// LINEAGE CHART
-// ======================
+    document.getElementById('totalSequences').innerText =
+        totalSequences;
 
-Plotly.newPlot('lineageChart', [
+    document.getElementById('totalMunicipalities').innerText =
+        totalMunicipalities;
 
-    {
-        x: Object.keys(lineageCounts),
-        y: Object.values(lineageCounts),
-        type: 'bar'
-    }
+    document.getElementById('topLineage').innerText =
+        topLineage;
 
-], {
+    // ======================
+    // LINEAGE CHART
+    // ======================
 
-    margin: { t: 30 }
+    Plotly.newPlot('lineageChart', [
 
-});
+        {
+            x: Object.keys(lineageCounts),
+            y: Object.values(lineageCounts),
+            type: 'bar'
+        }
 
-// ======================
-// YEAR CHART
-// ======================
+    ], {
 
-const yearCounts = {};
+        margin: { t: 30 }
 
-parsed.data.forEach(row => {
+    });
 
-    const year = row.year;
+    // ======================
+    // YEAR CHART
+    // ======================
 
-    if (year) {
+    const yearCounts = {};
 
-        yearCounts[year] =
-            (yearCounts[year] || 0) + 1;
+    allData.forEach(row => {
 
-    }
+        const year = row.year;
 
-});
+        if (year) {
 
-Plotly.newPlot('yearChart', [
+            yearCounts[year] =
+                (yearCounts[year] || 0) + 1;
 
-    {
-        x: Object.keys(yearCounts),
-        y: Object.values(yearCounts),
-        type: 'scatter',
-        mode: 'lines+markers'
-    }
+        }
 
-], {
+    });
 
-    margin: { t: 30 }
+    Plotly.newPlot('yearChart', [
 
-});
+        {
+            x: Object.keys(yearCounts),
+            y: Object.values(yearCounts),
+            type: 'scatter',
+            mode: 'lines+markers'
+        }
 
-// ======================
-// PRODUCTION STAGE CHART
-// ======================
+    ], {
 
-const stageCounts = {};
+        margin: { t: 30 }
 
-parsed.data.forEach(row => {
+    });
 
-    const stage = row.production_stage;
+    // ======================
+    // STAGE CHART
+    // ======================
 
-    if (stage) {
+    const stageCounts = {};
 
-        stageCounts[stage] =
-            (stageCounts[stage] || 0) + 1;
+    allData.forEach(row => {
 
-    }
+        const stage = row.production_stage;
 
-});
+        if (stage) {
 
-Plotly.newPlot('stageChart', [
+            stageCounts[stage] =
+                (stageCounts[stage] || 0) + 1;
 
-    {
-        labels: Object.keys(stageCounts),
-        values: Object.values(stageCounts),
-        type: 'pie'
-    }
+        }
 
-], {
+    });
 
-    margin: { t: 30 }
+    Plotly.newPlot('stageChart', [
 
-});
+        {
+            labels: Object.keys(stageCounts),
+            values: Object.values(stageCounts),
+            type: 'pie'
+        }
 
-// ======================
-// DATA TABLE
-// ======================
+    ], {
 
-const tableData = parsed.data.map(row => [
+        margin: { t: 30 }
 
-    row.accession,
+    });
 
-    row.municipality,
+    // ======================
+    // DATA TABLE
+    // ======================
 
-    row.year,
+    const tableData = allData.map(row => [
 
-    row.lineage,
+        row.accession,
 
-    row.production_stage,
+        row.municipality,
 
-    row.gene,
+        row.year,
 
-    row.detection,
+        row.lineage,
 
-    row.vaccine,
+        row.production_stage,
 
-    row.RFLP,
+        row.gene,
 
-    `<a href="${row.genbank_url}"
-        target="_blank">View</a>`
+        row.detection,
 
-]);
+        row.vaccine,
 
-$('#sequenceTable').DataTable({
+        row.RFLP,
 
-    data: tableData,
+        `<a href="${row.genbank_url}"
+            target="_blank">View</a>`
 
-    pageLength: 10,
+    ]);
 
-    columns: [
-        { title: "Accession" },
-        { title: "Municipality" },
-        { title: "Year" },
-        { title: "Lineage" },
-        { title: "Production Stage" },
-        { title: "Gene" },
-        { title: "Detection" },
-        { title: "Vaccine" },
-        { title: "RFLP" },
-        { title: "GenBank" }
-    ]
+    $('#sequenceTable').DataTable({
 
-});
+        data: tableData,
 
-    // Color scale
+        pageLength: 10,
+
+        columns: [
+            { title: "Accession" },
+            { title: "Municipality" },
+            { title: "Year" },
+            { title: "Lineage" },
+            { title: "Production Stage" },
+            { title: "Gene" },
+            { title: "Detection" },
+            { title: "Vaccine" },
+            { title: "RFLP" },
+            { title: "GenBank" }
+        ]
+
+    });
+
+    // ======================
+    // COLOR SCALE
+    // ======================
+
     function getColor(count) {
+
         return count > 15 ? '#08306b' :
                count > 10 ? '#2171b5' :
                count > 5  ? '#6baed6' :
                count > 0  ? '#c6dbef' :
                             '#f7fbff';
+
     }
 
-    // Add GeoJSON
+    // ======================
+    // GEOJSON LAYER
+    // ======================
+
     L.geoJSON(geojsonData, {
 
         style: function(feature) {
