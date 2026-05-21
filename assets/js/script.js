@@ -80,28 +80,6 @@ Promise.all([
     }
 
     // ======================
-    // MUNICIPALITY COUNTS
-    // ======================
-
-    const municipalityCounts = {};
-
-    allData.forEach(row => {
-
-        const municipality =
-            normalizeText(row.municipality);
-
-        if (municipality) {
-
-            municipalityCounts[municipality] =
-                (municipalityCounts[municipality] || 0) + 1;
-
-        }
-
-    });
-
-    console.log(municipalityCounts);
-
-    // ======================
     // RENDER KPIs
     // ======================
 
@@ -267,52 +245,84 @@ Promise.all([
     }
 
     // ======================
-    // DATA TABLE
+    // RENDER TABLE
     // ======================
 
-    const tableData = allData.map(row => [
+    function renderTable(data) {
 
-        row.accession,
+        if ($.fn.DataTable.isDataTable('#sequenceTable')) {
 
-        row.municipality,
+            $('#sequenceTable').DataTable().destroy();
 
-        row.year,
+        }
 
-        row.lineage,
+        $('#sequenceTable tbody').empty();
 
-        row.production_stage,
+        const tableData = data.map(row => [
 
-        row.gene,
+            row.accession,
 
-        row.detection,
+            row.municipality,
 
-        row.vaccine,
+            row.year,
 
-        row.RFLP,
+            row.lineage,
 
-        `<a href="${row.genbank_url}"
-            target="_blank">View</a>`
+            row.production_stage,
 
-    ]);
+            row.gene,
 
-    $('#sequenceTable').DataTable({
+            row.detection,
 
-        data: tableData,
+            row.vaccine,
 
-        pageLength: 10,
+            row.RFLP,
 
-        columns: [
-            { title: "Accession" },
-            { title: "Municipality" },
-            { title: "Year" },
-            { title: "Lineage" },
-            { title: "Production Stage" },
-            { title: "Gene" },
-            { title: "Detection" },
-            { title: "Vaccine" },
-            { title: "RFLP" },
-            { title: "GenBank" }
-        ]
+            `<a href="${row.genbank_url}"
+                target="_blank">View</a>`
+
+        ]);
+
+        $('#sequenceTable').DataTable({
+
+            data: tableData,
+
+            pageLength: 10,
+
+            columns: [
+                { title: "Accession" },
+                { title: "Municipality" },
+                { title: "Year" },
+                { title: "Lineage" },
+                { title: "Production Stage" },
+                { title: "Gene" },
+                { title: "Detection" },
+                { title: "Vaccine" },
+                { title: "RFLP" },
+                { title: "GenBank" }
+            ]
+
+        });
+
+    }
+
+    // ======================
+    // MUNICIPALITY COUNTS
+    // ======================
+
+    const municipalityCounts = {};
+
+    allData.forEach(row => {
+
+        const municipality =
+            normalizeText(row.municipality);
+
+        if (municipality) {
+
+            municipalityCounts[municipality] =
+                (municipalityCounts[municipality] || 0) + 1;
+
+        }
 
     });
 
@@ -381,5 +391,7 @@ Promise.all([
     renderKPIs(allData);
 
     renderCharts(allData);
+
+    renderTable(allData);
 
 });
