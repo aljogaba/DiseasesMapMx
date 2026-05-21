@@ -35,7 +35,14 @@ Promise.all([
 
     defaultOption.value = "";
 
-    defaultOption.textContent = "All";
+    defaultOption.textContent =
+    id === 'virusFilter' ? 'Virus' :
+
+    id === 'yearFilter' ? 'Year' :
+
+    id === 'lineageFilter' ? 'Lineage' :
+
+    'All';
 
     select.appendChild(defaultOption);
 
