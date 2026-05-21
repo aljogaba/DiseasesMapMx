@@ -36,11 +36,11 @@ Promise.all([
     defaultOption.value = "";
 
     defaultOption.textContent =
-    id === 'virusFilter' ? 'Virus' :
+    id === 'virusFilter' ? 'All Viruses' :
 
-    id === 'yearFilter' ? 'Year' :
+    id === 'yearFilter' ? 'All Year' :
 
-    id === 'lineageFilter' ? 'Lineage' :
+    id === 'lineageFilter' ? 'All Lineage/Genotype' :
 
     'All';
 
