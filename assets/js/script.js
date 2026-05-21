@@ -428,6 +428,53 @@ function renderMap(data) {
 
 }
 
+// ======================
+// APPLY FILTERS
+// ======================
+
+function applyFilters() {
+
+    const selectedVirus =
+        document.getElementById('virusFilter').value;
+
+    const selectedYear =
+        document.getElementById('yearFilter').value;
+
+    const selectedLineage =
+        document.getElementById('lineageFilter').value;
+
+    // Filter dataset
+    const filteredData = allData.filter(row => {
+
+        const virusMatch =
+            !selectedVirus ||
+            row.virus === selectedVirus;
+
+        const yearMatch =
+            !selectedYear ||
+            row.year === selectedYear;
+
+        const lineageMatch =
+            !selectedLineage ||
+            row.lineage === selectedLineage;
+
+        return virusMatch &&
+               yearMatch &&
+               lineageMatch;
+
+    });
+
+    // Re-render everything
+    renderKPIs(filteredData);
+
+    renderCharts(filteredData);
+
+    renderTable(filteredData);
+
+    renderMap(filteredData);
+
+}
+
     // ======================
     // INITIAL RENDER
     // ======================
@@ -439,5 +486,21 @@ function renderMap(data) {
     renderTable(allData);
 
     renderMap(allData);
+
+// ======================
+// FILTER EVENTS
+// ======================
+
+document
+    .getElementById('virusFilter')
+    .addEventListener('change', applyFilters);
+
+document
+    .getElementById('yearFilter')
+    .addEventListener('change', applyFilters);
+
+document
+    .getElementById('lineageFilter')
+    .addEventListener('change', applyFilters);
 
 });
