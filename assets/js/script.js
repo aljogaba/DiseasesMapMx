@@ -446,21 +446,27 @@ function applyFilters() {
     // Filter dataset
     const filteredData = allData.filter(row => {
 
-        const virusMatch =
-            !selectedVirus ||
-            row.virus === selectedVirus;
+      const virusMatch =
+        !selectedVirus ||
 
-        const yearMatch =
-            !selectedYear ||
-            row.year === selectedYear;
+        normalizeText(row.virus) ===
+        normalizeText(selectedVirus);
 
-        const lineageMatch =
-            !selectedLineage ||
-            row.lineage === selectedLineage;
+    const yearMatch =
+        !selectedYear ||
 
-        return virusMatch &&
-               yearMatch &&
-               lineageMatch;
+        String(row.year).trim() ===
+        String(selectedYear).trim();
+
+    const lineageMatch =
+        !selectedLineage ||
+
+        normalizeText(row.lineage) ===
+        normalizeText(selectedLineage);
+
+    return virusMatch &&
+           yearMatch &&
+           lineageMatch;
 
     });
 
