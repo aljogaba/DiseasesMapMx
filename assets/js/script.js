@@ -158,107 +158,113 @@ Promise.all([
 
     }
 
-    renderKPIs(allData);
-
     // ======================
-    // LINEAGE CHART
+    // RENDER CHARTS
     // ======================
 
-    const lineageCounts = {};
+    function renderCharts(data) {
 
-    allData.forEach(row => {
+        // ======================
+        // LINEAGE CHART
+        // ======================
 
-        const lineage = row.lineage;
+        const lineageCounts = {};
 
-        if (lineage) {
+        data.forEach(row => {
 
-            lineageCounts[lineage] =
-                (lineageCounts[lineage] || 0) + 1;
+            const lineage = row.lineage;
 
-        }
+            if (lineage) {
 
-    });
+                lineageCounts[lineage] =
+                    (lineageCounts[lineage] || 0) + 1;
 
-    Plotly.newPlot('lineageChart', [
+            }
 
-        {
-            x: Object.keys(lineageCounts),
-            y: Object.values(lineageCounts),
-            type: 'bar'
-        }
+        });
 
-    ], {
+        Plotly.newPlot('lineageChart', [
 
-        margin: { t: 30 }
+            {
+                x: Object.keys(lineageCounts),
+                y: Object.values(lineageCounts),
+                type: 'bar'
+            }
 
-    });
+        ], {
 
-    // ======================
-    // YEAR CHART
-    // ======================
+            margin: { t: 30 }
 
-    const yearCounts = {};
+        });
 
-    allData.forEach(row => {
+        // ======================
+        // YEAR CHART
+        // ======================
 
-        const year = row.year;
+        const yearCounts = {};
 
-        if (year) {
+        data.forEach(row => {
 
-            yearCounts[year] =
-                (yearCounts[year] || 0) + 1;
+            const year = row.year;
 
-        }
+            if (year) {
 
-    });
+                yearCounts[year] =
+                    (yearCounts[year] || 0) + 1;
 
-    Plotly.newPlot('yearChart', [
+            }
 
-        {
-            x: Object.keys(yearCounts),
-            y: Object.values(yearCounts),
-            type: 'scatter',
-            mode: 'lines+markers'
-        }
+        });
 
-    ], {
+        Plotly.newPlot('yearChart', [
 
-        margin: { t: 30 }
+            {
+                x: Object.keys(yearCounts),
+                y: Object.values(yearCounts),
+                type: 'scatter',
+                mode: 'lines+markers'
+            }
 
-    });
+        ], {
 
-    // ======================
-    // STAGE CHART
-    // ======================
+            margin: { t: 30 }
 
-    const stageCounts = {};
+        });
 
-    allData.forEach(row => {
+        // ======================
+        // STAGE CHART
+        // ======================
 
-        const stage = row.production_stage;
+        const stageCounts = {};
 
-        if (stage) {
+        data.forEach(row => {
 
-            stageCounts[stage] =
-                (stageCounts[stage] || 0) + 1;
+            const stage = row.production_stage;
 
-        }
+            if (stage) {
 
-    });
+                stageCounts[stage] =
+                    (stageCounts[stage] || 0) + 1;
 
-    Plotly.newPlot('stageChart', [
+            }
 
-        {
-            labels: Object.keys(stageCounts),
-            values: Object.values(stageCounts),
-            type: 'pie'
-        }
+        });
 
-    ], {
+        Plotly.newPlot('stageChart', [
 
-        margin: { t: 30 }
+            {
+                labels: Object.keys(stageCounts),
+                values: Object.values(stageCounts),
+                type: 'pie'
+            }
 
-    });
+        ], {
+
+            margin: { t: 30 }
+
+        });
+
+    }
 
     // ======================
     // DATA TABLE
@@ -367,5 +373,13 @@ Promise.all([
         }
 
     }).addTo(map);
+
+    // ======================
+    // INITIAL RENDER
+    // ======================
+
+    renderKPIs(allData);
+
+    renderCharts(allData);
 
 });
