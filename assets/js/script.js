@@ -101,58 +101,144 @@ Promise.all([
     // RENDER KPIs
     // ======================
 
-    function renderKPIs(data) {
+function renderKPIs(data) {
 
-        const municipalityCounts = {};
+    // ======================
+    // GLOBAL KPIs
+    // ======================
 
-        data.forEach(row => {
+    const municipalitySet = new Set();
 
-            const municipality =
-                normalizeText(row.municipality);
+    const virusSet = new Set();
 
-            if (municipality) {
+    data.forEach(row => {
 
-                municipalityCounts[municipality] =
-                    (municipalityCounts[municipality] || 0) + 1;
+        if (row.municipality) {
 
-            }
+            municipalitySet.add(
+                normalizeText(row.municipality)
+            );
 
-        });
+        }
 
-        const totalSequences = data.length;
+        if (row.virus) {
 
-        const totalMunicipalities =
-            Object.keys(municipalityCounts).length;
+            virusSet.add(row.virus);
 
-        const lineageCounts = {};
+        }
 
-        data.forEach(row => {
+    });
 
-            const lineage = row.lineage;
+    document.getElementById('totalSequences')
+        .innerText = data.length;
 
-            if (lineage) {
+    document.getElementById('totalMunicipalities')
+        .innerText = municipalitySet.size;
 
-                lineageCounts[lineage] =
-                    (lineageCounts[lineage] || 0) + 1;
+    document.getElementById('totalViruses')
+        .innerText = virusSet.size;
 
-            }
+    // ======================
+    // PRRSV KPIs
+    // ======================
 
-        });
+    const prrsvData = data.filter(row =>
 
-        const topLineage =
-            Object.entries(lineageCounts)
-            .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
+        row.virus ===
+        "Porcine reproductive and respiratory syndrome virus"
 
-        document.getElementById('totalSequences').innerText =
-            totalSequences;
+    );
 
-        document.getElementById('totalMunicipalities').innerText =
-            totalMunicipalities;
+    const prrsvMunicipalities = new Set();
 
-        document.getElementById('topLineage').innerText =
-            topLineage;
+    const prrsvLineages = {};
 
-    }
+    prrsvData.forEach(row => {
+
+        if (row.municipality) {
+
+            prrsvMunicipalities.add(
+                normalizeText(row.municipality)
+            );
+
+        }
+
+        if (row.lineage) {
+
+            prrsvLineages[row.lineage] =
+
+                (prrsvLineages[row.lineage] || 0) + 1;
+
+        }
+
+    });
+
+    const dominantPRRSV =
+
+        Object.entries(prrsvLineages)
+
+        .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
+
+    document.getElementById('prrsvSequences')
+        .innerText = prrsvData.length;
+
+    document.getElementById('prrsvMunicipalities')
+        .innerText = prrsvMunicipalities.size;
+
+    document.getElementById('prrsvLineage')
+        .innerText = dominantPRRSV;
+
+    // ======================
+    // PCV2 KPIs
+    // ======================
+
+    const pcv2Data = data.filter(row =>
+
+        row.virus ===
+        "Porcine circovirus type 2"
+
+    );
+
+    const pcv2Municipalities = new Set();
+
+    const pcv2Genotypes = {};
+
+    pcv2Data.forEach(row => {
+
+        if (row.municipality) {
+
+            pcv2Municipalities.add(
+                normalizeText(row.municipality)
+            );
+
+        }
+
+        if (row.lineage) {
+
+            pcv2Genotypes[row.lineage] =
+
+                (pcv2Genotypes[row.lineage] || 0) + 1;
+
+        }
+
+    });
+
+    const dominantPCV2 =
+
+        Object.entries(pcv2Genotypes)
+
+        .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
+
+    document.getElementById('pcv2Sequences')
+        .innerText = pcv2Data.length;
+
+    document.getElementById('pcv2Municipalities')
+        .innerText = pcv2Municipalities.size;
+
+    document.getElementById('pcv2Genotype')
+        .innerText = dominantPCV2;
+
+}
 
     // ======================
     // RENDER CHARTS
