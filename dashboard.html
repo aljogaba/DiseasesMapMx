@@ -1,115 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | DiseasesMapMx</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Dashboard | DiseasesMapMx
+    </title>
+
+    <meta name="description"
+          content="
+          Interactive epidemiological and genomic
+          surveillance dashboard for swine pathogens
+          in Mexico.
+          ">
+
     <link rel="stylesheet"
-href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+          href="assets/css/style.css">
 
-    
-    <!-- Leaflet CSS -->
+    <!-- DataTables -->
+
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+    <!-- Leaflet -->
+
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 </head>
 
 <body>
 
-<header>
-    <nav>
-        <h1>DiseasesMapMx</h1>
+<!-- ====================== -->
+<!-- HEADER -->
+<!-- ====================== -->
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="prrsv.html">PRRSV</a></li>
-            <li><a href="pcv2.html">PCV2</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-        </ul>
-    </nav>
-</header>
+<header class="main-header">
 
-<main>
+    <div class="header-top">
 
-    <section class="dashboard-container">
+        <div class="header-logos">
 
-<div class="filters-panel">
+            <img src="assets/img/logos/header_inifap.png"
+                 alt="INIFAP Logo"
+                 class="header-logo">
 
-    <select id="virusFilter">
-        <option value="all">Viruses-Filter</option>
-    </select>
+            <img src="assets/img/logos/header_mexico.png"
+                 alt="Mexico Flag"
+                 class="header-logo mexico-logo">
 
-    <select id="yearFilter">
-        <option value="all">Years-Filter</option>
-    </select>
-
-    <select id="lineageFilter">
-        <option value="all">Lineages and Genotypes-Filter</option>
-    </select>
-
-</div>
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h3>Total Sequences</h3>
-            <p id="totalSequences">0</p>
         </div>
 
-        <div class="stat-card">
-            <h3>Municipalities</h3>
-            <p id="totalMunicipalities">0</p>
-        </div>
+        <div class="header-title">
 
-        <div class="stat-card">
-            <h3>Most Common Lineage</h3>
-            <p id="topLineage">-</p>
+            <h1>DiseasesMapMx</h1>
+
+            <p>
+                Swine Genomic Surveillance Platform
+            </p>
+
         </div>
 
     </div>
 
-    <div class="dashboard-grid">
+    <nav class="navbar">
 
-        <div class="map-panel">
-            <h2>Geographic Surveillance</h2>
-            <div id="map"></div>
-        </div>
+        <ul>
 
-        <div class="chart-panel">
-            <h2>Sequences by Lineage</h2>
-            <div id="lineageChart"></div>
-        </div>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
 
-        <div class="chart-panel">
-            <h2>Sequences by Year</h2>
-            <div id="yearChart"></div>
-        </div>
+            <li>
+                <a href="prrsv.html">PRRSV</a>
+            </li>
 
-        <div class="chart-panel">
-            <h2>Sequences by Production Stage</h2>
-            <div id="stageChart"></div>
-        </div>
+            <li>
+                <a href="pcv2.html">PCV2</a>
+            </li>
+
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ====================== -->
+<!-- HERO -->
+<!-- ====================== -->
+
+<section class="page-hero">
+
+    <div class="page-hero-content">
+
+        <h2>
+            Interactive Epidemiological Dashboard
+        </h2>
+
+        <p>
+
+            Spatial visualization, genomic surveillance,
+            lineage distribution, and epidemiological
+            analysis of swine pathogens circulating
+            in Mexico.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ====================== -->
+<!-- INTRO -->
+<!-- ====================== -->
+
+<section class="dashboard-intro">
+
+    <div class="dashboard-intro-content">
+
+        <p>
+
+            DiseasesMapMx integrates genomic,
+            epidemiological, and geographic
+            metadata into an interactive
+            surveillance platform focused on
+            PRRSV and PCV2 circulation in swine
+            production systems.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ====================== -->
+<!-- MAIN DASHBOARD -->
+<!-- ====================== -->
+
+<main>
+
+<section class="dashboard-container">
+
+<!-- ====================== -->
+<!-- FILTERS -->
+<!-- ====================== -->
+
+<div class="filters-panel">
+
+    <select id="virusFilter">
+
+        <option value="all">
+            Virus
+        </option>
+
+    </select>
+
+    <select id="yearFilter">
+
+        <option value="all">
+            Year
+        </option>
+
+    </select>
+
+    <select id="lineageFilter">
+
+        <option value="all">
+            Lineage / Genotype
+        </option>
+
+    </select>
+
+</div>
+
+<!-- ====================== -->
+<!-- KPI CARDS -->
+<!-- ====================== -->
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <h3>
+            Total Sequences
+        </h3>
+
+        <p id="totalSequences">
+            0
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3>
+            Municipalities
+        </h3>
+
+        <p id="totalMunicipalities">
+            0
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3>
+            Dominant Lineage
+        </h3>
+
+        <p id="topLineage">
+            -
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ====================== -->
+<!-- GRID -->
+<!-- ====================== -->
+
+<div class="dashboard-grid">
+
+    <!-- MAP -->
+
+    <div class="map-panel">
+
+        <h2>
+            Geographic Surveillance
+        </h2>
+
+        <div id="map"></div>
+
+    </div>
+
+    <!-- LINEAGE -->
+
+    <div class="chart-panel">
+
+        <h2>
+            Sequences by Lineage
+        </h2>
+
+        <div id="lineageChart"></div>
+
+    </div>
+
+    <!-- YEAR -->
+
+    <div class="chart-panel">
+
+        <h2>
+            Sequences by Year
+        </h2>
+
+        <div id="yearChart"></div>
+
+    </div>
+
+    <!-- STAGE -->
+
+    <div class="chart-panel">
+
+        <h2>
+            Production Stage
+        </h2>
+
+        <div id="stageChart"></div>
+
+    </div>
+
+</div>
+
+<!-- ====================== -->
+<!-- TABLE -->
+<!-- ====================== -->
 
 <div class="table-panel">
 
-    <h2>Sequence Metadata</h2>
+    <h2>
+        Sequence Metadata
+    </h2>
 
-    <table id="sequenceTable" class="display">
+    <table id="sequenceTable"
+           class="display responsive nowrap"
+           style="width:100%">
 
         <thead>
+
             <tr>
+
                 <th>Accession</th>
+
                 <th>Municipality</th>
+
                 <th>Year</th>
+
                 <th>Lineage</th>
+
                 <th>Production Stage</th>
+
                 <th>Gene</th>
+
                 <th>Detection</th>
+
                 <th>Vaccine</th>
+
                 <th>RFLP</th>
+
                 <th>GenBank</th>
+
             </tr>
+
         </thead>
 
         <tbody></tbody>
@@ -117,31 +332,91 @@ href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.
     </table>
 
 </div>
-        
-    </div>
 
 </section>
 
 </main>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- ====================== -->
+<!-- COLLABORATORS -->
+<!-- ====================== -->
 
-<!-- PapaParse -->
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<section class="collaborators-section">
 
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <h3>
+        Collaborating Institutions
+    </h3>
 
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <div class="collaborators-grid">
 
-<link rel="stylesheet"
-href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <img src="assets/img/logos/sponsor_1.png"
+             alt="Sponsor 1">
+
+        <img src="assets/img/logos/sponsor_2.png"
+             alt="Sponsor 2">
+
+        <img src="assets/img/logos/sponsor_3.png"
+             alt="Sponsor 3">
+
+    </div>
+
+</section>
+
+<!-- ====================== -->
+<!-- FOOTER -->
+<!-- ====================== -->
+
+<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <p>
+            © 2026 DiseasesMapMx.
+            All rights reserved.
+        </p>
+
+        <p>
+            Developed by
+            Alberto Jorge Galindo Barboza
+        </p>
+
+        <p>
+            National Institute for Forestry,
+            Agricultural and Livestock Research
+            (INIFAP)
+        </p>
+
+        <p>
+            Veterinary and Zootechnical Research
+            in Molecular Epidemiology and
+            Genomic Surveillance of Swine Pathogens
+        </p>
+
+        <p>
+            ORCID:
+            0000-0003-4223-6161
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- ====================== -->
+<!-- SCRIPTS -->
+<!-- ====================== -->
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<!-- Custom JS -->
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
 <script src="assets/js/script.js"></script>
 
 </body>
