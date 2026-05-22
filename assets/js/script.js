@@ -195,7 +195,7 @@ function renderKPIs(data) {
     const pcv2Data = data.filter(row =>
 
         row.virus ===
-        "Porcine circovirus type 2"
+        "Porcine Circovirus Type 2"
 
     );
 
