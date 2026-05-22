@@ -507,3 +507,138 @@ body {
     }
 
 }
+
+/* ====================== */
+/* PAGE HERO */
+/* ====================== */
+
+.page-hero {
+
+    background:
+        linear-gradient(
+            rgba(15,23,42,0.82),
+            rgba(15,23,42,0.88)
+        ),
+
+        url('../img/background.jpg');
+
+    background-size: cover;
+
+    background-position: center;
+
+    padding: 120px 20px;
+
+    text-align: center;
+
+    color: white;
+
+}
+
+.page-hero-content {
+
+    max-width: 950px;
+
+    margin: auto;
+
+}
+
+.page-hero-content h2 {
+
+    font-size: 3rem;
+
+    margin-bottom: 25px;
+
+    line-height: 1.2;
+
+}
+
+.page-hero-content p {
+
+    font-size: 1.25rem;
+
+    line-height: 1.8;
+
+    color: #e2e8f0;
+
+}
+
+/* ====================== */
+/* SCIENTIFIC SECTIONS */
+/* ====================== */
+
+.info-section {
+
+    background: white;
+
+    padding: 40px;
+
+    margin-bottom: 30px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+.info-section h3 {
+
+    font-size: 2rem;
+
+    margin-bottom: 20px;
+
+    color: #0f172a;
+
+}
+
+.info-section p {
+
+    line-height: 1.9;
+
+    font-size: 1.05rem;
+
+    color: #374151;
+
+}
+
+.scientific-list {
+
+    padding-left: 25px;
+
+    line-height: 2;
+
+    color: #374151;
+
+}
+
+.scientific-list li {
+
+    margin-bottom: 10px;
+
+}
+
+/* ====================== */
+/* MOBILE */
+/* ====================== */
+
+@media (max-width: 768px) {
+
+    .page-hero-content h2 {
+
+        font-size: 2.2rem;
+
+    }
+
+    .page-hero-content p {
+
+        font-size: 1.05rem;
+
+    }
+
+    .info-section {
+
+        padding: 25px;
+
+    }
+
+}
