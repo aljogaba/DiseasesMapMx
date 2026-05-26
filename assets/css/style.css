@@ -705,3 +705,84 @@ body {
     color: #0f172a;
 
 }
+
+```css
+/* ====================== */
+/* AUTHOR SECTION */
+/* ====================== */
+
+.author-container {
+
+    display: flex;
+
+    gap: 40px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+.author-image img {
+
+    width: 260px;
+
+    border-radius: 18px;
+
+    object-fit: cover;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.15);
+
+}
+
+.author-text {
+
+    flex: 1;
+
+    min-width: 280px;
+
+}
+
+.author-text h4 {
+
+    font-size: 1.8rem;
+
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    color: #0f172a;
+
+}
+
+.author-text p {
+
+    line-height: 1.9;
+
+    color: #374151;
+
+}
+
+/* ====================== */
+/* MOBILE */
+/* ====================== */
+
+@media (max-width: 768px) {
+
+    .author-container {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+    .author-image img {
+
+        width: 220px;
+
+    }
+
+}
+```
