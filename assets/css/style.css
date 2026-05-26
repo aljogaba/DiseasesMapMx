@@ -784,3 +784,84 @@ body {
     }
 
 }
+
+/* ====================== */
+/* COLLABORATOR SECTION */
+/* ====================== */
+
+.collaborator-container {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 40px;
+
+    flex-wrap: wrap;
+
+}
+
+.collaborator-text {
+
+    flex: 1;
+
+    min-width: 280px;
+
+}
+
+.collaborator-text h4 {
+
+    font-size: 1.5rem;
+
+    margin-top: 0;
+
+    margin-bottom: 18px;
+
+    color: #0f172a;
+
+}
+
+.collaborator-text p {
+
+    line-height: 1.9;
+
+    color: #374151;
+
+}
+
+.collaborator-image img {
+
+    width: 180px;
+
+    border-radius: 16px;
+
+    object-fit: cover;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.12);
+
+}
+
+/* ====================== */
+/* MOBILE */
+/* ====================== */
+
+@media (max-width: 768px) {
+
+    .collaborator-container {
+
+        flex-direction: column-reverse;
+
+        text-align: center;
+
+    }
+
+    .collaborator-image img {
+
+        width: 150px;
+
+    }
+
+}
