@@ -677,60 +677,7 @@ function renderMap(data) {
 
         }
 
-            // ======================
-            // POPUP
-            // ======================
-
-            layer.bindPopup(`
-
-                <strong>${municipalityOriginal}</strong><br>
-
-                Sequences: ${count}
-
-            `);
-
-            // ======================
-            // HOVER EFFECT
-            // ======================
-
-            layer.on({
-
-                mouseover: function(e) {
-
-                    const layer = e.target;
-
-                    layer.setStyle({
-
-                        weight: 3,
-
-                        color: '#111827',
-
-                        fillOpacity: 0.9
-
-                    });
-
-                    layer.bringToFront();
-
-                },
-
-                mouseout: function(e) {
-
-                    geojsonLayer.resetStyle(e.target);
-
-                },
-
-                click: function(e) {
-
-                    map.fitBounds(
-                        e.target.getBounds()
-                    );
-
-                }
-
-            });
-
-        }
-
+           
     }).addTo(map);
 
 // ======================
