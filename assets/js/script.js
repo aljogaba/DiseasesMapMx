@@ -784,6 +784,90 @@ legend.addTo(map);
 // APPLY FILTERS
 // ======================
 
+// ======================
+// UPDATE FILTER OPTIONS
+// ======================
+
+function updateFilterOptions(filteredData) {
+
+    filtersConfig.forEach(currentFilter => {
+
+        const select =
+            document.getElementById(currentFilter.id);
+
+        // Preserve current selection
+
+        const currentValue = select.value;
+
+        // Dataset excluding current filter
+
+        const partiallyFilteredData = allData.filter(row => {
+
+            return filtersConfig.every(filter => {
+
+                // Skip current filter
+
+                if (filter.id === currentFilter.id) {
+
+                    return true;
+
+                }
+
+                const selectedValue =
+                    document.getElementById(filter.id).value;
+
+                if (!selectedValue) {
+
+                    return true;
+
+                }
+
+                return normalizeText(
+
+                    String(row[filter.field])
+
+                ) === normalizeText(selectedValue);
+
+            });
+
+        });
+
+        // Available values
+
+        const availableValues = partiallyFilteredData.map(
+
+            row => row[currentFilter.field]
+
+        );
+
+        // Rebuild filter
+
+        populateFilter(
+
+            currentFilter.id,
+
+            availableValues,
+
+            currentFilter.label
+
+        );
+
+        // Restore selection if still valid
+
+        if (
+
+            availableValues.includes(currentValue)
+
+        ) {
+
+            select.value = currentValue;
+
+        }
+
+    });
+
+}
+
 function applyFilters() {
 
     const filteredData = allData.filter(row => {
@@ -816,6 +900,8 @@ function applyFilters() {
     renderTable(filteredData);
 
     renderMap(filteredData);
+
+    updateFilterOptions(filteredData);
 
 }
 
