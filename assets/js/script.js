@@ -514,6 +514,8 @@ function renderKPIs(data) {
 
 let geojsonLayer;
 
+let legend;
+
 // ======================
 // RENDER MAP
 // ======================
@@ -744,7 +746,15 @@ function renderMap(data) {
 // LEGEND
 // ======================
 
-const legend = L.control({ position: 'bottomright' });
+if (legend) {
+
+    map.removeControl(legend);
+
+}
+
+legend = L.control({
+    position: 'bottomright'
+});
 
 legend.onAdd = function() {
 
