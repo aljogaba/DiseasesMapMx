@@ -511,16 +511,171 @@ function renderMap(data) {
 
         },
 
-        onEachFeature: function(feature, layer) {
+onEachFeature: function(feature, layer) {
 
-            const municipalityOriginal =
-                feature.properties.NOMGEO;
+    const municipalityOriginal =
+        feature.properties.NOMGEO;
 
-             const municipality =
-                 normalizeText(municipalityOriginal);
+    const municipality =
+        normalizeText(municipalityOriginal);
 
-             const count =
-                municipalityCounts[municipality] || 0;
+    const municipalityData = data.filter(row =>
+
+        normalizeText(row.municipality) ===
+        municipality
+
+    );
+
+    const count = municipalityData.length;
+
+    // ======================
+    // DOMINANT LINEAGE
+    // ======================
+
+    const lineageCounts = {};
+
+    municipalityData.forEach(row => {
+
+        if (row.lineage) {
+
+            lineageCounts[row.lineage] =
+
+                (lineageCounts[row.lineage] || 0) + 1;
+
+        }
+
+    });
+
+    const dominantLineage =
+
+        Object.entries(lineageCounts)
+
+        .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
+
+    // ======================
+    // YEARS
+    // ======================
+
+    const years = [
+
+        ...new Set(
+
+            municipalityData.map(row => row.year)
+
+        )
+
+    ]
+
+    .filter(Boolean)
+
+    .sort();
+
+    // ======================
+    // GENES
+    // ======================
+
+    const genes = [
+
+        ...new Set(
+
+            municipalityData.map(row => row.gene)
+
+        )
+
+    ]
+
+    .filter(Boolean)
+
+    .sort();
+
+    // ======================
+    // VIRUSES
+    // ======================
+
+    const viruses = [
+
+        ...new Set(
+
+            municipalityData.map(row => row.virus)
+
+        )
+
+    ]
+
+    .filter(Boolean);
+
+    // ======================
+    // POPUP
+    // ======================
+
+    layer.bindPopup(`
+
+        <div style="min-width:220px">
+
+        <h3 style="margin-bottom:10px;">
+            ${municipalityOriginal}
+        </h3>
+
+        <strong>Sequences:</strong>
+        ${count}<br>
+
+        <strong>Dominant Lineage:</strong>
+        ${dominantLineage}<br>
+
+        <strong>Years:</strong>
+        ${years.join(', ') || '-'}<br>
+
+        <strong>Genes:</strong>
+        ${genes.join(', ') || '-'}<br>
+
+        <strong>Viruses:</strong>
+        ${viruses.length}<br>
+
+        </div>
+
+    `);
+
+    // ======================
+    // HOVER EFFECT
+    // ======================
+
+    layer.on({
+
+        mouseover: function(e) {
+
+            const layer = e.target;
+
+            layer.setStyle({
+
+                weight: 3,
+
+                color: '#111827',
+
+                fillOpacity: 0.9
+
+            });
+
+            layer.bringToFront();
+
+        },
+
+        mouseout: function(e) {
+
+            geojsonLayer.resetStyle(e.target);
+
+        },
+
+        click: function(e) {
+
+            map.fitBounds(
+                e.target.getBounds()
+            );
+
+        }
+
+    });
+
+}
 
     // ======================
     // POPUP
@@ -577,7 +732,7 @@ function renderMap(data) {
 }
 
     }).addTo(map);
-    
+
 // ======================
 // LEGEND
 // ======================
