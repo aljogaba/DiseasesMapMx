@@ -1,67 +1,67 @@
 ﻿accession,virus,municipality,region,year,month,production_stage,lineage,sample_type,host,latitude,longitude,sequence_length,gene,detection,vaccine,RFLP,genbank_url
-PV235482,Porcine Reproductive and Respiratory Syndrome Virus,Zapopan,B3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
-PV235483,Porcine Reproductive and Respiratory Syndrome Virus,El Grullo,A3,2022,February,Gestation,L2,Serum,Pig,,,603,ORF5,Sanger,no,1_18_1,https://www.ncbi.nlm.nih.gov/nuccore/PV235483
-PV235484,Porcine Reproductive and Respiratory Syndrome Virus,Juanacatlán,B3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235484
-PV235485,Porcine Reproductive and Respiratory Syndrome Virus,Zapopan,B3,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235485
-PV235486,Porcine Reproductive and Respiratory Syndrome Virus,Ayutla,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235486
-PV235487,Porcine Reproductive and Respiratory Syndrome Virus,Encarnación de Díaz,B1,2022,February,Gestation,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235487
-PV235488,Porcine Reproductive and Respiratory Syndrome Virus,Zapotlanejo,B2,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_7_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235488
-PV235489,Porcine Reproductive and Respiratory Syndrome Virus,Tequila,A4,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_103_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235489
-PV235490,Porcine Reproductive and Respiratory Syndrome Virus,Valle de Guadalupe,B3,2022,February,Growing,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235490
-PV235491,Porcine Reproductive and Respiratory Syndrome Virus,Degollado,B2,2022,February,Gestation,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_7_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235491
-PV235492,Porcine Reproductive and Respiratory Syndrome Virus,Zapopan,B3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_7_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235492
-PV235493,Porcine Reproductive and Respiratory Syndrome Virus,Tototlán,B2,2022,February,Finishing,8C,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235493
-PV235494,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235494
-PV235495,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235495
-PV235496,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235496
-PV235497,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235497
-PV235498,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Grower,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235498
-PV235499,Porcine Reproductive and Respiratory Syndrome Virus,Unión de Tula,A3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235499
-PV235500,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235500
-PV235501,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Grower,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235501
-PV235502,Porcine Reproductive and Respiratory Syndrome Virus,Valle de Guadalupe,B3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235502
-PV235503,Porcine Reproductive and Respiratory Syndrome Virus,Valle de Guadalupe,B3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235503
-PV235504,Porcine Reproductive and Respiratory Syndrome Virus,San Juan de los Lagos,B1,2022,February,Growing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235504
-PV235505,Porcine Reproductive and Respiratory Syndrome Virus,San Juan de los Lagos,B1,2022,February,Grower,1I,Serum,Pig,,,603,ORF5,Sanger,yes,2_8_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235505
-PV235506,Porcine Reproductive and Respiratory Syndrome Virus,San Juan de los Lagos,B1,2022,February,Finishing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235506
-PV235507,Porcine Reproductive and Respiratory Syndrome Virus,San Juan de los Lagos,B1,2022,February,Growing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235507
-PV235508,Porcine Reproductive and Respiratory Syndrome Virus,San Juan de los Lagos,B1,2022,February,Grower,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235508
-PV235509,Porcine Reproductive and Respiratory Syndrome Virus,Unión de San Antonio,B1,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235509
-PV235510,Porcine Reproductive and Respiratory Syndrome Virus,Unión de San Antonio,B1,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235510
-PV235511,Porcine Reproductive and Respiratory Syndrome Virus,Jalostotitlán,B1,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235511
-PV235512,Porcine Reproductive and Respiratory Syndrome Virus,Jalostotitlán,B1,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235512
-PV235513,Porcine Reproductive and Respiratory Syndrome Virus,Acatic,B2,2022,February,Gestation,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_1,https://www.ncbi.nlm.nih.gov/nuccore/PV235513
-PV235514,Porcine Reproductive and Respiratory Syndrome Virus,Acatic,B2,2022,February,Gestation,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235514
-PV235515,Porcine Reproductive and Respiratory Syndrome Virus,Acatic,B2,2022,February,Finishing,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_3_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235515
-PV235516,Porcine Reproductive and Respiratory Syndrome Virus,Zapotlán el Grande,A5,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235516
-PV235517,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235517
-PV235518,Porcine Reproductive and Respiratory Syndrome Virus,Poncitlán,B3,2022,February,Gestation,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235518
-PV235519,Porcine Reproductive and Respiratory Syndrome Virus,Cuquío,A4,2022,February,Growing,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235519
-PV235520,Porcine Reproductive and Respiratory Syndrome Virus,Ixtlahuacán del Río,A4,2022,February,Weaned,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235520
-PZ201031,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201031
-PZ201032,Porcine Reproductive and Respiratory Syndrome Virus,Zapotlán el Grande,A5,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201032
-PZ201033,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201033
-PZ201034,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201034
-PZ201035,Porcine Reproductive and Respiratory Syndrome Virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201035
-PZ201036,Porcine Reproductive and Respiratory Syndrome Virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201036
-PZ201037,Porcine Reproductive and Respiratory Syndrome Virus,Lagos de Moreno,B1,2022,February,Weaned,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201037
-PZ201038,Porcine Reproductive and Respiratory Syndrome Virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201038
-PZ201039,Porcine Reproductive and Respiratory Syndrome Virus,Zapopan,B3,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201039
-PZ201040,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201040
-PZ201041,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201041
-PZ201042,Porcine Reproductive and Respiratory Syndrome Virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201042
-PZ201043,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Weaned,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201043
-PZ201044,Porcine Reproductive and Respiratory Syndrome Virus,Tepatitlán de Morelos,B2,2022,February,Weaned,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201044
-PZ201045,Porcine Reproductive and Respiratory Syndrome Virus,Zapotiltic,A5,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201045
-PZ201046,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201046
-PZ201047,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201047
-PZ201048,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201048
-PZ201049,Porcine Reproductive and Respiratory Syndrome Virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201049
-PZ201050,Porcine Reproductive and Respiratory Syndrome Virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201050
-PZ201051,Porcine Reproductive and Respiratory Syndrome Virus,Zapotlanejo,B2,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201051
-PZ201052,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201052
-PZ201053,Porcine Reproductive and Respiratory Syndrome Virus,Ayotlán,B2,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201053
-PZ201054,Porcine Reproductive and Respiratory Syndrome Virus,Ayotlán,B2,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201054
+PV235482,Porcine reproductive and respiratory syndrome virus,Zapopan,B3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235482
+PV235483,Porcine reproductive and respiratory syndrome virus,El Grullo,A3,2022,February,Gestation,L2,Serum,Pig,,,603,ORF5,Sanger,no,1_18_1,https://www.ncbi.nlm.nih.gov/nuccore/PV235483
+PV235484,Porcine reproductive and respiratory syndrome virus,Juanacatlán,B3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235484
+PV235485,Porcine reproductive and respiratory syndrome virus,Zapopan,B3,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235485
+PV235486,Porcine reproductive and respiratory syndrome virus,Ayutla,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235486
+PV235487,Porcine reproductive and respiratory syndrome virus,Encarnación de Díaz,B1,2022,February,Gestation,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235487
+PV235488,Porcine reproductive and respiratory syndrome virus,Zapotlanejo,B2,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_7_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235488
+PV235489,Porcine reproductive and respiratory syndrome virus,Tequila,A4,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_103_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235489
+PV235490,Porcine reproductive and respiratory syndrome virus,Valle de Guadalupe,B3,2022,February,Growing,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235490
+PV235491,Porcine reproductive and respiratory syndrome virus,Degollado,B2,2022,February,Gestation,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_7_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235491
+PV235492,Porcine reproductive and respiratory syndrome virus,Zapopan,B3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_7_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235492
+PV235493,Porcine reproductive and respiratory syndrome virus,Tototlán,B2,2022,February,Finishing,8C,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235493
+PV235494,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235494
+PV235495,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235495
+PV235496,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Gestation,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235496
+PV235497,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235497
+PV235498,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Grower,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235498
+PV235499,Porcine reproductive and respiratory syndrome virus,Unión de Tula,A3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235499
+PV235500,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235500
+PV235501,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Grower,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235501
+PV235502,Porcine reproductive and respiratory syndrome virus,Valle de Guadalupe,B3,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235502
+PV235503,Porcine reproductive and respiratory syndrome virus,Valle de Guadalupe,B3,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235503
+PV235504,Porcine reproductive and respiratory syndrome virus,San Juan de los Lagos,B1,2022,February,Growing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235504
+PV235505,Porcine reproductive and respiratory syndrome virus,San Juan de los Lagos,B1,2022,February,Grower,1I,Serum,Pig,,,603,ORF5,Sanger,yes,2_8_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235505
+PV235506,Porcine reproductive and respiratory syndrome virus,San Juan de los Lagos,B1,2022,February,Finishing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235506
+PV235507,Porcine reproductive and respiratory syndrome virus,San Juan de los Lagos,B1,2022,February,Growing,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235507
+PV235508,Porcine reproductive and respiratory syndrome virus,San Juan de los Lagos,B1,2022,February,Grower,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235508
+PV235509,Porcine reproductive and respiratory syndrome virus,Unión de San Antonio,B1,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235509
+PV235510,Porcine reproductive and respiratory syndrome virus,Unión de San Antonio,B1,2022,February,Finishing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235510
+PV235511,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235511
+PV235512,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PV235512
+PV235513,Porcine reproductive and respiratory syndrome virus,Acatic,B2,2022,February,Gestation,1I,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_1,https://www.ncbi.nlm.nih.gov/nuccore/PV235513
+PV235514,Porcine reproductive and respiratory syndrome virus,Acatic,B2,2022,February,Gestation,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235514
+PV235515,Porcine reproductive and respiratory syndrome virus,Acatic,B2,2022,February,Finishing,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_3_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235515
+PV235516,Porcine reproductive and respiratory syndrome virus,Zapotlán el Grande,A5,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235516
+PV235517,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Growing,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_6_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235517
+PV235518,Porcine reproductive and respiratory syndrome virus,Poncitlán,B3,2022,February,Gestation,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235518
+PV235519,Porcine reproductive and respiratory syndrome virus,Cuquío,A4,2022,February,Growing,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_4,https://www.ncbi.nlm.nih.gov/nuccore/PV235519
+PV235520,Porcine reproductive and respiratory syndrome virus,Ixtlahuacán del Río,A4,2022,February,Weaned,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_3,https://www.ncbi.nlm.nih.gov/nuccore/PV235520
+PZ201031,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201031
+PZ201032,Porcine reproductive and respiratory syndrome virus,Zapotlán el Grande,A5,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201032
+PZ201033,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201033
+PZ201034,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201034
+PZ201035,Porcine reproductive and respiratory syndrome virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201035
+PZ201036,Porcine reproductive and respiratory syndrome virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201036
+PZ201037,Porcine reproductive and respiratory syndrome virus,Lagos de Moreno,B1,2022,February,Weaned,8D,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201037
+PZ201038,Porcine reproductive and respiratory syndrome virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201038
+PZ201039,Porcine reproductive and respiratory syndrome virus,Zapopan,B3,2022,February,Nursery,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201039
+PZ201040,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201040
+PZ201041,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,no,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201041
+PZ201042,Porcine reproductive and respiratory syndrome virus,Zacoalco de Torres,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_1_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201042
+PZ201043,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Weaned,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201043
+PZ201044,Porcine reproductive and respiratory syndrome virus,Tepatitlán de Morelos,B2,2022,February,Weaned,1C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201044
+PZ201045,Porcine reproductive and respiratory syndrome virus,Zapotiltic,A5,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201045
+PZ201046,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201046
+PZ201047,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201047
+PZ201048,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201048
+PZ201049,Porcine reproductive and respiratory syndrome virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201049
+PZ201050,Porcine reproductive and respiratory syndrome virus,Ixtlahuacán del Río,A4,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,yes,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201050
+PZ201051,Porcine reproductive and respiratory syndrome virus,Zapotlanejo,B2,2022,February,Weaned,1A,Serum,Pig,,,603,ORF5,Sanger,no,1_2_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201051
+PZ201052,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,1_5_4,https://www.ncbi.nlm.nih.gov/nuccore/PZ201052
+PZ201053,Porcine reproductive and respiratory syndrome virus,Ayotlán,B2,2022,February,Nursery,5A,Serum,Pig,,,603,ORF5,Sanger,yes,2_5_2,https://www.ncbi.nlm.nih.gov/nuccore/PZ201053
+PZ201054,Porcine reproductive and respiratory syndrome virus,Ayotlán,B2,2022,February,Weaned,5A,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_1,https://www.ncbi.nlm.nih.gov/nuccore/PZ201054
 PV235521,Porcine Circovirus Type 2,Acatic,B2,2022,February,Weaned,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235521
 PV235522,Porcine Circovirus Type 2,Acatic,B2,2022,February,Grower,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235522
 PV235523,Porcine Circovirus Type 2,Acatic,B2,2022,February,Growing,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235523
