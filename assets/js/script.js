@@ -438,11 +438,13 @@ function renderKPIs(data) {
 
     function getColor(count) {
 
-        return count > 15 ? '#08306b' :
-               count > 10 ? '#2171b5' :
-               count > 5  ? '#6baed6' :
-               count > 0  ? '#c6dbef' :
-                            '#f7fbff';
+    return count > 50 ? '#4a1486' :
+           count > 25 ? '#08519c' :
+           count > 10 ? '#2171b5' :
+           count > 5  ? '#4292c6' :
+           count > 1  ? '#6baed6' :
+           count > 0  ? '#c6dbef' :
+                        '#f7fbff';
 
     }
 
@@ -514,24 +516,106 @@ function renderMap(data) {
             const municipalityOriginal =
                 feature.properties.NOMGEO;
 
-            const municipality =
-                normalizeText(municipalityOriginal);
+             const municipality =
+                 normalizeText(municipalityOriginal);
 
-            const count =
+             const count =
                 municipalityCounts[municipality] || 0;
 
-            layer.bindPopup(`
+    // ======================
+    // POPUP
+    // ======================
 
-                <strong>${municipalityOriginal}</strong><br>
+    layer.bindPopup(`
 
-                Sequences: ${count}
+        <strong>${municipalityOriginal}</strong><br>
 
-            `);
+        Sequences: ${count}
+
+    `);
+
+    // ======================
+    // HOVER EFFECT
+    // ======================
+
+    layer.on({
+
+        mouseover: function(e) {
+
+            const layer = e.target;
+
+            layer.setStyle({
+
+                weight: 3,
+
+                color: '#111827',
+
+                fillOpacity: 0.9
+
+            });
+
+            layer.bringToFront();
+
+        },
+
+        mouseout: function(e) {
+
+            geojsonLayer.resetStyle(e.target);
+
+        },
+
+        click: function(e) {
+
+            map.fitBounds(
+                e.target.getBounds()
+            );
 
         }
 
-    }).addTo(map);
+    });
 
+}
+
+    }).addTo(map);
+    
+// ======================
+// LEGEND
+// ======================
+
+const legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function() {
+
+    const div = L.DomUtil.create('div', 'info legend');
+
+    const grades = [1, 5, 10, 25, 50];
+
+    div.innerHTML +=
+        '<strong>Sequences</strong><br>';
+
+    for (let i = 0; i < grades.length; i++) {
+
+        div.innerHTML +=
+
+            '<i style="background:' +
+
+            getColor(grades[i] + 1) +
+
+            '; width:18px; height:18px; display:inline-block; margin-right:8px;"></i> ' +
+
+            grades[i] +
+
+            (grades[i + 1]
+                ? '&ndash;' + grades[i + 1] + '<br>'
+                : '+');
+
+    }
+
+    return div;
+
+};
+
+legend.addTo(map);
 }
 
 // ======================
