@@ -972,3 +972,197 @@ body {
     }
 
 }
+
+/* ====================== */
+/* DASHBOARD VISUAL POLISH */
+/* ====================== */
+
+.dashboard-container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+/* Filters */
+
+.filters-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 35px;
+}
+
+.filters-panel select {
+    width: 100%;
+    cursor: pointer;
+    font-weight: 500;
+    color: #1f2937;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters-panel select:hover,
+.filters-panel select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    outline: none;
+}
+
+/* KPI groups */
+
+.kpi-section {
+    margin-bottom: 40px;
+}
+
+.kpi-group {
+    background: rgba(255,255,255,0.65);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.kpi-group h2 {
+    font-size: 1.35rem;
+    margin: 0 0 18px 0;
+    color: #0f172a;
+    letter-spacing: 0.2px;
+}
+
+.kpi-group:nth-child(1) h2 {
+    border-left: 5px solid #1d4ed8;
+    padding-left: 12px;
+}
+
+.kpi-group:nth-child(2) h2 {
+    border-left: 5px solid #047857;
+    padding-left: 12px;
+}
+
+.kpi-group:nth-child(3) h2 {
+    border-left: 5px solid #7c3aed;
+    padding-left: 12px;
+}
+
+.stat-card {
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.stat-card h3 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.stat-card p {
+    margin: 8px 0 0 0;
+}
+
+/* Panels */
+
+.map-panel,
+.chart-panel,
+.table-panel {
+    border: 1px solid #e5e7eb;
+}
+
+.map-panel h2,
+.chart-panel h2,
+.table-panel h2 {
+    font-size: 1.35rem;
+    border-left: 5px solid #1d4ed8;
+    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+/* Make the map more prominent */
+
+.map-panel {
+    grid-row: span 2;
+}
+
+#map {
+    margin-top: 20px;
+}
+
+/* Plot containers */
+
+#lineageChart,
+#yearChart,
+#stageChart {
+    min-height: 330px;
+}
+
+/* Table polish */
+
+.table-panel {
+    overflow-x: auto;
+}
+
+.dataTables_wrapper {
+    margin-top: 20px;
+}
+
+.dataTables_filter input {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 7px 10px;
+}
+
+.dataTables_length select {
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    padding: 5px;
+}
+
+/* Better mobile dashboard */
+
+@media (max-width: 900px) {
+
+    .dashboard-container {
+        padding: 25px 18px;
+    }
+
+    .kpi-group {
+        padding: 18px;
+    }
+
+    .filters-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .map-panel {
+        grid-row: auto;
+    }
+
+    #map {
+        height: 480px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-card p {
+        font-size: 1.6rem;
+    }
+
+    .map-panel h2,
+    .chart-panel h2,
+    .table-panel h2 {
+        font-size: 1.15rem;
+    }
+
+    #map {
+        height: 420px;
+    }
+
+}
