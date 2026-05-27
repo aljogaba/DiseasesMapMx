@@ -511,225 +511,225 @@ function renderMap(data) {
 
         },
 
-onEachFeature: function(feature, layer) {
+    onEachFeature: function(feature, layer) {
 
-    const municipalityOriginal =
-        feature.properties.NOMGEO;
+            const municipalityOriginal =
+                feature.properties.NOMGEO;
 
-    const municipality =
-        normalizeText(municipalityOriginal);
+            const municipality =
+                normalizeText(municipalityOriginal);
 
-    const municipalityData = data.filter(row =>
+            const municipalityData = data.filter(row =>
 
-        normalizeText(row.municipality) ===
-        municipality
+                normalizeText(row.municipality) ===
+                municipality
 
-    );
+            );
 
-    const count = municipalityData.length;
+            const count = municipalityData.length;
 
-    // ======================
-    // DOMINANT LINEAGE
-    // ======================
+            // ======================
+            // DOMINANT LINEAGE
+            // ======================
 
-    const lineageCounts = {};
+            const lineageCounts = {};
 
-    municipalityData.forEach(row => {
+            municipalityData.forEach(row => {
 
-        if (row.lineage) {
+                if (row.lineage) {
 
-            lineageCounts[row.lineage] =
+                    lineageCounts[row.lineage] =
 
-                (lineageCounts[row.lineage] || 0) + 1;
+                        (lineageCounts[row.lineage] || 0) + 1;
 
-        }
-
-    });
-
-    const dominantLineage =
-
-        Object.entries(lineageCounts)
-
-        .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
-
-    // ======================
-    // YEARS
-    // ======================
-
-    const years = [
-
-        ...new Set(
-
-            municipalityData.map(row => row.year)
-
-        )
-
-    ]
-
-    .filter(Boolean)
-
-    .sort();
-
-    // ======================
-    // GENES
-    // ======================
-
-    const genes = [
-
-        ...new Set(
-
-            municipalityData.map(row => row.gene)
-
-        )
-
-    ]
-
-    .filter(Boolean)
-
-    .sort();
-
-    // ======================
-    // VIRUSES
-    // ======================
-
-    const viruses = [
-
-        ...new Set(
-
-            municipalityData.map(row => row.virus)
-
-        )
-
-    ]
-
-    .filter(Boolean);
-
-    // ======================
-    // POPUP
-    // ======================
-
-    layer.bindPopup(`
-
-        <div style="min-width:220px">
-
-        <h3 style="margin-bottom:10px;">
-            ${municipalityOriginal}
-        </h3>
-
-        <strong>Sequences:</strong>
-        ${count}<br>
-
-        <strong>Dominant Lineage:</strong>
-        ${dominantLineage}<br>
-
-        <strong>Years:</strong>
-        ${years.join(', ') || '-'}<br>
-
-        <strong>Genes:</strong>
-        ${genes.join(', ') || '-'}<br>
-
-        <strong>Viruses:</strong>
-        ${viruses.length}<br>
-
-        </div>
-
-    `);
-
-    // ======================
-    // HOVER EFFECT
-    // ======================
-
-    layer.on({
-
-        mouseover: function(e) {
-
-            const layer = e.target;
-
-            layer.setStyle({
-
-                weight: 3,
-
-                color: '#111827',
-
-                fillOpacity: 0.9
+                }
 
             });
 
-            layer.bringToFront();
+            const dominantLineage =
 
-        },
+                Object.entries(lineageCounts)
 
-        mouseout: function(e) {
+                .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
 
-            geojsonLayer.resetStyle(e.target);
+            // ======================
+            // YEARS
+            // ======================
 
-        },
+            const years = [
 
-        click: function(e) {
+                ...new Set(
 
-            map.fitBounds(
-                e.target.getBounds()
-            );
+                    municipalityData.map(row => row.year)
 
-        }
+                )
 
-    });
+            ]
 
-}
+            .filter(Boolean)
 
-    // ======================
-    // POPUP
-    // ======================
+            .sort();
 
-    layer.bindPopup(`
+            // ======================
+            // GENES
+            // ======================
 
-        <strong>${municipalityOriginal}</strong><br>
+            const genes = [
 
-        Sequences: ${count}
+                ...new Set(
 
-    `);
+                    municipalityData.map(row => row.gene)
 
-    // ======================
-    // HOVER EFFECT
-    // ======================
+                )
 
-    layer.on({
+            ]
 
-        mouseover: function(e) {
+            .filter(Boolean)
 
-            const layer = e.target;
+            .sort();
 
-            layer.setStyle({
+            // ======================
+            // VIRUSES
+            // ======================
 
-                weight: 3,
+            const viruses = [
 
-                color: '#111827',
+                ...new Set(
 
-                fillOpacity: 0.9
+                    municipalityData.map(row => row.virus)
+
+                )
+
+            ]
+
+            .filter(Boolean);
+
+            // ======================
+            // POPUP
+            // ======================
+
+            layer.bindPopup(`
+
+                <div style="min-width:220px">
+
+                <h3 style="margin-bottom:10px;">
+                    ${municipalityOriginal}
+                </h3>
+
+                <strong>Sequences:</strong>
+                ${count}<br>
+
+                <strong>Dominant Lineage:</strong>
+                ${dominantLineage}<br>
+
+                <strong>Years:</strong>
+                ${years.join(', ') || '-'}<br>
+
+                <strong>Genes:</strong>
+                ${genes.join(', ') || '-'}<br>
+
+                <strong>Viruses:</strong>
+                ${viruses.length}<br>
+
+                </div>
+
+            `);
+
+            // ======================
+            // HOVER EFFECT
+            // ======================
+
+            layer.on({
+
+                mouseover: function(e) {
+
+                    const layer = e.target;
+
+                    layer.setStyle({
+
+                        weight: 3,
+
+                        color: '#111827',
+
+                        fillOpacity: 0.9
+
+                    });
+
+                    layer.bringToFront();
+
+                },
+
+                mouseout: function(e) {
+
+                    geojsonLayer.resetStyle(e.target);
+
+                },
+
+                click: function(e) {
+
+                    map.fitBounds(
+                        e.target.getBounds()
+                    );
+
+                }
 
             });
 
-            layer.bringToFront();
-
-        },
-
-        mouseout: function(e) {
-
-            geojsonLayer.resetStyle(e.target);
-
-        },
-
-        click: function(e) {
-
-            map.fitBounds(
-                e.target.getBounds()
-            );
-
         }
 
-    });
+            // ======================
+            // POPUP
+            // ======================
 
-}
+            layer.bindPopup(`
+
+                <strong>${municipalityOriginal}</strong><br>
+
+                Sequences: ${count}
+
+            `);
+
+            // ======================
+            // HOVER EFFECT
+            // ======================
+
+            layer.on({
+
+                mouseover: function(e) {
+
+                    const layer = e.target;
+
+                    layer.setStyle({
+
+                        weight: 3,
+
+                        color: '#111827',
+
+                        fillOpacity: 0.9
+
+                    });
+
+                    layer.bringToFront();
+
+                },
+
+                mouseout: function(e) {
+
+                    geojsonLayer.resetStyle(e.target);
+
+                },
+
+                click: function(e) {
+
+                    map.fitBounds(
+                        e.target.getBounds()
+                    );
+
+                }
+
+            });
+
+        }
 
     }).addTo(map);
 
