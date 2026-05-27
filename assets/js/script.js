@@ -845,3 +845,9 @@ filtersConfig.forEach(filter => {
         );
 
 });
+
+// ======================
+// CLOSE PROMISE
+// ======================
+
+});
