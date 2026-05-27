@@ -894,3 +894,81 @@ body {
     border-radius: 3px;
 
 }
+
+/* ====================== */
+/* KPI GROUPS */
+/* ====================== */
+
+.kpi-section {
+
+    margin-bottom: 35px;
+
+}
+
+.kpi-group {
+
+    margin-bottom: 28px;
+
+}
+
+.kpi-group h2 {
+
+    font-size: 1.4rem;
+
+    margin: 0 0 14px 0;
+
+    color: #0f172a;
+
+    border-left: 5px solid #1d4ed8;
+
+    padding-left: 12px;
+
+}
+
+.global-card {
+
+    border-top: 5px solid #1d4ed8;
+
+}
+
+.prrsv-card {
+
+    border-top: 5px solid #047857;
+
+}
+
+.pcv2-card {
+
+    border-top: 5px solid #7c3aed;
+
+}
+
+.global-card p {
+
+    color: #1d4ed8;
+
+}
+
+.prrsv-card p {
+
+    color: #047857;
+
+}
+
+.pcv2-card p {
+
+    color: #7c3aed;
+
+}
+
+@media (max-width: 900px) {
+
+    .kpi-group h2 {
+
+        text-align: left;
+
+        font-size: 1.25rem;
+
+    }
+
+}
