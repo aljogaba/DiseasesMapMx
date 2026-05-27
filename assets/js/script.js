@@ -22,66 +22,126 @@ Promise.all([
 
     const allData = parsed.data;
 
-    // ======================
-    // FILTER OPTIONS
-    // ======================
 
-    function populateFilter(id, values) {
+// ======================
+// FILTER CONFIG
+// ======================
 
-        const select = document.getElementById(id);
-// Default option
+const filtersConfig = [
+
+    {
+        id: 'virusFilter',
+        field: 'virus',
+        label: 'All Viruses'
+    },
+
+    {
+        id: 'yearFilter',
+        field: 'year',
+        label: 'All Years'
+    },
+
+    {
+        id: 'lineageFilter',
+        field: 'lineage',
+        label: 'All Lineages'
+    },
+
+    {
+        id: 'regionFilter',
+        field: 'region',
+        label: 'All Regions'
+    },
+
+    {
+        id: 'stageFilter',
+        field: 'production_stage',
+        label: 'All Stages'
+    },
+
+    {
+        id: 'geneFilter',
+        field: 'gene',
+        label: 'All Genes'
+    },
+
+    {
+        id: 'vaccineFilter',
+        field: 'vaccine',
+        label: 'All Vaccine Status'
+    },
+
+    {
+        id: 'detectionFilter',
+        field: 'detection',
+        label: 'All Detection Methods'
+    },
+
+    {
+        id: 'rflpFilter',
+        field: 'RFLP',
+        label: 'All RFLP Patterns'
+    }
+
+];
+
+function populateFilter(id, values, label) {
+
+    const select = document.getElementById(id);
+
+    select.innerHTML = '';
+
+    // Default option
+
     const defaultOption =
         document.createElement('option');
 
-    defaultOption.value = "";
+    defaultOption.value = '';
 
-    defaultOption.textContent =
-    id === 'virusFilter' ? 'All Viruses' :
-
-    id === 'yearFilter' ? 'All Year' :
-
-    id === 'lineageFilter' ? 'All Lineage/Genotype' :
-
-    'All';
+    defaultOption.textContent = label;
 
     select.appendChild(defaultOption);
 
     // Unique values
+
     [...new Set(values)]
+
+        .filter(Boolean)
+
         .sort()
+
         .forEach(value => {
 
-            if (value) {
+            const option =
+                document.createElement('option');
 
-                const option =
-                    document.createElement('option');
+            option.value = value;
 
-                option.value = value;
+            option.textContent = value;
 
-                option.textContent = value;
+            select.appendChild(option);
 
-                select.appendChild(option);
+        });
 
-                }
+}
 
-            });
+// ======================
+// GENERATE FILTERS
+// ======================
 
-    }
-
-    populateFilter(
-        'virusFilter',
-        allData.map(row => row.virus)
-    );
+filtersConfig.forEach(filter => {
 
     populateFilter(
-        'yearFilter',
-        allData.map(row => row.year)
+
+        filter.id,
+
+        allData.map(row => row[filter.field]),
+
+        filter.label
+
     );
 
-    populateFilter(
-        'lineageFilter',
-        allData.map(row => row.lineage)
-    );
+});
 
     // ======================
     // NORMALIZE TEXT
@@ -726,43 +786,29 @@ legend.addTo(map);
 
 function applyFilters() {
 
-    const selectedVirus =
-        document.getElementById('virusFilter').value;
-
-    const selectedYear =
-        document.getElementById('yearFilter').value;
-
-    const selectedLineage =
-        document.getElementById('lineageFilter').value;
-
-    // Filter dataset
     const filteredData = allData.filter(row => {
 
-      const virusMatch =
-        !selectedVirus ||
+        return filtersConfig.every(filter => {
 
-        normalizeText(row.virus) ===
-        normalizeText(selectedVirus);
+            const selectedValue =
+                document.getElementById(filter.id).value;
 
-    const yearMatch =
-        !selectedYear ||
+            if (!selectedValue) {
 
-        String(row.year).trim() ===
-        String(selectedYear).trim();
+                return true;
 
-    const lineageMatch =
-        !selectedLineage ||
+            }
 
-        normalizeText(row.lineage) ===
-        normalizeText(selectedLineage);
+            return normalizeText(
 
-    return virusMatch &&
-           yearMatch &&
-           lineageMatch;
+                String(row[filter.field])
+
+            ) === normalizeText(selectedValue);
+
+        });
 
     });
 
-    // Re-render everything
     renderKPIs(filteredData);
 
     renderCharts(filteredData);
@@ -789,16 +835,13 @@ function applyFilters() {
 // FILTER EVENTS
 // ======================
 
-document
-    .getElementById('virusFilter')
-    .addEventListener('change', applyFilters);
+filtersConfig.forEach(filter => {
 
-document
-    .getElementById('yearFilter')
-    .addEventListener('change', applyFilters);
-
-document
-    .getElementById('lineageFilter')
-    .addEventListener('change', applyFilters);
+    document
+        .getElementById(filter.id)
+        .addEventListener(
+            'change',
+            applyFilters
+        );
 
 });
