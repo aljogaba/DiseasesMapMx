@@ -44,7 +44,7 @@ const filtersConfig = [
     {
         id: 'lineageFilter',
         field: 'lineage',
-        label: 'All Lineages'
+        label: 'All Lineages/Genotypes'
     },
 
     {
