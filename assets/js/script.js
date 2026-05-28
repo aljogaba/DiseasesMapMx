@@ -575,54 +575,100 @@ function renderMap(data) {
 
     onEachFeature: function(feature, layer) {
 
-            const municipalityOriginal =
-                feature.properties.NOMGEO;
+        const municipalityOriginal =
+            feature.properties.NOMGEO;
 
-            const municipality =
-                normalizeText(municipalityOriginal);
+        const municipality =
+            normalizeText(municipalityOriginal);
 
-            const municipalityData = data.filter(row =>
+        const municipalityData = data.filter(row =>
 
-                normalizeText(row.municipality) ===
-                municipality
+            normalizeText(row.municipality) ===
+            municipality
 
-            );
+        );
 
-            const count = municipalityData.length;
+        const totalCount =
+            municipalityData.length;
 
-            // ======================
-            // DOMINANT LINEAGE
-            // ======================
+        // ======================
+        // VIRUS SUMMARY
+        // ======================
 
-            const lineageCounts = {};
+        const virusGroups = {};
 
-            municipalityData.forEach(row => {
+        municipalityData.forEach(row => {
 
-                if (row.lineage) {
+            const virusName =
+                row.virus || "Unknown virus";
 
-                    lineageCounts[row.lineage] =
+            if (!virusGroups[virusName]) {
 
-                        (lineageCounts[row.lineage] || 0) + 1;
+                virusGroups[virusName] = [];
+
+            }
+
+            virusGroups[virusName].push(row);
+
+        });
+
+        function getShortVirusName(virusName) {
+
+            const normalizedVirus =
+                normalizeText(virusName);
+
+            if (
+                normalizedVirus.includes("reproductive") ||
+                normalizedVirus.includes("prrs")
+            ) {
+
+                return "PRRSV";
+
+            }
+
+            if (
+                normalizedVirus.includes("circovirus") ||
+                normalizedVirus.includes("pcv")
+            ) {
+
+                return "PCV2";
+
+            }
+
+            return virusName;
+
+        }
+
+        function getDominantValue(rows, field) {
+
+            const counts = {};
+
+            rows.forEach(row => {
+
+                const value =
+                    row[field];
+
+                if (value) {
+
+                    counts[value] =
+                        (counts[value] || 0) + 1;
 
                 }
 
             });
 
-            const dominantLineage =
-
-                Object.entries(lineageCounts)
-
+            return Object.entries(counts)
                 .sort((a, b) => b[1] - a[1])[0]?.[0] || "-";
 
-            // ======================
-            // YEARS
-            // ======================
+        }
 
-            const years = [
+        function getUniqueValues(rows, field) {
+
+            return [
 
                 ...new Set(
 
-                    municipalityData.map(row => row.year)
+                    rows.map(row => row[field])
 
                 )
 
@@ -632,112 +678,132 @@ function renderMap(data) {
 
             .sort();
 
-            // ======================
-            // GENES
-            // ======================
+        }
 
-            const genes = [
+        let virusSummaryHTML = "";
 
-                ...new Set(
+        Object.entries(virusGroups).forEach(([virusName, rows]) => {
 
-                    municipalityData.map(row => row.gene)
+            const shortVirusName =
+                getShortVirusName(virusName);
 
-                )
+            const dominantLineage =
+                getDominantValue(rows, "lineage");
 
-            ]
+            const years =
+                getUniqueValues(rows, "year");
 
-            .filter(Boolean)
+            const genes =
+                getUniqueValues(rows, "gene");
 
-            .sort();
+            const label =
+                shortVirusName === "PCV2"
+                    ? "Dominant genotype"
+                    : "Dominant lineage";
 
-            // ======================
-            // VIRUSES
-            // ======================
+            virusSummaryHTML += `
 
-            const viruses = [
+                <div style="margin-top:12px; padding-top:10px; border-top:1px solid #e5e7eb;">
 
-                ...new Set(
+                    <strong>${shortVirusName}</strong><br>
 
-                    municipalityData.map(row => row.virus)
+                    <span>Sequences:</span>
+                    ${rows.length}<br>
 
-                )
+                    <span>${label}:</span>
+                    ${dominantLineage}<br>
 
-            ]
+                    <span>Years:</span>
+                    ${years.join(', ') || '-'}<br>
 
-            .filter(Boolean);
-
-            // ======================
-            // POPUP
-            // ======================
-
-            layer.bindPopup(`
-
-                <div style="min-width:220px">
-
-                <h3 style="margin-bottom:10px;">
-                    ${municipalityOriginal}
-                </h3>
-
-                <strong>Sequences:</strong>
-                ${count}<br>
-
-                <strong>Dominant Lineage:</strong>
-                ${dominantLineage}<br>
-
-                <strong>Years:</strong>
-                ${years.join(', ') || '-'}<br>
-
-                <strong>Genes:</strong>
-                ${genes.join(', ') || '-'}<br>
-
-                <strong>Viruses:</strong>
-                ${viruses.length}<br>
+                    <span>Genes:</span>
+                    ${genes.join(', ') || '-'}<br>
 
                 </div>
 
-            `);
+            `;
 
-            // ======================
-            // HOVER EFFECT
-            // ======================
+        });
 
-            layer.on({
+        if (!virusSummaryHTML) {
 
-                mouseover: function(e) {
+            virusSummaryHTML = `
 
-                    const layer = e.target;
+                <div style="margin-top:12px; padding-top:10px; border-top:1px solid #e5e7eb;">
 
-                    layer.setStyle({
+                    No records available for the current filters.
 
-                        weight: 3,
+                </div>
 
-                        color: '#111827',
-
-                        fillOpacity: 0.9
-
-                    });
-
-                    layer.bringToFront();
-
-                },
-
-                mouseout: function(e) {
-
-                    geojsonLayer.resetStyle(e.target);
-
-                },
-
-                click: function(e) {
-
-                    map.fitBounds(
-                        e.target.getBounds()
-                    );
-
-                }
-
-            });
+            `;
 
         }
+
+        // ======================
+        // POPUP
+        // ======================
+
+        layer.bindPopup(`
+
+            <div style="min-width:240px">
+
+                <h3 style="margin:0 0 10px 0;">
+                    ${municipalityOriginal}
+                </h3>
+
+                <strong>Total sequences:</strong>
+                ${totalCount}<br>
+
+                <strong>Viruses detected:</strong>
+                ${Object.keys(virusGroups).length}<br>
+
+                ${virusSummaryHTML}
+
+            </div>
+
+        `);
+
+        // ======================
+        // HOVER EFFECT
+        // ======================
+
+        layer.on({
+
+            mouseover: function(e) {
+
+                const layer = e.target;
+
+                layer.setStyle({
+
+                    weight: 3,
+
+                    color: '#111827',
+
+                    fillOpacity: 0.9
+
+                });
+
+                layer.bringToFront();
+
+            },
+
+            mouseout: function(e) {
+
+                geojsonLayer.resetStyle(e.target);
+
+            },
+
+            click: function(e) {
+
+                map.fitBounds(
+                    e.target.getBounds()
+                );
+
+            }
+
+        });
+
+    }
 
            
     }).addTo(map);
