@@ -364,18 +364,43 @@ function renderKPIs(data) {
 
         });
 
+        const sortedYears =
+            Object.keys(yearCounts)
+                .map(Number)
+                .sort((a, b) => a - b);
+
+        const sortedYearCounts =
+            sortedYears.map(year => yearCounts[year]);
+
         Plotly.newPlot('yearChart', [
 
             {
-                x: Object.keys(yearCounts),
-                y: Object.values(yearCounts),
+                x: sortedYears,
+                y: sortedYearCounts,
                 type: 'scatter',
-                mode: 'lines+markers'
+                mode: 'lines+markers',
+                name: 'Sequences'
             }
 
         ], {
 
-            margin: { t: 30 }
+            margin: { t: 40, r: 20, b: 55, l: 55 },
+
+            xaxis: {
+                title: 'Year',
+                tickmode: 'array',
+                tickvals: sortedYears,
+                ticktext: sortedYears.map(String)
+            },
+
+            yaxis: {
+                title: 'Number of sequences',
+                tickformat: 'd',
+                rangemode: 'tozero',
+                automargin: true
+            },
+
+            showlegend: true
 
         });
 
