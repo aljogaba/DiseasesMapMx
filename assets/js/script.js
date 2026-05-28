@@ -54,6 +54,12 @@ const filtersConfig = [
     },
 
     {
+        id: 'municipalityFilter',
+        field: 'municipality',
+        label: 'All Municipalities'
+    },
+
+    {
         id: 'stageFilter',
         field: 'production_stage',
         label: 'All Stages'
