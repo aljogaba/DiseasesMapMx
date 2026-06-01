@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        PRRSV and PCV2 Coinfection Dashboard | DiseasesMapMx
+    </title>
+
+    <meta name="description"
+          content="Internal epidemiological dashboard for exploratory analysis of PRRSV and PCV2 positivity, coinfection patterns, vaccination status, production stage, and regional distribution in swine farms.">
+
+    <meta name="author"
+          content="Alberto Jorge Galindo Barboza">
+
+    <meta name="keywords"
+          content="PRRSV, PCV2, coinfection, swine health, molecular epidemiology, vaccination, Jalisco, DiseasesMapMx">
+
+    <!-- Internal / semi-private page -->
+    <meta name="robots"
+          content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon"
+          href="/DiseasesMapMx/favicon.png">
+
+    <!-- Main styles -->
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <!-- Specific styles for this dashboard -->
+    <link rel="stylesheet"
+          href="assets/css/coinfections.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+    <!-- PapaParse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+    <!-- jQuery + DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- ====================== -->
+<!-- HEADER -->
+<!-- ====================== -->
+
+<header class="main-header">
+
+    <div class="header-top">
+
+        <div class="header-logos">
+
+            <img src="assets/img/logos/header_inifap.png"
+                 alt="INIFAP Logo"
+                 class="header-logo">
+
+            <img src="assets/img/logos/header_mexico.png"
+                 alt="Mexico Flag"
+                 class="header-logo mexico-logo">
+
+        </div>
+
+        <div class="header-title">
+
+            <h1>DiseasesMapMx</h1>
+
+            <p>
+                Swine Genomic Surveillance Platform
+            </p>
+
+        </div>
+
+    </div>
+
+    <nav class="navbar">
+
+        <ul>
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="prrsv.html">PRRSV</a>
+            </li>
+
+            <li>
+                <a href="pcv2.html">PCV2</a>
+            </li>
+
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ====================== -->
+<!-- HERO -->
+<!-- ====================== -->
+
+<section class="page-hero">
+
+    <div class="page-hero-content">
+
+        <h2>
+            PRRSV and PCV2 Coinfection Dashboard
+        </h2>
+
+        <p>
+            Exploratory epidemiological dashboard for visualizing positivity,
+            coinfection patterns, vaccination status, production stage,
+            and regional distribution of PRRSV and PCV2 in swine farms.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ====================== -->
+<!-- MAIN CONTENT -->
+<!-- ====================== -->
+
+<main class="page-content">
+
+    <!-- ====================== -->
+    <!-- INTRODUCTION -->
+    <!-- ====================== -->
+
+    <section class="info-section">
+
+        <h3>
+            Exploratory Analysis Module
+        </h3>
+
+        <p>
+            This internal dashboard summarizes PRRSV and PCV2 molecular positivity
+            at pool and farm level. The pool-level analysis describes detection
+            frequency in biological samples, while the farm-level analysis avoids
+            overestimating farms with multiple positive pools.
+        </p>
+
+        <p>
+            Filters can be applied by region, production function, farm type,
+            sample origin, production stage, sampling site, diagnostic result,
+            and vaccination status.
+        </p>
+
+        <p class="internal-note">
+            Internal working module. This page is not linked in the main public
+            navigation as an official analytical product.
+        </p>
+
+    </section>
+
+    <!-- ====================== -->
+    <!-- FILTERS -->
+    <!-- ====================== -->
+
+    <section class="info-section dashboard-section">
+
+        <div class="section-title-row">
+
+            <h3>
+                Filters
+            </h3>
+
+            <button id="reset-filters"
+                    class="dashboard-button">
+                Reset filters
+            </button>
+
+        </div>
+
+        <div class="filters-grid">
+
+            <div class="filter-group">
+                <label for="filter-region-com">Commercial region</label>
+                <select id="filter-region-com">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-region">Region</label>
+                <select id="filter-region">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-funcion">Production function</label>
+                <select id="filter-funcion">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-tipo">Farm type</label>
+                <select id="filter-tipo">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-origen-muestra">Sample origin</label>
+                <select id="filter-origen-muestra">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-etapa">Production stage</label>
+                <select id="filter-etapa">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-sitio-muestra">Sampling site</label>
+                <select id="filter-sitio-muestra">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-prrs-muestra">PRRSV result by pool</label>
+                <select id="filter-prrs-muestra">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-prrs-granja">PRRSV result by farm</label>
+                <select id="filter-prrs-granja">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-pcv2-muestra">PCV2 result by pool</label>
+                <select id="filter-pcv2-muestra">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-pcv2-granja">PCV2 result by farm</label>
+                <select id="filter-pcv2-granja">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-prrs-vaccine">PRRSV vaccination</label>
+                <select id="filter-prrs-vaccine">
+                    <option value="all">All</option>
+                    <option value="vaccinated">Vaccinated</option>
+                    <option value="not_vaccinated">Not vaccinated</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-pcv2-vaccine">PCV2 vaccination</label>
+                <select id="filter-pcv2-vaccine">
+                    <option value="all">All</option>
+                    <option value="vaccinated">Vaccinated</option>
+                    <option value="not_vaccinated">Not vaccinated</option>
+                </select>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================== -->
+    <!-- KPI CARDS -->
+    <!-- ====================== -->
+
+    <section class="info-section dashboard-section">
+
+        <h3>
+            Key Indicators
+        </h3>
+
+        <div class="kpi-grid">
+
+            <div class="kpi-card">
+                <span class="kpi-label">Total pools</span>
+                <span id="kpi-total-pools" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">Total farms</span>
+                <span id="kpi-total-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV+ pools</span>
+                <span id="kpi-prrs-pools" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PCV2+ pools</span>
+                <span id="kpi-pcv2-pools" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV+/PCV2+ pools</span>
+                <span id="kpi-coinfected-pools" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV+ farms</span>
+                <span id="kpi-prrs-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PCV2+ farms</span>
+                <span id="kpi-pcv2-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV+/PCV2+ farms</span>
+                <span id="kpi-coinfected-farms" class="kpi-value">0</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================== -->
+    <!-- VACCINATION SUMMARY -->
+    <!-- ====================== -->
+
+    <section class="info-section dashboard-section">
+
+        <h3>
+            Vaccination Summary
+        </h3>
+
+        <p class="dashboard-note">
+            In the original dataset, <strong>prrs = 1</strong> means no PRRSV vaccination
+            and <strong>circo = 1</strong> means no PCV2 vaccination.
+            The dashboard translates these values into vaccinated / not vaccinated labels.
+        </p>
+
+        <div class="kpi-grid secondary-kpi-grid">
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV vaccinated farms</span>
+                <span id="kpi-prrs-vaccinated-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PRRSV not vaccinated farms</span>
+                <span id="kpi-prrs-not-vaccinated-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PCV2 vaccinated farms</span>
+                <span id="kpi-pcv2-vaccinated-farms" class="kpi-value">0</span>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-label">PCV2 not vaccinated farms</span>
+                <span id="kpi-pcv2-not-vaccinated-farms" class="kpi-value">0</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================== -->
+    <!-- CHARTS -->
+    <!-- ====================== -->
+
+    <section class="info-section dashboard-section">
+
+        <h3>
+            Graphical Summary
+        </h3>
+
+        <div class="charts-grid">
+
+            <div class="chart-card">
+                <h4>Pools positive by region</h4>
+                <div id="chart-pools-region" class="chart-container"></div>
+            </div>
+
+            <div class="chart-card">
+                <h4>Farms positive by region</h4>
+                <div id="chart-farms-region" class="chart-container"></div>
+            </div>
+
+            <div class="chart-card">
+                <h4>PRRSV positivity by vaccination status</h4>
+                <div id="chart-prrs-vaccine" class="chart-container"></div>
+            </div>
+
+            <div class="chart-card">
+                <h4>PCV2 positivity by vaccination status</h4>
+                <div id="chart-pcv2-vaccine" class="chart-container"></div>
+            </div>
+
+            <div class="chart-card">
+                <h4>Coinfection by production stage</h4>
+                <div id="chart-coinfection-stage" class="chart-container"></div>
+            </div>
+
+            <div class="chart-card">
+                <h4>Diagnostic profile</h4>
+                <div id="chart-diagnostic-profile" class="chart-container"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================== -->
+    <!-- DATA TABLE -->
+    <!-- ====================== -->
+
+    <section class="info-section dashboard-section">
+
+        <div class="section-title-row">
+
+            <h3>
+                Filtered Data
+            </h3>
+
+            <button id="download-filtered-csv"
+                    class="dashboard-button">
+                Download filtered CSV
+            </button>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="coinfections-table"
+                   class="display compact"
+                   style="width:100%">
+
+                <thead>
+
+                    <tr>
+                        <th>Farm</th>
+                        <th>Commercial region</th>
+                        <th>Region</th>
+                        <th>Function</th>
+                        <th>Type</th>
+                        <th>Sample origin</th>
+                        <th>Stage</th>
+                        <th>Sampling site</th>
+                        <th>PRRSV pool</th>
+                        <th>PRRSV farm</th>
+                        <th>PCV2 pool</th>
+                        <th>PCV2 farm</th>
+                        <th>PRRSV vaccination</th>
+                        <th>PCV2 vaccination</th>
+                        <th>Coinfection pool</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- ====================== -->
+<!-- COLLABORATORS -->
+<!-- ====================== -->
+
+<section class="collaborators-section">
+
+    <h3>
+        Collaborating Institutions
+    </h3>
+
+    <div class="collaborators-grid">
+
+        <img src="assets/img/logos/sponsor_1.png"
+             alt="Sponsor 1">
+
+        <img src="assets/img/logos/sponsor_2.png"
+             alt="Sponsor 2">
+
+        <img src="assets/img/logos/sponsor_3.png"
+             alt="Sponsor 3">
+
+        <img src="assets/img/logos/sponsor_4.png"
+             alt="Sponsor 4">
+
+    </div>
+
+</section>
+
+<!-- ====================== -->
+<!-- FOOTER -->
+<!-- ====================== -->
+
+<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <p>
+            © 2026 DiseasesMapMx.
+            All rights reserved.
+        </p>
+
+        <p>
+            Developed by
+            Alberto Jorge Galindo Barboza
+        </p>
+
+        <p>
+            Veterinary and Zootechnical Research
+            in Molecular Epidemiology and
+            Genomic Surveillance of Swine Pathogens
+        </p>
+
+        <p>
+            <a href="https://aljogaba.github.io/"
+               target="_blank"
+               rel="noopener noreferrer">
+                <strong>Professional website</strong>
+            </a>
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- Specific script for this dashboard -->
+<script src="assets/js/coinfections.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+/* ========================================================= */
+/* COINFECTIONS DASHBOARD */
+/* Specific styles for coinfections.html */
+/* ========================================================= */
+
+/* Wider layout for dashboard page */
+
+.page-content {
+    max-width: 1500px;
+    padding: 70px 40px;
+}
+
+/* ========================================================= */
+/* GENERAL DASHBOARD SECTIONS */
+/* ========================================================= */
+
+.dashboard-section {
+    border: 1px solid #e5e7eb;
+}
+
+.section-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.section-title-row h3 {
+    margin-bottom: 0;
+}
+
+.internal-note {
+    margin-top: 25px;
+    padding: 14px 18px;
+    border-left: 5px solid #1d4ed8;
+    background: #eff6ff;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #1e3a8a !important;
+}
+
+.dashboard-note {
+    margin-bottom: 25px;
+    padding: 14px 18px;
+    border-left: 5px solid #047857;
+    background: #ecfdf5;
+    border-radius: 10px;
+    color: #065f46 !important;
+}
+
+/* ========================================================= */
+/* BUTTONS */
+/* ========================================================= */
+
+.dashboard-button {
+    background-color: #1d4ed8;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dashboard-button:hover {
+    background-color: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(29,78,216,0.25);
+}
+
+.dashboard-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ========================================================= */
+/* FILTERS */
+/* ========================================================= */
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #1f2937;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.filter-group select:hover,
+.filter-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    outline: none;
+}
+
+/* ========================================================= */
+/* KPI CARDS */
+/* ========================================================= */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 20px;
+}
+
+.secondary-kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.kpi-card {
+    background: white;
+    padding: 24px 22px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border-color: #cbd5e1;
+}
+
+.kpi-label {
+    display: block;
+    min-height: 38px;
+    margin-bottom: 10px;
+    color: #374151;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+}
+
+.kpi-value {
+    display: block;
+    color: #1d4ed8;
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* Visual emphasis by KPI position */
+
+.kpi-grid .kpi-card:nth-child(1),
+.kpi-grid .kpi-card:nth-child(2) {
+    border-top: 5px solid #1d4ed8;
+}
+
+.kpi-grid .kpi-card:nth-child(3),
+.kpi-grid .kpi-card:nth-child(6) {
+    border-top: 5px solid #047857;
+}
+
+.kpi-grid .kpi-card:nth-child(4),
+.kpi-grid .kpi-card:nth-child(7) {
+    border-top: 5px solid #7c3aed;
+}
+
+.kpi-grid .kpi-card:nth-child(5),
+.kpi-grid .kpi-card:nth-child(8) {
+    border-top: 5px solid #dc2626;
+}
+
+/* Vaccination summary cards */
+
+.secondary-kpi-grid .kpi-card:nth-child(1),
+.secondary-kpi-grid .kpi-card:nth-child(2) {
+    border-top: 5px solid #047857;
+}
+
+.secondary-kpi-grid .kpi-card:nth-child(3),
+.secondary-kpi-grid .kpi-card:nth-child(4) {
+    border-top: 5px solid #7c3aed;
+}
+
+/* ========================================================= */
+/* CHARTS */
+/* ========================================================= */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.chart-card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.chart-card h4 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    padding-left: 12px;
+    border-left: 5px solid #1d4ed8;
+    color: #0f172a;
+    font-size: 1.15rem;
+}
+
+.chart-container {
+    width: 100%;
+    min-height: 360px;
+}
+
+/* ========================================================= */
+/* TABLE */
+/* ========================================================= */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+#coinfections-table {
+    width: 100%;
+    font-size: 0.88rem;
+}
+
+#coinfections-table thead th {
+    background-color: #0f172a;
+    color: white;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+#coinfections-table tbody td {
+    white-space: nowrap;
+}
+
+.dataTables_wrapper {
+    margin-top: 10px;
+}
+
+.dataTables_filter input {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 7px 10px;
+    margin-left: 8px;
+}
+
+.dataTables_length select {
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    padding: 5px;
+}
+
+.dataTables_info,
+.dataTables_paginate,
+.dataTables_length,
+.dataTables_filter {
+    color: #374151 !important;
+    font-size: 0.9rem;
+}
+
+.dataTables_paginate .paginate_button {
+    border-radius: 6px !important;
+}
+
+/* ========================================================= */
+/* SMALL STATUS LABELS */
+/* These can be used later from JS if we want colored labels */
+/* ========================================================= */
+
+.status-label {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.status-positive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-negative {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-vaccinated {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-not-vaccinated {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-coinfection {
+    background: #fce7f3;
+    color: #9d174d;
+}
+
+/* ========================================================= */
+/* RESPONSIVE */
+/* ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        min-height: 330px;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .page-content {
+        padding: 50px 25px;
+    }
+
+    .filters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .kpi-value {
+        font-size: 1.8rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .page-content {
+        padding: 40px 18px;
+    }
+
+    .section-title-row {
+        align-items: stretch;
+    }
+
+    .dashboard-button {
+        width: 100%;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        padding: 18px;
+    }
+
+    .chart-container {
+        min-height: 300px;
+    }
+
+    #coinfections-table {
+        font-size: 0.82rem;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .kpi-card {
+        padding: 20px;
+    }
+
+    .kpi-value {
+        font-size: 1.65rem;
+    }
+
+    .chart-card h4 {
+        font-size: 1.05rem;
+    }
+
+    .chart-container {
+        min-height: 280px;
+    }
+
+}
