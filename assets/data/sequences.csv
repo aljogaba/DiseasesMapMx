@@ -132,3 +132,14 @@ PV235587,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,A,
 PV235588,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235588
 PV235589,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235589
 PV235590,Porcine Circovirus Type 2,Amacueca,A5,2022,February,Growing,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235590
+AJ000001,Porcine Reproductive and Respiratory Syndrome Virus,Zapotiltic,A5,2023,July,crecimiento,L1A,Serum,Pig,,,599,ORF5,Sanger,no,1_7_4,not available
+AJ000002,Porcine Reproductive and Respiratory Syndrome Virus,Zapotiltic,A5,2023,July,crecimiento,L1A,Serum,Pig,,,568,ORF5,Sanger,no,1_7_3,not available
+AJ000003,Porcine Reproductive and Respiratory Syndrome Virus,Poncitlán,B3,2023,July,destete,L1A,Serum,Pig,,,599,ORF5,Sanger,no,1_6_4,not available
+AJ000004,Porcine Reproductive and Respiratory Syndrome Virus,Poncitlán,B3,2023,July,destete,L1A,Serum,Pig,,,431,ORF5,Sanger,no,1_5_3,not available
+AJ000005,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2023,July,crecimiento,L5A,Serum,Pig,,,406,ORF5,Sanger,no,1_1_2,not available
+AJ000006,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2023,July,crecimiento,L5A,Serum,Pig,,,521,ORF5,Sanger,no,2_5_2,not available
+AJ000007,Porcine Reproductive and Respiratory Syndrome Virus,Autlán de Navarro,A3,2023,July,crecimiento,L5A,Serum,Pig,,,507,ORF5,Sanger,no,2_5_1,not available
+AJ000008,Porcine Reproductive and Respiratory Syndrome Virus,Jalostotitlán,B1,2023,July,gestacion,L1C.4,Serum,Pig,,,600,ORF5,Sanger,yes,1_3_4,not available
+AJ000009,Porcine Reproductive and Respiratory Syndrome Virus,Jalostotitlán,B1,2023,July,gestacion,L1C,Serum,Pig,,,436,ORF5,Sanger,yes,1_1_3,not available
+AJ000010,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2023,July,crecimiento,L8C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,not available
+AJ000011,Porcine Reproductive and Respiratory Syndrome Virus,Etzatlán,A4,2023,July,crecimiento,L8C,Serum,Pig,,,304,ORF5,Sanger,yes,1_1_1,not available
