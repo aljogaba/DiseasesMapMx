@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html lang="es-MX">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Tablero Interactivo | DiseasesMapMx
+</title>
+
+<meta name="description"
+      content="Tablero interactivo de vigilancia epidemiológica y genómica de patógenos porcinos en México, integrando mapas, KPIs, filtros, gráficas, metadatos de secuencias y datos de vigilancia de PRRSV y PCV2.">
+
+<meta name="author"
+      content="Alberto Jorge Galindo Barboza">
+
+<meta name="keywords"
+      content="tablero DiseasesMapMx, tablero de enfermedades porcinas, tablero PRRSV, tablero PCV2, vigilancia genómica porcina, tablero de epidemiología molecular, enfermedades porcinas Jalisco, epidemiología veterinaria, INIFAP">
+
+<meta name="robots"
+      content="index, follow">
+
+<link rel="canonical"
+      href="https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html">
+
+<link rel="alternate"
+      hreflang="en"
+      href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html">
+
+<link rel="alternate"
+      hreflang="es-MX"
+      href="https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html">
+
+<link rel="alternate"
+      hreflang="x-default"
+      href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html">
+
+<!-- Open Graph -->
+
+<meta property="og:title"
+      content="Tablero Interactivo | DiseasesMapMx">
+
+<meta property="og:description"
+      content="Tablero interactivo con SIG para PRRSV, PCV2 y vigilancia genómica porcina en México.">
+
+<meta property="og:image"
+      content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
+
+<meta property="og:url"
+      content="https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html">
+
+<meta property="og:type"
+      content="website">
+
+<meta property="og:locale"
+      content="es_MX">
+
+<meta property="og:locale:alternate"
+      content="en_US">
+
+<!-- Twitter Card -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Tablero Interactivo | DiseasesMapMx">
+
+<meta name="twitter:description"
+      content="Tablero epidemiológico interactivo para la vigilancia genómica de patógenos porcinos en México.">
+
+<meta name="twitter:image"
+      content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
+
+<!-- Favicon -->
+
+<link rel="icon"
+      href="/DiseasesMapMx/favicon.png">
+
+<!-- Styles -->
+
+<link rel="stylesheet"
+      href="assets/css/style.css">
+
+<!-- DataTables -->
+
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<!-- Leaflet -->
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+</head>
+
+<body>
+
+<!-- ====================== -->
+
+<!-- HEADER -->
+
+<!-- ====================== -->
+
+<header class="main-header">
+
+<div class="header-top">
+
+    <div class="header-logos">
+
+        <img src="assets/img/logos/header_inifap.png"
+             alt="Logotipo de INIFAP"
+             class="header-logo">
+
+        <img src="assets/img/logos/header_mexico.png"
+             alt="Bandera de México"
+             class="header-logo mexico-logo">
+
+    </div>
+
+    <div class="header-title">
+
+        <h1>DiseasesMapMx</h1>
+
+        <p>
+            Plataforma de Vigilancia Genómica Porcina
+        </p>
+
+    </div>
+
+</div>
+
+<nav class="navbar">
+
+    <ul>
+
+        <li>
+            <a href="index-es.html">Inicio</a>
+        </li>
+
+        <li>
+            <a href="prrsv-es.html">PRRSV</a>
+        </li>
+
+        <li>
+            <a href="pcv2-es.html">PCV2</a>
+        </li>
+
+        <li>
+            <a href="dashboard-es.html">Tablero</a>
+        </li>
+
+        <li>
+            <a href="about-es.html">Acerca del proyecto</a>
+        </li>
+
+        <li class="language-switch">
+            <a href="dashboard-es.html" class="active">ES</a>
+            <span>|</span>
+            <a href="dashboard.html">EN</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+</header>
+
+<!-- ====================== -->
+
+<!-- HERO -->
+
+<!-- ====================== -->
+
+<section class="page-hero">
+
+<div class="page-hero-content">
+
+    <h2>
+        Tablero Epidemiológico Interactivo
+    </h2>
+
+    <p>
+
+        Visualización espacial, vigilancia genómica,
+        distribución de linajes y análisis epidemiológico
+        de patógenos porcinos circulantes en México.
+
+    </p>
+
+</div>
+
+</section>
+
+<!-- ====================== -->
+
+<!-- INTRO -->
+
+<!-- ====================== -->
+
+<section class="dashboard-intro">
+
+<div class="dashboard-intro-content">
+
+    <p>
+
+        DiseasesMapMx integra metadatos genómicos,
+        epidemiológicos y geográficos en una plataforma
+        interactiva de vigilancia enfocada en la circulación
+        de PRRSV y PCV2 en sistemas de producción porcina.
+
+    </p>
+
+</div>
+
+</section>
+
+<!-- ====================== -->
+
+<!-- MAIN DASHBOARD -->
+
+<!-- ====================== -->
+
+<main>
+
+<section class="dashboard-container">
+
+<!-- ====================== -->
+
+<!-- FILTERS -->
+
+<!-- ====================== -->
+
+<div class="filters-panel">
+
+
+<select id="virusFilter" name="virusFilter"></select>
+
+<select id="yearFilter" name="yearFilter"></select>
+
+<select id="lineageFilter" name="lineageFilter"></select>
+
+<select id="regionFilter" name="regionFilter"></select>
+
+<select id="municipalityFilter" name="municipalityFilter"></select>
+
+<select id="stageFilter" name="stageFilter"></select>
+
+<select id="geneFilter" name="geneFilter"></select>
+
+<select id="vaccineFilter" name="vaccineFilter"></select>
+
+<select id="detectionFilter" name="detectionFilter"></select>
+
+<select id="rflpFilter" name="rflpFilter"></select>
+
+</div>
+
+<!-- ====================== -->
+
+<!-- KPI CARDS -->
+
+<!-- ====================== -->
+
+<section class="kpi-section">
+
+<!-- GLOBAL -->
+
+<div class="kpi-group">
+
+    <h2>
+        Panorama General
+    </h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card global-card">
+
+            <h3>
+                Secuencias Totales
+            </h3>
+
+            <p id="totalSequences">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card global-card">
+
+            <h3>
+                Municipios Totales
+            </h3>
+
+            <p id="totalMunicipalities">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card global-card">
+
+            <h3>
+                Virus Totales
+            </h3>
+
+            <p id="totalViruses">
+                0
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PRRSV -->
+
+<div class="kpi-group">
+
+    <h2>
+        Vigilancia de PRRSV
+    </h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card prrsv-card">
+
+            <h3>
+                Secuencias de PRRSV
+            </h3>
+
+            <p id="prrsvSequences">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card prrsv-card">
+
+            <h3>
+                Municipios con secuencias de PRRSV
+            </h3>
+
+            <p id="prrsvMunicipalities">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card prrsv-card">
+
+            <h3>
+                Linaje Dominante de PRRSV
+            </h3>
+
+            <p id="prrsvLineage">
+                -
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PCV2 -->
+
+<div class="kpi-group">
+
+    <h2>
+        Vigilancia de PCV2
+    </h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card pcv2-card">
+
+            <h3>
+                Secuencias de PCV2
+            </h3>
+
+            <p id="pcv2Sequences">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card pcv2-card">
+
+            <h3>
+                Municipios con secuencias de PCV2
+            </h3>
+
+            <p id="pcv2Municipalities">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card pcv2-card">
+
+            <h3>
+                Genotipo Dominante de PCV2
+            </h3>
+
+            <p id="pcv2Genotype">
+                -
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- ====================== -->
+
+<!-- GRID -->
+
+<!-- ====================== -->
+
+<div class="dashboard-grid">
+
+<!-- MAP -->
+
+<div class="map-panel">
+
+    <h2>
+        Vigilancia Geográfica
+    </h2>
+
+    <div id="map"></div>
+
+</div>
+
+<!-- LINEAGE -->
+
+<div class="chart-panel">
+
+    <h2>
+        Secuencias por Linaje / Genotipo
+    </h2>
+
+    <div id="lineageChart"></div>
+
+</div>
+
+<!-- YEAR -->
+
+<div class="chart-panel">
+
+    <h2>
+        Secuencias por Año
+    </h2>
+
+    <div id="yearChart"></div>
+
+</div>
+
+<!-- STAGE -->
+
+<div class="chart-panel">
+
+    <h2>
+        Etapa Productiva
+    </h2>
+
+    <div id="stageChart"></div>
+
+</div>
+
+</div>
+
+<!-- ====================== -->
+
+<!-- TABLE -->
+
+<!-- ====================== -->
+
+<div class="table-panel">
+
+<h2>
+    Metadatos de Secuencias
+</h2>
+
+<table id="sequenceTable"
+       class="display responsive nowrap"
+       style="width:100%">
+
+    <thead>
+
+        <tr>
+
+            <th>Accesión</th>
+
+            <th>Municipio</th>
+
+            <th>Año</th>
+
+            <th>Linaje</th>
+
+            <th>Etapa Productiva</th>
+
+            <th>Gen</th>
+
+            <th>Detección</th>
+
+            <th>Vacuna</th>
+
+            <th>RFLP</th>
+
+            <th>GenBank</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ====================== -->
+
+<!-- COLLABORATORS -->
+
+<!-- ====================== -->
+
+<section class="collaborators-section">
+
+<h3>
+    Instituciones Colaboradoras
+</h3>
+
+<div class="collaborators-grid">
+
+    <img src="assets/img/logos/sponsor_1.png"
+         alt="Institución colaboradora 1">
+
+    <img src="assets/img/logos/sponsor_2.png"
+         alt="Institución colaboradora 2">
+
+    <img src="assets/img/logos/sponsor_3.png"
+         alt="Institución colaboradora 3">
+
+    <img src="assets/img/logos/sponsor_4.png"
+         alt="Institución colaboradora 4">
+
+</div>
+
+</section>
+
+<!-- ====================== -->
+
+<!-- FOOTER -->
+
+<!-- ====================== -->
+
+<footer class="main-footer">
+
+<div class="footer-content">
+
+    <p>
+        © 2026 DiseasesMapMx.
+        Todos los derechos reservados.
+    </p>
+
+    <p>
+        Desarrollado por
+        Alberto Jorge Galindo Barboza
+    </p>
+
+    <!--
+    <p>
+        Instituto Nacional de Investigaciones Forestales,
+        Agrícolas y Pecuarias
+        (INIFAP)
+    </p>
+    -->
+
+    <p>
+        Investigación veterinaria y zootécnica
+        en epidemiología molecular y vigilancia
+        genómica de patógenos porcinos
+    </p>
+
+    <p>
+        <a
+        class="professional-link" href="https://aljogaba.github.io/" target="_blank" rel="noopener noreferrer">
+        Sitio profesional
+        </a>
+    </p>
+
+</div>
+
+</footer>
+
+<!-- ====================== -->
+
+<!-- SCRIPTS -->
+
+<!-- ====================== -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+
+</body>
+</html>
