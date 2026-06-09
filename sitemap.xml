@@ -1,30 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+ xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-    <url>
-        <loc>https://aljogaba.github.io/DiseasesMapMx/</loc>
-        <priority>1.0</priority>
-    </url>
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/index-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/" />
+    <priority>1.0</priority>
+</url>
 
-    <url>
-        <loc>https://aljogaba.github.io/DiseasesMapMx/prrsv.html</loc>
-        <priority>0.9</priority>
-    </url>
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/index-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/index-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/" />
+    <priority>1.0</priority>
+</url>
 
-    <url>
-        <loc>https://aljogaba.github.io/DiseasesMapMx/pcv2.html</loc>
-        <priority>0.9</priority>
-    </url>
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/prrsv.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/prrsv.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/prrsv-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/prrsv.html" />
+    <priority>0.9</priority>
+</url>
 
-    <url>
-        <loc>https://aljogaba.github.io/DiseasesMapMx/dashboard.html</loc>
-        <priority>0.8</priority>
-    </url>
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/prrsv-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/prrsv.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/prrsv-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/prrsv.html" />
+    <priority>0.9</priority>
+</url>
 
-    <url>
-        <loc>https://aljogaba.github.io/DiseasesMapMx/about.html</loc>
-        <priority>0.8</priority>
-    </url>
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/pcv2.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/pcv2.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/pcv2-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/pcv2.html" />
+    <priority>0.9</priority>
+</url>
+
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/pcv2-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/pcv2.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/pcv2-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/pcv2.html" />
+    <priority>0.9</priority>
+</url>
+
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/dashboard.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html" />
+    <priority>0.8</priority>
+</url>
+
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/dashboard.html" />
+    <priority>0.8</priority>
+</url>
+
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/about.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/about-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/about.html" />
+    <priority>0.8</priority>
+</url>
+
+<url>
+    <loc>https://aljogaba.github.io/DiseasesMapMx/about-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/about.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/about-es.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/about.html" />
+    <priority>0.8</priority>
+</url>
 
 </urlset>
