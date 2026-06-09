@@ -132,30 +132,30 @@ PV235587,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,A,
 PV235588,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235588
 PV235589,Porcine Circovirus Type 2,Autlán de Navarro,A3,2022,February,Grower,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235589
 PV235590,Porcine Circovirus Type 2,Amacueca,A5,2022,February,Growing,D,Serum,Pig,,,705,ORF2,Sanger,yes,,https://www.ncbi.nlm.nih.gov/nuccore/PV235590
-AJ000001,Porcine reproductive and respiratory syndrome virus,Zapotiltic,A5,2023,July,Growing,1A,Serum,Pig,,,599,ORF5,Sanger,no,1_7_4,not available
-AJ000002,Porcine reproductive and respiratory syndrome virus,Zapotiltic,A5,2023,July,Growing,1A,Serum,Pig,,,568,ORF5,Sanger,no,1_7_3,not available
-AJ000003,Porcine reproductive and respiratory syndrome virus,Poncitlán,B3,2023,July,Weaned,1A,Serum,Pig,,,599,ORF5,Sanger,no,1_6_4,not available
-AJ000004,Porcine reproductive and respiratory syndrome virus,Poncitlán,B3,2023,July,Weaned,1A,Serum,Pig,,,431,ORF5,Sanger,no,1_5_3,not available
-AJ000005,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,406,ORF5,Sanger,no,1_1_2,not available
-AJ000006,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,521,ORF5,Sanger,no,2_5_2,not available
-AJ000007,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,507,ORF5,Sanger,no,2_5_1,not available
-AJ000008,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2023,July,Gestation,1C.4,Serum,Pig,,,600,ORF5,Sanger,yes,1_3_4,not available
-AJ000009,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2023,July,Gestation,1C,Serum,Pig,,,436,ORF5,Sanger,yes,1_1_3,not available
-AJ000010,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2023,July,Growing,8C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,not available
-AJ000011,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2023,July,Growing,8C,Serum,Pig,,,304,ORF5,Sanger,yes,1_1_1,not available
-AJ000012,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,D,Serum,Pig,,,694,ORF2,Sanger,yes,,not available
-AJ000013,Porcine Circovirus Type 2,Tonaya,A3,2023,July,Growing,D,Serum,Pig,,,558,ORF2,Sanger,yes,,not available
-AJ000014,Porcine Circovirus Type 2,Tonaya,A3,2023,July,Growing,D,Serum,Pig,,,708,ORF2,Sanger,yes,,not available
-AJ000015,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,July,Growing,A,Serum,Pig,,,728,ORF2,Sanger,yes,,not available
-AJ000016,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,July,Growing,A,Serum,Pig,,,719,ORF2,Sanger,yes,,not available
-AJ000017,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,662,ORF2,Sanger,yes,,not available
-AJ000018,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,655,ORF2,Sanger,yes,,not available
-AJ000019,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,D,Serum,Pig,,,690,ORF2,Sanger,yes,,not available
-AJ000020,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,D,Serum,Pig,,,680,ORF2,Sanger,yes,,not available
-AJ000021,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,698,ORF2,Sanger,yes,,not available
-AJ000022,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,689,ORF2,Sanger,yes,,not available
-AJ000023,Porcine Circovirus Type 2,Lagos de Moreno,B1,2023,July,Growing,A,Serum,Pig,,,730,ORF2,Sanger,yes,,not available
-AJ000024,Porcine Circovirus Type 2,Lagos de Moreno,B1,2023,July,Growing,A,Serum,Pig,,,718,ORF2,Sanger,yes,,not available
-AJ000025,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,A,Serum,Pig,,,729,ORF2,Sanger,yes,,not available
-AJ000026,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,A,Serum,Pig,,,716,ORF2,Sanger,yes,,not available
-AJ000027,Porcine Circovirus Type 2,San Gabriel,A3,2023,July,Growing,D,Serum,Pig,,,723,ORF2,Sanger,yes,,not available
+AJ000001,Porcine reproductive and respiratory syndrome virus,Zapotiltic,A5,2023,July,Growing,1A,Serum,Pig,,,599,ORF5,Sanger,no,1_7_4,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000002,Porcine reproductive and respiratory syndrome virus,Zapotiltic,A5,2023,July,Growing,1A,Serum,Pig,,,568,ORF5,Sanger,no,1_7_3,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000003,Porcine reproductive and respiratory syndrome virus,Poncitlán,B3,2023,July,Weaned,1A,Serum,Pig,,,599,ORF5,Sanger,no,1_6_4,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000004,Porcine reproductive and respiratory syndrome virus,Poncitlán,B3,2023,July,Weaned,1A,Serum,Pig,,,431,ORF5,Sanger,no,1_5_3,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000005,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,406,ORF5,Sanger,no,1_1_2,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000006,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,521,ORF5,Sanger,no,2_5_2,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000007,Porcine reproductive and respiratory syndrome virus,Autlán de Navarro,A3,2023,July,Growing,5A,Serum,Pig,,,507,ORF5,Sanger,no,2_5_1,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000008,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2023,July,Gestation,1C.4,Serum,Pig,,,600,ORF5,Sanger,yes,1_3_4,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000009,Porcine reproductive and respiratory syndrome virus,Jalostotitlán,B1,2023,July,Gestation,1C,Serum,Pig,,,436,ORF5,Sanger,yes,1_1_3,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000010,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2023,July,Growing,8C,Serum,Pig,,,603,ORF5,Sanger,yes,1_4_2,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000011,Porcine reproductive and respiratory syndrome virus,Etzatlán,A4,2023,July,Growing,8C,Serum,Pig,,,304,ORF5,Sanger,yes,1_1_1,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000012,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,D,Serum,Pig,,,694,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000013,Porcine Circovirus Type 2,Tonaya,A3,2023,July,Growing,D,Serum,Pig,,,558,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000014,Porcine Circovirus Type 2,Tonaya,A3,2023,July,Growing,D,Serum,Pig,,,708,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000015,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,July,Growing,A,Serum,Pig,,,728,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000016,Porcine Circovirus Type 2,Tepatitlán de Morelos,B3,2023,July,Growing,A,Serum,Pig,,,719,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000017,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,662,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000018,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,655,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000019,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,D,Serum,Pig,,,690,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000020,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,D,Serum,Pig,,,680,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000021,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,698,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000022,Porcine Circovirus Type 2,Etzatlán,A4,2023,July,Growing,A,Serum,Pig,,,689,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000023,Porcine Circovirus Type 2,Lagos de Moreno,B1,2023,July,Growing,A,Serum,Pig,,,730,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000024,Porcine Circovirus Type 2,Lagos de Moreno,B1,2023,July,Growing,A,Serum,Pig,,,718,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000025,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,A,Serum,Pig,,,729,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000026,Porcine Circovirus Type 2,Tepatitlán de Morelos,B2,2023,July,Growing,A,Serum,Pig,,,716,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
+AJ000027,Porcine Circovirus Type 2,San Gabriel,A3,2023,July,Growing,D,Serum,Pig,,,723,ORF2,Sanger,yes,,https://aljogaba.github.io/DiseasesMapMx/genbank-unavailable.html
