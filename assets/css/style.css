@@ -1236,3 +1236,16 @@ body {
   opacity: 0.5;
 }
 
+.navbar a.active-page {
+  color: #ffffff;
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+  text-decoration-thickness: 2px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+}
+
+.navbar a.active-page:hover {
+  color: #ffffff;
+  opacity: 1;
+}
