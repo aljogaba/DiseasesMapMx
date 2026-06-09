@@ -785,9 +785,6 @@ function renderMap(data) {
                 <strong>Total sequences:</strong>
                 ${totalCount}<br>
 
-                <strong>Viruses detected:</strong>
-                ${Object.keys(virusGroups).length}<br>
-
                 ${virusSummaryHTML}
 
             </div>
