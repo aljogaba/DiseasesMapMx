@@ -1827,3 +1827,11 @@ canvas {
     }
 }
 
+.inline-project-link {
+  color: #1f5f7a;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(31, 95, 122, 0.45);
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
