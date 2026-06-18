@@ -8,7 +8,7 @@
     <title>PRRSV-2 ORF5 Sequence Analysis | DiseasesMapMx</title>
 
     <meta name="description"
-          content="Prototype interface for preliminary PRRSV-2 ORF5 sequence validation, metadata capture, and future phylogenetic lineage assignment in DiseasesMapMx.">
+          content="Interface for preliminary PRRSV-2 ORF5 sequence validation, metadata capture, and closest-reference screening in DiseasesMapMx.">
 
     <meta name="author" content="Alberto Jorge Galindo-Barboza">
     <meta name="robots" content="noindex, nofollow">
@@ -47,7 +47,7 @@
                 <li><a href="phylogeny.html" class="active-page" aria-current="page">Sequence Analysis</a></li>
                 <li><a href="about.html">About</a></li>
                 <li class="language-switch analysis-language-status" aria-label="Current language">
-                    <span>EN prototype</span>
+                    <span>EN</span>
                 </li>
             </ul>
         </nav>
@@ -56,16 +56,16 @@
     <main>
         <section class="page-hero analysis-hero">
             <div class="page-hero-content">
-                <p class="analysis-eyebrow">Prototype module</p>
+                <p class="analysis-eyebrow">Sequence analysis</p>
                 <h2>PRRSV-2 ORF5 Sequence Analysis</h2>
                 <p>
                     Submit an ORF5 nucleotide sequence and associated sample metadata for
-                    preliminary quality assessment and future phylogenetic lineage assignment.
+                    preliminary quality assessment and closest-reference screening.
                 </p>
                 <div class="analysis-hero-badges" aria-label="Analysis scope">
                     <span>PRRSV-2</span>
                     <span>ORF5</span>
-                    <span>Preliminary classification</span>
+                    <span>Closest-reference screening</span>
                 </div>
             </div>
         </section>
@@ -74,20 +74,19 @@
             <div class="analysis-intro-content">
                 <div>
                     <p class="analysis-section-label">Scientific scope</p>
-                    <h2>Sequence submission and preliminary classification</h2>
+                    <h2>Sequence submission and reference screening</h2>
                     <p>
-                        This prototype captures standardized metadata, validates nucleotide input,
-                        and prepares the request for comparison with curated PRRSV-2 ORF5 reference
-                        sequences. Phylogenetic lineage assignment will be enabled after the Python
-                        analysis service is connected.
+                        This module captures standardized metadata, validates nucleotide input,
+                        and sends the request to a Python analysis engine for preliminary closest-reference
+                        comparison against curated PRRSV-2 ORF5 sequences.
                     </p>
                 </div>
 
                 <div class="analysis-status-card" role="status">
                     <span class="analysis-status-dot" aria-hidden="true"></span>
                     <div>
-                        <strong>Current development status</strong>
-                        <p>Front-end validation is active. Server-side phylogenetic analysis is not yet connected.</p>
+                        <strong>Interpretation status</strong>
+                        <p>The current output is a preliminary closest-reference screening. It is not a formal phylogenetic lineage assignment and depends on the current reference panel.</p>
                     </div>
                 </div>
             </div>
@@ -285,7 +284,7 @@
                                 <input type="checkbox" id="analysisConsent" name="analysisConsent" required>
                                 <span>
                                     <strong>I authorize preliminary analysis of this sequence. <span aria-hidden="true">*</span></strong>
-                                    <small>The sequence will be processed for validation and future phylogenetic comparison.</small>
+                                    <small>The sequence will be processed for validation and closest-reference screening.</small>
                                 </span>
                             </label>
 
@@ -311,12 +310,12 @@
 
                     <div class="analysis-submit-bar">
                         <div>
-                            <strong>Ready to validate the request?</strong>
-                            <p>No information is transmitted or stored in this prototype.</p>
+                            <strong>Ready to run the screening?</strong>
+                            <p>The request is sent to the PRRSV-2 ORF5 analysis engine configured for this page.</p>
                         </div>
 
                         <button type="submit" class="analysis-button analysis-button-primary">
-                            Run preliminary validation
+                            Run sequence analysis
                         </button>
                     </div>
                 </form>
@@ -325,17 +324,16 @@
                     <div class="analysis-panel-header">
                         <div class="analysis-step-number analysis-step-result" aria-hidden="true">4</div>
                         <div>
-                            <p class="analysis-section-label">Prototype output</p>
+                            <p class="analysis-section-label">Analysis result</p>
                             <h3 id="resultsHeading">Preliminary analysis result</h3>
-                            <p id="resultRequestCode">Temporary request code: —</p>
+                            <p id="resultRequestCode">Analysis ID: —</p>
                         </div>
                     </div>
 
-                    <div class="analysis-result-alert analysis-result-alert-info">
-                        <strong>Front-end validation completed.</strong>
-                        <p>
-                            A phylogenetic lineage has not been assigned because the Python analysis API
-                            is not connected in this prototype.
+                    <div id="apiStatusAlert" class="analysis-result-alert analysis-result-alert-info">
+                        <strong id="apiStatusTitle">Waiting for analysis.</strong>
+                        <p id="apiStatusText">
+                            Results will appear after the analysis engine returns a response.
                         </p>
                     </div>
 
@@ -365,18 +363,75 @@
                         </article>
                     </div>
 
-                    <div class="analysis-classification-placeholder">
-                        <div>
-                            <span class="analysis-placeholder-label">Future API output</span>
-                            <h4>Phylogenetic classification pending</h4>
-                            <p>
-                                This area will display the assigned lineage or sublineage, closest references,
-                                nucleotide identity, alignment coverage, confidence level, and scientific warnings.
-                            </p>
+                    <div class="analysis-result-grid analysis-api-summary-grid" aria-label="API analysis summary">
+                        <article class="analysis-result-card analysis-lineage-card">
+                            <span>Lineage screening result</span>
+                            <strong id="resultLineage">—</strong>
+                            <small>Based on the current reference panel and v3 support thresholds</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Best reference match</span>
+                            <strong id="resultBestMatch">—</strong>
+                            <small id="resultBestMatchDetails">Reference metadata will appear here</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Nucleotide identity</span>
+                            <strong id="resultIdentity">—</strong>
+                            <small id="resultIdentityDetails">Comparable positions and mismatches</small>
+                        </article>
+
+                        <article class="analysis-result-card analysis-orientation-card">
+                            <span>Sequence orientation</span>
+                            <strong id="resultOrientation">—</strong>
+                            <small id="resultOrientationDetails">Orientation used for closest-reference screening</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Confidence</span>
+                            <strong id="resultConfidence">—</strong>
+                            <small id="resultGap">Gap to closest different lineage</small>
+                        </article>
+                    </div>
+
+                    <div class="analysis-api-output">
+                        <div class="analysis-api-output-header">
+                            <div>
+                                <span class="analysis-placeholder-label">Reference screening</span>
+                                <h4>Closest PRRSV-2 ORF5 references</h4>
+                                <p>
+                                    This table summarizes the closest references returned by the Python engine.
+                                    Closest references are reported for context. A reliable lineage signal is reported only when v3 support thresholds are met.
+                                </p>
+                            </div>
                         </div>
-                        <div class="analysis-placeholder-tree" aria-hidden="true">
-                            <span></span><span></span><span></span><span></span><span></span>
+
+                        <div class="analysis-match-table-wrapper">
+                            <table class="analysis-match-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Reference</th>
+                                        <th>Lineage</th>
+                                        <th>Identity</th>
+                                        <th>Mismatches</th>
+                                        <th>Orientation</th>
+                                        <th>Metadata</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultTopMatchesBody">
+                                    <tr>
+                                        <td colspan="7">Run the analysis to display closest references.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+
+                        <details class="analysis-json-details">
+                            <summary>View raw JSON response</summary>
+                            <pre id="resultJson">No API response yet.</pre>
+                        </details>
                     </div>
                 </section>
             </div>
@@ -384,13 +439,13 @@
             <aside class="analysis-sidebar" aria-label="Analysis information">
                 <section class="analysis-side-card">
                     <p class="analysis-section-label">Analysis scope</p>
-                    <h3>What this module will evaluate</h3>
+                    <h3>What this module evaluates</h3>
                     <ul class="analysis-check-list">
                         <li>Input format and nucleotide characters</li>
                         <li>Sequence length and ORF5 coverage</li>
                         <li>Ambiguous nucleotide proportion</li>
-                        <li>Phylogenetic placement against curated references</li>
-                        <li>Closest DiseasesMapMx reference sequences</li>
+                        <li>Closest-reference signal against curated ORF5 references</li>
+                        <li>Closest reference and closest Mexican reference signals</li>
                     </ul>
                 </section>
 
@@ -423,7 +478,7 @@
                             <dd>603 nt</dd>
                         </div>
                         <div>
-                            <dt>Accepted prototype range</dt>
+                            <dt>Accepted input range</dt>
                             <dd>250–750 nt</dd>
                         </div>
                         <div>
@@ -438,7 +493,7 @@
                     <h3>Do not submit identifying farm data</h3>
                     <p>
                         Use coded sample identifiers. Farm names, producer names, street addresses,
-                        and exact geographic coordinates are not required for phylogenetic analysis.
+                        and exact geographic coordinates are not required for this screening.
                     </p>
                 </section>
             </aside>
@@ -446,8 +501,8 @@
 
         <section class="analysis-workflow-section" aria-labelledby="workflowHeading">
             <div class="analysis-workflow-content">
-                <p class="analysis-section-label">Planned computational workflow</p>
-                <h2 id="workflowHeading">How the complete analysis will work</h2>
+                <p class="analysis-section-label">Computational workflow</p>
+                <h2 id="workflowHeading">How the screening works</h2>
 
                 <div class="analysis-workflow-grid">
                     <article>
@@ -462,8 +517,8 @@
                     </article>
                     <article>
                         <span>03</span>
-                        <h3>Classify</h3>
-                        <p>Estimate phylogenetic placement, lineage assignment, identity, coverage, and confidence.</p>
+                        <h3>Screen</h3>
+                        <p>Report closest-reference lineage signal, identity, ORF5 coverage, support level, and uncertainty warnings.</p>
                     </article>
                     <article>
                         <span>04</span>
