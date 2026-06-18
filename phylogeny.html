@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PRRSV-2 ORF5 Sequence Analysis | DiseasesMapMx</title>
+
+    <meta name="description"
+          content="Prototype interface for preliminary PRRSV-2 ORF5 sequence validation, metadata capture, and future phylogenetic lineage assignment in DiseasesMapMx.">
+
+    <meta name="author" content="Alberto Jorge Galindo-Barboza">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="/DiseasesMapMx/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/phylogeny.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-top">
+            <div class="header-logos">
+                <img src="assets/img/logos/header_inifap.png"
+                     alt="INIFAP Logo"
+                     class="header-logo">
+
+                <img src="assets/img/logos/header_mexico.png"
+                     alt="Mexico Flag"
+                     class="header-logo mexico-logo">
+            </div>
+
+            <div class="header-title">
+                <h1>DiseasesMapMx</h1>
+                <p>Swine Genomic Surveillance Platform</p>
+            </div>
+        </div>
+
+        <nav class="navbar" aria-label="Primary navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prrsv.html">PRRSV</a></li>
+                <li><a href="pcv2.html">PCV2</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="phylogeny.html" class="active-page" aria-current="page">Sequence Analysis</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="language-switch analysis-language-status" aria-label="Current language">
+                    <span>EN prototype</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero analysis-hero">
+            <div class="page-hero-content">
+                <p class="analysis-eyebrow">Prototype module</p>
+                <h2>PRRSV-2 ORF5 Sequence Analysis</h2>
+                <p>
+                    Submit an ORF5 nucleotide sequence and associated sample metadata for
+                    preliminary quality assessment and future phylogenetic lineage assignment.
+                </p>
+                <div class="analysis-hero-badges" aria-label="Analysis scope">
+                    <span>PRRSV-2</span>
+                    <span>ORF5</span>
+                    <span>Preliminary classification</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-intro">
+            <div class="analysis-intro-content">
+                <div>
+                    <p class="analysis-section-label">Scientific scope</p>
+                    <h2>Sequence submission and preliminary classification</h2>
+                    <p>
+                        This prototype captures standardized metadata, validates nucleotide input,
+                        and prepares the request for comparison with curated PRRSV-2 ORF5 reference
+                        sequences. Phylogenetic lineage assignment will be enabled after the Python
+                        analysis service is connected.
+                    </p>
+                </div>
+
+                <div class="analysis-status-card" role="status">
+                    <span class="analysis-status-dot" aria-hidden="true"></span>
+                    <div>
+                        <strong>Current development status</strong>
+                        <p>Front-end validation is active. Server-side phylogenetic analysis is not yet connected.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-shell" aria-label="Sequence analysis workspace">
+            <div class="analysis-main-column">
+
+                <form id="sequenceAnalysisForm" class="analysis-form" novalidate>
+
+                    <section class="analysis-panel" aria-labelledby="metadataHeading">
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number" aria-hidden="true">1</div>
+                            <div>
+                                <p class="analysis-section-label">Required information</p>
+                                <h3 id="metadataHeading">Sample metadata</h3>
+                                <p>Fields marked with an asterisk are required for the preliminary request.</p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-form-grid">
+                            <div class="analysis-field">
+                                <label for="sampleId">Sample identifier <span aria-hidden="true">*</span></label>
+                                <input type="text"
+                                       id="sampleId"
+                                       name="sampleId"
+                                       maxlength="80"
+                                       placeholder="e.g., FARM23-ORF5-01"
+                                       autocomplete="off"
+                                       required>
+                                <small>Use a non-identifying laboratory or project code.</small>
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="collectionDate">Collection date</label>
+                                <input type="date" id="collectionDate" name="collectionDate">
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="country">Country <span aria-hidden="true">*</span></label>
+                                <input type="text"
+                                       id="country"
+                                       name="country"
+                                       value="Mexico"
+                                       maxlength="80"
+                                       required>
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="state">State / administrative area <span aria-hidden="true">*</span></label>
+                                <input type="text"
+                                       id="state"
+                                       name="state"
+                                       placeholder="e.g., Jalisco"
+                                       maxlength="100"
+                                       required>
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="municipality">Municipality</label>
+                                <input type="text"
+                                       id="municipality"
+                                       name="municipality"
+                                       placeholder="e.g., Tepatitlán de Morelos"
+                                       maxlength="120">
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="sampleType">Sample type <span aria-hidden="true">*</span></label>
+                                <select id="sampleType" name="sampleType" required>
+                                    <option value="">Select a sample type</option>
+                                    <option value="serum">Serum</option>
+                                    <option value="oral-fluid">Oral fluid</option>
+                                    <option value="tissue">Tissue</option>
+                                    <option value="lung">Lung</option>
+                                    <option value="processing-fluid">Processing fluid</option>
+                                    <option value="semen">Semen</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="productionStage">Production stage</label>
+                                <select id="productionStage" name="productionStage">
+                                    <option value="">Not specified</option>
+                                    <option value="suckling">Suckling</option>
+                                    <option value="nursery">Nursery</option>
+                                    <option value="grower">Grower</option>
+                                    <option value="finisher">Finisher</option>
+                                    <option value="breeding">Breeding herd</option>
+                                    <option value="mixed">Mixed / multiple stages</option>
+                                    <option value="unknown">Unknown</option>
+                                </select>
+                            </div>
+
+                            <div class="analysis-field">
+                                <label for="collectionYear">Collection year <span aria-hidden="true">*</span></label>
+                                <input type="number"
+                                       id="collectionYear"
+                                       name="collectionYear"
+                                       min="1990"
+                                       max="2100"
+                                       inputmode="numeric"
+                                       placeholder="e.g., 2026"
+                                       required>
+                            </div>
+
+                            <div class="analysis-field analysis-field-wide">
+                                <label for="institution">Submitting institution or laboratory</label>
+                                <input type="text"
+                                       id="institution"
+                                       name="institution"
+                                       maxlength="160"
+                                       placeholder="Optional">
+                            </div>
+
+                            <div class="analysis-field analysis-field-wide">
+                                <label for="contactEmail">Contact email</label>
+                                <input type="email"
+                                       id="contactEmail"
+                                       name="contactEmail"
+                                       maxlength="160"
+                                       placeholder="Optional; used only for request follow-up">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="analysis-panel" aria-labelledby="sequenceHeading">
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number" aria-hidden="true">2</div>
+                            <div>
+                                <p class="analysis-section-label">Nucleotide input</p>
+                                <h3 id="sequenceHeading">ORF5 sequence</h3>
+                                <p>Paste a FASTA-formatted sequence or nucleotide characters only.</p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-fixed-fields" aria-label="Fixed analysis settings">
+                            <div>
+                                <span>Target virus</span>
+                                <strong>PRRSV-2</strong>
+                            </div>
+                            <div>
+                                <span>Target gene</span>
+                                <strong>ORF5</strong>
+                            </div>
+                            <div>
+                                <span>Expected complete length</span>
+                                <strong>603 nt</strong>
+                            </div>
+                        </div>
+
+                        <div class="analysis-field analysis-sequence-field">
+                            <div class="analysis-label-row">
+                                <label for="sequenceInput">Sequence <span aria-hidden="true">*</span></label>
+                                <span id="sequenceLengthBadge" class="analysis-counter" aria-live="polite">0 nt</span>
+                            </div>
+
+                            <textarea id="sequenceInput"
+                                      name="sequenceInput"
+                                      rows="14"
+                                      spellcheck="false"
+                                      autocapitalize="characters"
+                                      autocomplete="off"
+                                      placeholder=">sample_identifier&#10;ATG..."
+                                      required></textarea>
+
+                            <div class="analysis-sequence-tools">
+                                <button type="button" id="exampleSequenceButton" class="analysis-button analysis-button-secondary">
+                                    Insert synthetic example
+                                </button>
+                                <button type="button" id="clearSequenceButton" class="analysis-button analysis-button-ghost">
+                                    Clear sequence
+                                </button>
+                            </div>
+
+                            <div id="sequenceFeedback" class="analysis-inline-feedback" aria-live="polite">
+                                Accepted characters: A, C, G, T, and N. FASTA headers beginning with “&gt;” are allowed.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="analysis-panel" aria-labelledby="permissionsHeading">
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number" aria-hidden="true">3</div>
+                            <div>
+                                <p class="analysis-section-label">Data governance</p>
+                                <h3 id="permissionsHeading">Analysis permissions</h3>
+                                <p>Analysis and public release are treated as separate decisions.</p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-consent-list">
+                            <label class="analysis-checkbox-card">
+                                <input type="checkbox" id="analysisConsent" name="analysisConsent" required>
+                                <span>
+                                    <strong>I authorize preliminary analysis of this sequence. <span aria-hidden="true">*</span></strong>
+                                    <small>The sequence will be processed for validation and future phylogenetic comparison.</small>
+                                </span>
+                            </label>
+
+                            <label class="analysis-checkbox-card">
+                                <input type="checkbox" id="storageConsent" name="storageConsent">
+                                <span>
+                                    <strong>I authorize private storage of this request for scientific review.</strong>
+                                    <small>This does not authorize publication or inclusion in the public DiseasesMapMx dataset.</small>
+                                </span>
+                            </label>
+
+                            <label class="analysis-checkbox-card">
+                                <input type="checkbox" id="publicationConsent" name="publicationConsent">
+                                <span>
+                                    <strong>I authorize future public release after scientific review.</strong>
+                                    <small>Public inclusion would remain subject to manual review, metadata verification, and curator approval.</small>
+                                </span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <div id="formMessage" class="analysis-form-message" aria-live="assertive"></div>
+
+                    <div class="analysis-submit-bar">
+                        <div>
+                            <strong>Ready to validate the request?</strong>
+                            <p>No information is transmitted or stored in this prototype.</p>
+                        </div>
+
+                        <button type="submit" class="analysis-button analysis-button-primary">
+                            Run preliminary validation
+                        </button>
+                    </div>
+                </form>
+
+                <section id="analysisResults" class="analysis-panel analysis-results" aria-labelledby="resultsHeading" hidden>
+                    <div class="analysis-panel-header">
+                        <div class="analysis-step-number analysis-step-result" aria-hidden="true">4</div>
+                        <div>
+                            <p class="analysis-section-label">Prototype output</p>
+                            <h3 id="resultsHeading">Preliminary analysis result</h3>
+                            <p id="resultRequestCode">Temporary request code: —</p>
+                        </div>
+                    </div>
+
+                    <div class="analysis-result-alert analysis-result-alert-info">
+                        <strong>Front-end validation completed.</strong>
+                        <p>
+                            A phylogenetic lineage has not been assigned because the Python analysis API
+                            is not connected in this prototype.
+                        </p>
+                    </div>
+
+                    <div class="analysis-result-grid">
+                        <article class="analysis-result-card">
+                            <span>Valid sequence length</span>
+                            <strong id="resultLength">—</strong>
+                            <small>After removing the FASTA header and whitespace</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Estimated ORF5 coverage</span>
+                            <strong id="resultCoverage">—</strong>
+                            <small>Relative to a 603 nt complete ORF5 sequence</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Ambiguous bases</span>
+                            <strong id="resultAmbiguous">—</strong>
+                            <small>Number and percentage of N characters</small>
+                        </article>
+
+                        <article class="analysis-result-card">
+                            <span>Input quality status</span>
+                            <strong id="resultQuality">—</strong>
+                            <small>Preliminary syntax and length assessment</small>
+                        </article>
+                    </div>
+
+                    <div class="analysis-classification-placeholder">
+                        <div>
+                            <span class="analysis-placeholder-label">Future API output</span>
+                            <h4>Phylogenetic classification pending</h4>
+                            <p>
+                                This area will display the assigned lineage or sublineage, closest references,
+                                nucleotide identity, alignment coverage, confidence level, and scientific warnings.
+                            </p>
+                        </div>
+                        <div class="analysis-placeholder-tree" aria-hidden="true">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="analysis-sidebar" aria-label="Analysis information">
+                <section class="analysis-side-card">
+                    <p class="analysis-section-label">Analysis scope</p>
+                    <h3>What this module will evaluate</h3>
+                    <ul class="analysis-check-list">
+                        <li>Input format and nucleotide characters</li>
+                        <li>Sequence length and ORF5 coverage</li>
+                        <li>Ambiguous nucleotide proportion</li>
+                        <li>Phylogenetic placement against curated references</li>
+                        <li>Closest DiseasesMapMx reference sequences</li>
+                    </ul>
+                </section>
+
+                <section class="analysis-side-card analysis-side-card-accent">
+                    <p class="analysis-section-label">Interpretation</p>
+                    <h3>Preliminary result only</h3>
+                    <p>
+                        Lineage assignment must be interpreted together with sequence quality,
+                        phylogenetic placement, reference coverage, and epidemiological context.
+                    </p>
+                    <p>
+                        Percentage identity alone will not be used as the sole criterion for lineage assignment.
+                    </p>
+                </section>
+
+                <section class="analysis-side-card">
+                    <p class="analysis-section-label">Sequence requirements</p>
+                    <h3>Recommended input</h3>
+                    <dl class="analysis-requirements">
+                        <div>
+                            <dt>Virus</dt>
+                            <dd>PRRSV-2</dd>
+                        </div>
+                        <div>
+                            <dt>Gene</dt>
+                            <dd>ORF5</dd>
+                        </div>
+                        <div>
+                            <dt>Preferred length</dt>
+                            <dd>603 nt</dd>
+                        </div>
+                        <div>
+                            <dt>Accepted prototype range</dt>
+                            <dd>250–750 nt</dd>
+                        </div>
+                        <div>
+                            <dt>Format</dt>
+                            <dd>FASTA or raw nucleotides</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section class="analysis-side-card">
+                    <p class="analysis-section-label">Privacy</p>
+                    <h3>Do not submit identifying farm data</h3>
+                    <p>
+                        Use coded sample identifiers. Farm names, producer names, street addresses,
+                        and exact geographic coordinates are not required for phylogenetic analysis.
+                    </p>
+                </section>
+            </aside>
+        </section>
+
+        <section class="analysis-workflow-section" aria-labelledby="workflowHeading">
+            <div class="analysis-workflow-content">
+                <p class="analysis-section-label">Planned computational workflow</p>
+                <h2 id="workflowHeading">How the complete analysis will work</h2>
+
+                <div class="analysis-workflow-grid">
+                    <article>
+                        <span>01</span>
+                        <h3>Validate</h3>
+                        <p>Standardize the nucleotide input, remove formatting, and evaluate sequence quality.</p>
+                    </article>
+                    <article>
+                        <span>02</span>
+                        <h3>Align</h3>
+                        <p>Align the submitted ORF5 sequence against a curated PRRSV-2 reference dataset.</p>
+                    </article>
+                    <article>
+                        <span>03</span>
+                        <h3>Classify</h3>
+                        <p>Estimate phylogenetic placement, lineage assignment, identity, coverage, and confidence.</p>
+                    </article>
+                    <article>
+                        <span>04</span>
+                        <h3>Review</h3>
+                        <p>Store authorized requests privately for manual scientific review before any public use.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>© 2026 DiseasesMapMx. All rights reserved.</p>
+            <p>Developed by Alberto Jorge Galindo Barboza</p>
+            <p>
+                Veterinary and Zootechnical Research in Molecular Epidemiology and
+                Genomic Surveillance of Swine Pathogens
+            </p>
+            <p>
+                <a class="professional-link"
+                   href="https://aljogaba.github.io/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Professional website
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/js/phylogeny.js"></script>
+</body>
+
+</html>
