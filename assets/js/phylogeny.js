@@ -14,6 +14,7 @@ const collectionDateInput = document.getElementById("collectionDate");
 const collectionYearInput = document.getElementById("collectionYear");
 const submitButton = form.querySelector("button[type='submit']");
 const downloadReportButton = document.getElementById("downloadReportButton");
+const openPdfReportButton = document.getElementById("openPdfReportButton");
 
 let latestAnalysisResult = null;
 
@@ -385,14 +386,322 @@ function renderLocalTreeGraphic(treeContext = {}) {
 
     if (caption) {
         const cladeText = view.mrca_leaf_count_in_full_tree
-            ? `Pruned local view around ${view.focal_reference_id || treeContext.tree_id || "the closest reference"}; the connecting ancestor contains ${view.mrca_leaf_count_in_full_tree} taxa in the full master tree.`
-            : "Pruned local view around the closest reference.";
-        caption.textContent = `${cladeText} The full Newick tree and alignment are not exposed.`;
+            ? `Reduced local tree view around ${view.focal_reference_id || treeContext.tree_id || "the closest reference"}. The closest shared ancestor contains ${view.mrca_leaf_count_in_full_tree} taxa in the full master tree, but only a capped local neighborhood is displayed.`
+            : "Reduced local tree view around the closest reference.";
+        caption.textContent = `${cladeText} The full Newick tree, alignment, FASTA dataset, and curated metadata table are not exposed.`;
     }
 
     if (badge) {
         badge.textContent = `${view.selected_leaf_count || leaves.length} displayed taxa`;
     }
+}
+
+
+function reportCard(title, value, note = "") {
+    return `
+        <article class="pdf-card">
+            <span>${escapeHtml(title)}</span>
+            <strong>${escapeHtml(value)}</strong>
+            ${note ? `<small>${escapeHtml(note)}</small>` : ""}
+        </article>
+    `;
+}
+
+function pdfTable(headers, rows) {
+    const head = headers.map((header) => `<th>${escapeHtml(header)}</th>`).join("");
+    const body = rows.length
+        ? rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
+        : `<tr><td colspan="${headers.length}">Not available</td></tr>`;
+
+    return `
+        <div class="pdf-table-wrap">
+            <table>
+                <thead><tr>${head}</tr></thead>
+                <tbody>${body}</tbody>
+            </table>
+        </div>
+    `;
+}
+
+function buildPdfReadyReportHtml(result) {
+    const qc = result.qc || {};
+    const metadata = result.submitted_metadata || {};
+    const bestMatch = result.closest_reference_match || result.best_match || {};
+    const topMatches = Array.isArray(result.top_matches) ? result.top_matches : [];
+    const treeContext = result.tree_context || {};
+    const treeNeighborhood = Array.isArray(treeContext.local_display_neighborhood) ? treeContext.local_display_neighborhood : [];
+    const warnings = Array.isArray(qc.warnings) ? qc.warnings : [];
+    const now = new Date();
+
+    const topRows = topMatches.slice(0, 5).map((match, index) => [
+        String(index + 1),
+        reportValue(match.reference_id, "Not available"),
+        reportValue(match.accession, "No accession"),
+        reportValue(match.lineage, "Not available"),
+        formatPercent(match.identity_percent),
+        reportValue(match.mismatches, "Not available"),
+        formatOrientation(match.orientation)
+    ]);
+
+    const treeRows = treeNeighborhood.map((item) => [
+        reportValue(item.tree_id, "Not available"),
+        reportValue(item.accession, "No accession"),
+        reportValue(item.display_group, "No group"),
+        reportValue(item.lineage, "No lineage"),
+        item.is_best_match === "yes" ? "Yes" : "No"
+    ]);
+
+    const treeView = treeContext.local_tree_view || {};
+    const gapValue = result.lineage_gap_to_closest_different_lineage_percent ?? result.lineage_gap_to_second_best_percent;
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DiseasesMapMx PRRSV-2 ORF5 Report</title>
+<style>
+    :root {
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: #dbeafe;
+        --blue: #1d4ed8;
+        --green: #047857;
+        --soft-blue: #eff6ff;
+        --soft-green: #ecfdf5;
+        --soft-slate: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: #eef2f7;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.5;
+    }
+    .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 12px;
+        background: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(8px);
+    }
+    .toolbar button {
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 16px;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .toolbar small { color: #cbd5e1; align-self: center; }
+    .report {
+        width: min(960px, calc(100% - 32px));
+        margin: 24px auto;
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 12px 36px rgba(15, 23, 42, 0.16);
+        overflow: hidden;
+    }
+    header {
+        padding: 34px 38px;
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        color: #fff;
+    }
+    header .eyebrow {
+        margin: 0 0 8px;
+        color: #93c5fd;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+    header h1 { margin: 0; font-size: 28px; line-height: 1.15; }
+    header p { margin: 10px 0 0; color: #dbeafe; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .badge {
+        display: inline-flex;
+        padding: 6px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        color: #f8fafc;
+        font-size: 12px;
+        font-weight: 700;
+    }
+    main { padding: 30px 38px 38px; }
+    section { margin-top: 24px; }
+    h2 {
+        margin: 0 0 12px;
+        color: #0f172a;
+        font-size: 18px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 9px;
+    }
+    .summary-grid, .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .pdf-card {
+        padding: 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: var(--soft-slate);
+    }
+    .pdf-card span {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .pdf-card strong { display: block; font-size: 18px; color: #0f172a; }
+    .pdf-card small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .highlight {
+        border: 1px solid #bbf7d0;
+        border-radius: 14px;
+        padding: 16px;
+        background: var(--soft-green);
+        color: #14532d;
+    }
+    .note {
+        border: 1px solid #bfdbfe;
+        border-radius: 14px;
+        padding: 15px;
+        background: var(--soft-blue);
+        color: #1e3a8a;
+    }
+    .pdf-table-wrap { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    th { background: #eff6ff; color: #1e3a8a; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li { margin-bottom: 5px; }
+    footer {
+        padding: 22px 38px 30px;
+        background: #0f172a;
+        color: #cbd5e1;
+        text-align: center;
+    }
+    footer strong { color: #fff; }
+    footer a { color: #93c5fd; font-weight: 700; }
+    @media print {
+        body { background: #fff; }
+        .toolbar { display: none; }
+        .report { width: 100%; margin: 0; box-shadow: none; border-radius: 0; }
+        section { break-inside: avoid; }
+        header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+</style>
+</head>
+<body>
+<div class="toolbar">
+    <button onclick="window.print()">Print / Save as PDF</button>
+    <small>Use your browser's PDF destination to save this public report.</small>
+</div>
+<article class="report">
+<header>
+    <p class="eyebrow">DiseasesMapMx public analysis report</p>
+    <h1>PRRSV-2 ORF5 closest-reference screening</h1>
+    <p>Preliminary result with local master-tree context. This report does not include the submitted nucleotide sequence, reference FASTA, alignment, curated metadata table, or master tree file.</p>
+    <div class="badge-row">
+        <span class="badge">${escapeHtml(reportValue(result.analysis_id, "No analysis ID"))}</span>
+        <span class="badge">Engine ${escapeHtml(reportValue(result.engine_version, "v3.1"))}</span>
+        <span class="badge">Generated ${escapeHtml(now.toLocaleString())}</span>
+    </div>
+</header>
+<main>
+    <section>
+        <h2>1. Analysis summary</h2>
+        <div class="summary-grid">
+            ${reportCard("Lineage screening result", reportValue(result.lineage_screening_result || result.closest_lineage_candidate, "Not available"), "Preliminary closest-reference result")}
+            ${reportCard("Confidence", reportValue(result.confidence, "Not available"), gapValue !== null && gapValue !== undefined ? `${formatPercent(gapValue)} gap to closest different lineage` : "Gap unavailable")}
+            ${reportCard("Best reference", reportValue(bestMatch.reference_id, "Not available"), `${reportValue(bestMatch.accession, "No accession")} | ${reportValue(bestMatch.lineage, "No lineage")}`)}
+        </div>
+    </section>
+    <section>
+        <h2>2. Submitted metadata</h2>
+        <div class="card-grid">
+            ${reportCard("Sample ID", reportValue(metadata.sample_id))}
+            ${reportCard("Country/state", `${reportValue(metadata.country)} / ${reportValue(metadata.state)}`)}
+            ${reportCard("Municipality", reportValue(metadata.municipality))}
+            ${reportCard("Collection date", reportValue(metadata.collection_date))}
+            ${reportCard("Sample type", reportValue(metadata.sample_type))}
+            ${reportCard("Production stage", reportValue(metadata.production_stage))}
+        </div>
+    </section>
+    <section>
+        <h2>3. Query quality control</h2>
+        <div class="card-grid">
+            ${reportCard("Valid input", qc.valid ? "Yes" : "No")}
+            ${reportCard("Length", `${reportValue(qc.length, "Not available")} nt`, "After FASTA cleaning")}
+            ${reportCard("ORF5 coverage", formatPercent(qc.coverage_percent), "Relative to 603 nt")}
+            ${reportCard("Ambiguous bases", `${reportValue(qc.ambiguous_bases, "0")} (${Number(qc.ambiguous_percent ?? 0).toFixed(2)}%)`)}
+        </div>
+        <div class="note" style="margin-top:12px;"><strong>Warnings:</strong> ${warnings.length ? escapeHtml(warnings.join(" ")) : "None"}</div>
+    </section>
+    <section>
+        <h2>4. Closest-reference screening</h2>
+        <div class="highlight">
+            <strong>${escapeHtml(reportValue(result.interpretation, "Preliminary closest-reference screening result returned."))}</strong>
+        </div>
+        <div class="card-grid" style="margin-top:12px;">
+            ${reportCard("Nucleotide identity", formatPercent(bestMatch.identity_percent), `${reportValue(bestMatch.comparable_positions, "Not available")} comparable positions`)}
+            ${reportCard("Mismatches", reportValue(bestMatch.mismatches, "Not available"))}
+            ${reportCard("Orientation", formatOrientation(bestMatch.orientation))}
+        </div>
+        <h3 style="font-size:14px;margin:16px 0 8px;">Top closest references</h3>
+        ${pdfTable(["Rank", "Reference", "Accession", "Lineage", "Identity", "Mismatches", "Orientation"], topRows)}
+    </section>
+    <section>
+        <h2>5. Master-tree context</h2>
+        <div class="card-grid">
+            ${reportCard("Reference in master tree", treeContext.best_match_present_in_tree ? "Represented" : "Not represented", treeContext.master_tree_available ? `Master tree contains ${reportValue(treeContext.tree_taxa_count, "-")} taxa` : "Master-tree context unavailable")}
+            ${reportCard("Master-tree group", reportValue(treeContext.display_group, "Not available"), `${reportValue(treeContext.group_size_in_tree_metadata, "-")} references in this group`)}
+            ${reportCard("Displayed label", reportValue(treeContext.display_label || treeContext.tree_id, "Not available"))}
+        </div>
+        <div class="note" style="margin-top:12px;">
+            ${escapeHtml(reportValue(treeContext.interpretation, "The closest reference was linked to the master-tree context when available."))}
+            ${treeView.available ? ` Local tree view displayed ${escapeHtml(reportValue(treeView.selected_leaf_count, "-"))} taxa; the closest shared ancestor contains ${escapeHtml(reportValue(treeView.mrca_leaf_count_in_full_tree, "-"))} taxa in the full master tree.` : ""}
+        </div>
+        <h3 style="font-size:14px;margin:16px 0 8px;">Displayed reference window</h3>
+        ${pdfTable(["Tree ID", "Accession", "Group", "Lineage", "Best match"], treeRows)}
+    </section>
+    <section>
+        <h2>6. Data protection and interpretation</h2>
+        <p>This public report excludes the submitted nucleotide sequence, the complete reference FASTA, the curated metadata table, alignments, and the master tree file. GenBank accessions may be shown because they correspond to public sequence records.</p>
+        <p>This result corresponds to preliminary closest-reference screening based on nucleotide identity and local master-tree context. It should not be interpreted as a formal phylogenetic lineage assignment. Formal interpretation should consider sequence quality, reference-panel coverage, phylogenetic context, epidemiological information, and expert review.</p>
+    </section>
+</main>
+<footer>
+    <p><strong>Prepared for DiseasesMapMx by Alberto Jorge Galindo-Barboza</strong></p>
+    <p>Veterinary and Zootechnical Research in Molecular Epidemiology and Genomic Surveillance of Swine Pathogens</p>
+    <p><a href="https://aljogaba.github.io/" target="_blank" rel="noopener noreferrer">Professional website: https://aljogaba.github.io/</a></p>
+</footer>
+</article>
+</body>
+</html>`;
+}
+
+function openPdfReadyReport(result) {
+    const reportWindow = window.open("", "_blank", "noopener,noreferrer");
+
+    if (!reportWindow) {
+        showFormMessage("The PDF report window was blocked by the browser. Allow pop-ups for this site and try again.", "error");
+        return;
+    }
+
+    reportWindow.document.open();
+    reportWindow.document.write(buildPdfReadyReportHtml(result));
+    reportWindow.document.close();
 }
 
 function buildPublicSummaryReport(result) {
@@ -520,7 +829,13 @@ function buildPublicSummaryReport(result) {
         "GenBank accessions may be shown because they correspond to public sequence records.",
         "",
         "============================================================",
-        "7. METHODOLOGICAL NOTE",
+        "7. AUTHOR AND PROJECT CONTACT",
+        "============================================================",
+        "Prepared for DiseasesMapMx by Alberto Jorge Galindo-Barboza.",
+        "Professional website: https://aljogaba.github.io/",
+        "",
+        "============================================================",
+        "8. METHODOLOGICAL NOTE",
         "============================================================",
         "This result corresponds to preliminary closest-reference screening based on nucleotide identity.",
         "It should not be interpreted as a formal phylogenetic lineage assignment.",
@@ -547,11 +862,13 @@ function downloadTextFile(filename, content) {
 }
 
 function updateReportButtonState(enabled) {
-    if (!downloadReportButton) {
-        return;
+    if (downloadReportButton) {
+        downloadReportButton.disabled = !enabled;
     }
 
-    downloadReportButton.disabled = !enabled;
+    if (openPdfReportButton) {
+        openPdfReportButton.disabled = !enabled;
+    }
 }
 
 function setLineageCardState(result) {
@@ -640,9 +957,9 @@ function resetTreeContextOutput() {
         resultTreeRepresentation: "—",
         resultTreeRepresentationDetails: "Best reference presence in the master tree",
         resultTreeGroup: "—",
-        resultTreeGroupSize: "Group size in tree metadata",
+        resultTreeGroupSize: "Group size in the visualization metadata",
         resultTreeLabel: "—",
-        treeContextSummary: "Tree context will appear when the closest reference is represented in the local master tree."
+        treeContextSummary: "Tree context will appear when the closest reference is represented in the PRRSV-2 ORF5 master tree."
     };
 
     Object.entries(defaults).forEach(([id, value]) => {
@@ -675,7 +992,7 @@ function renderTreeContext(result) {
             : "Not available";
 
     document.getElementById("resultTreeRepresentationDetails").textContent = available
-        ? `${treeContext.tree_taxa_count ?? "—"} taxa in the local master tree context`
+        ? `Master tree contains ${treeContext.tree_taxa_count ?? "—"} taxa; this card reports presence of the best reference.`
         : (treeContext.tree_context_error || "Master-tree context is not available.");
 
     document.getElementById("resultTreeGroup").textContent = treeContext.display_group || "—";
@@ -914,6 +1231,18 @@ if (downloadReportButton) {
         const report = buildPublicSummaryReport(latestAnalysisResult);
 
         downloadTextFile(filename, report);
+    });
+}
+
+
+if (openPdfReportButton) {
+    openPdfReportButton.addEventListener("click", () => {
+        if (!latestAnalysisResult) {
+            showFormMessage("Run an analysis before opening the PDF report.", "error");
+            return;
+        }
+
+        openPdfReadyReport(latestAnalysisResult);
     });
 }
 

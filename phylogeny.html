@@ -59,8 +59,8 @@
                 <p class="analysis-eyebrow">Sequence analysis</p>
                 <h2>PRRSV-2 ORF5 Sequence Analysis</h2>
                 <p>
-                    Submit an ORF5 nucleotide sequence and associated sample metadata for
-                    preliminary quality assessment and closest-reference screening.
+                    Submit an ORF5 nucleotide sequence and non-identifying sample metadata for
+                    preliminary quality assessment, closest-reference screening, and master-tree context.
                 </p>
                 <div class="analysis-hero-badges" aria-label="Analysis scope">
                     <span>PRRSV-2</span>
@@ -78,7 +78,7 @@
                     <p>
                         This module captures standardized metadata, validates nucleotide input,
                         and sends the request to a Python analysis engine for preliminary closest-reference
-                        comparison against curated PRRSV-2 ORF5 sequences.
+                        comparison and local master-tree context against curated PRRSV-2 ORF5 references.
                     </p>
                 </div>
 
@@ -86,7 +86,7 @@
                     <span class="analysis-status-dot" aria-hidden="true"></span>
                     <div>
                         <strong>Interpretation status</strong>
-                        <p>The current output is a preliminary closest-reference screening. It is not a formal phylogenetic lineage assignment and depends on the current reference panel.</p>
+                        <p>This module provides a preliminary closest-reference screening result. It is not a formal phylogenetic lineage assignment and must be interpreted with the current reference panel and tree context.</p>
                     </div>
                 </div>
             </div>
@@ -342,9 +342,9 @@
                         <div class="analysis-workflow-note">
                             <strong>What this step shows</strong>
                             <p>
-                                This step summarizes query quality control and the closest-reference screening process:
-                                sequence length, ORF5 coverage, ambiguity, best reference match, nucleotide identity,
-                                orientation, confidence, and the closest references returned by the engine.
+                                This step summarizes the query quality control and closest-reference screening result:
+                                sequence length, ORF5 coverage, ambiguous bases, best reference match, nucleotide identity,
+                                orientation, support level, and the closest references returned by the engine.
                             </p>
                         </div>
 
@@ -378,7 +378,7 @@
                             <article class="analysis-result-card analysis-lineage-card">
                                 <span>Lineage screening result</span>
                                 <strong id="resultLineage">—</strong>
-                                <small>Based on the current reference panel and v3 support thresholds</small>
+                                <small>Based on the active reference panel and configured support thresholds</small>
                             </article>
 
                             <article class="analysis-result-card">
@@ -413,7 +413,7 @@
                                     <h4>Closest PRRSV-2 ORF5 references</h4>
                                     <p>
                                         This table summarizes the closest references returned by the Python engine.
-                                        Closest references are reported for context. A reliable lineage signal is reported only when v3 support thresholds are met.
+                                        Closest references are reported for context. A reliable lineage signal is reported only when the configured support thresholds are met.
                                     </p>
                                 </div>
                             </div>
@@ -448,7 +448,7 @@
                                 <p class="analysis-section-label">Master tree context</p>
                                 <h3 id="treeContextHeading">Phylogenetic context from the PRRSV-2 ORF5 master tree</h3>
                                 <p id="treeContextSummary">
-                                    Tree context will appear when the closest reference is represented in the local master tree.
+                                    Tree context will appear when the closest reference is represented in the PRRSV-2 ORF5 master tree.
                                 </p>
                             </div>
                         </div>
@@ -456,50 +456,50 @@
                         <div class="analysis-workflow-note analysis-workflow-note-tree">
                             <strong>What this step shows</strong>
                             <p>
-                                This step links the closest reference from the screening step to the local PRRSV-2 ORF5 master tree.
-                                It reports whether the closest reference is represented in the tree and shows a pruned local tree view around that reference,
-                                not the full Newick tree, alignment, FASTA, or curated metadata table.
+                                This step links the closest reference from the screening result to the PRRSV-2 ORF5 master tree.
+                                It reports whether that reference is represented in the tree and shows a reduced local view around it,
+                                not the full Newick tree, alignment, FASTA dataset, or curated metadata table.
                             </p>
                         </div>
 
                         <div class="analysis-result-grid analysis-tree-context-grid">
                             <article class="analysis-result-card">
-                                <span>Tree representation</span>
+                                <span>Reference in master tree</span>
                                 <strong id="resultTreeRepresentation">—</strong>
                                 <small id="resultTreeRepresentationDetails">Best reference presence in the master tree</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Tree display group</span>
+                                <span>Master-tree group</span>
                                 <strong id="resultTreeGroup">—</strong>
-                                <small id="resultTreeGroupSize">Group size in tree metadata</small>
+                                <small id="resultTreeGroupSize">Group size in the visualization metadata</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Tree label</span>
+                                <span>Displayed reference label</span>
                                 <strong id="resultTreeLabel">—</strong>
-                                <small>Public display label for the represented reference</small>
+                                <small>Public label for the represented reference</small>
                             </article>
                         </div>
 
                         <div id="treeGraphicContainer" class="analysis-tree-graphic" hidden>
                             <div class="analysis-tree-graphic-header">
                                 <div>
-                                    <h5>Local master-tree view</h5>
-                                    <p id="treeGraphicCaption">Pruned visualization around the closest reference.</p>
+                                    <h5>Local phylogenetic context</h5>
+                                    <p id="treeGraphicCaption">Reduced local tree view around the closest reference.</p>
                                 </div>
                                 <span id="treeGraphicBadge">Local view</span>
                             </div>
                             <div id="treeLegend" class="analysis-tree-legend" aria-label="Tree group legend"></div>
                             <div class="analysis-tree-svg-scroll">
-                                <svg id="masterTreeSvg" class="analysis-tree-svg" role="img" aria-label="Local PRRSV-2 ORF5 master-tree view"></svg>
+                                <svg id="masterTreeSvg" class="analysis-tree-svg" role="img" aria-label="Local PRRSV-2 ORF5 phylogenetic context"></svg>
                             </div>
                         </div>
 
                         <div id="treeNeighborhoodContainer" class="analysis-tree-neighborhood" hidden>
-                            <h5>Local tree metadata window</h5>
+                            <h5>Displayed reference window</h5>
                             <p>
-                                Small capped metadata window around the closest reference. The graphical tree view above is pruned to the displayed references and does not expose the full tree, alignment, FASTA, or curated metadata table.
+                                Small capped reference window around the closest match. The graphical view above is reduced to the displayed references and does not expose the full tree, alignment, FASTA dataset, or curated metadata table.
                             </p>
 
                             <div class="analysis-match-table-wrapper">
@@ -528,9 +528,9 @@
                             <div class="analysis-step-number analysis-step-report" aria-hidden="true">6</div>
                             <div>
                                 <p class="analysis-section-label">Report and traceability</p>
-                                <h3 id="reportHeading">Downloadable public analysis summary</h3>
+                                <h3 id="reportHeading">Public analysis report</h3>
                                 <p>
-                                    Download a limited report for review and traceability after the analysis is completed.
+                                    Download a limited text summary or open a PDF-ready report after the analysis is completed.
                                 </p>
                             </div>
                         </div>
@@ -540,10 +540,16 @@
                                     id="downloadReportButton"
                                     class="analysis-button analysis-button-secondary"
                                     disabled>
-                                Download analysis report
+                                Download TXT summary
+                            </button>
+                            <button type="button"
+                                    id="openPdfReportButton"
+                                    class="analysis-button analysis-button-secondary analysis-button-pdf"
+                                    disabled>
+                                Open PDF report
                             </button>
                             <small>
-                                The report is limited to a public analysis summary and excludes the submitted nucleotide sequence,
+                                Reports are limited to public analysis summaries and exclude the submitted nucleotide sequence,
                                 the reference FASTA, the curated metadata table, alignments, and the master tree file.
                             </small>
                         </div>
@@ -566,6 +572,7 @@
                         <li>Ambiguous nucleotide proportion</li>
                         <li>Closest-reference signal against curated ORF5 references</li>
                         <li>Closest reference and closest Mexican reference signals</li>
+                        <li>Local master-tree context for represented references</li>
                     </ul>
                 </section>
 
@@ -573,11 +580,11 @@
                     <p class="analysis-section-label">Interpretation</p>
                     <h3>Preliminary result only</h3>
                     <p>
-                        Lineage assignment must be interpreted together with sequence quality,
-                        phylogenetic placement, reference coverage, and epidemiological context.
+                        Lineage interpretation must be considered together with sequence quality,
+                        reference-panel coverage, local master-tree context, and epidemiological information.
                     </p>
                     <p>
-                        Percentage identity alone will not be used as the sole criterion for lineage assignment.
+                        Percentage identity alone is not used as the sole criterion for lineage interpretation.
                     </p>
                 </section>
 
@@ -632,13 +639,13 @@
                     </article>
                     <article>
                         <span>02</span>
-                        <h3>Align</h3>
-                        <p>Align the submitted ORF5 sequence against a curated PRRSV-2 reference dataset.</p>
+                        <h3>Screen</h3>
+                        <p>Compare the submitted ORF5 sequence against curated references using ungapped closest-reference identity.</p>
                     </article>
                     <article>
                         <span>03</span>
-                        <h3>Screen</h3>
-                        <p>Report closest-reference lineage signal, identity, ORF5 coverage, support level, and uncertainty warnings.</p>
+                        <h3>Contextualize</h3>
+                        <p>Link the closest reference to the PRRSV-2 ORF5 master tree and show a reduced local tree view.</p>
                     </article>
                     <article>
                         <span>04</span>
@@ -653,7 +660,7 @@
     <footer class="main-footer">
         <div class="footer-content">
             <p>© 2026 DiseasesMapMx. All rights reserved.</p>
-            <p>Developed by Alberto Jorge Galindo Barboza</p>
+            <p>Developed by Alberto Jorge Galindo-Barboza</p>
             <p>
                 Veterinary and Zootechnical Research in Molecular Epidemiology and
                 Genomic Surveillance of Swine Pathogens
