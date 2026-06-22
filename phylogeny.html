@@ -320,132 +320,239 @@
                     </div>
                 </form>
 
-                <section id="analysisResults" class="analysis-panel analysis-results" aria-labelledby="resultsHeading" hidden>
-                    <div class="analysis-panel-header">
-                        <div class="analysis-step-number analysis-step-result" aria-hidden="true">4</div>
-                        <div>
-                            <p class="analysis-section-label">Analysis result</p>
-                            <h3 id="resultsHeading">Preliminary analysis result</h3>
-                            <p id="resultRequestCode">Analysis ID: —</p>
-                        </div>
-                    </div>
+                <section id="analysisResults" class="analysis-results" aria-label="Analysis results workflow" hidden>
 
-                    <div id="apiStatusAlert" class="analysis-result-alert analysis-result-alert-info">
-                        <strong id="apiStatusTitle">Waiting for analysis.</strong>
-                        <p id="apiStatusText">
-                            Results will appear after the analysis engine returns a response.
-                        </p>
-                    </div>
-
-                    <div class="analysis-report-actions">
-                        <button type="button"
-                                id="downloadReportButton"
-                                class="analysis-button analysis-button-secondary"
-                                disabled>
-                            Download analysis report
-                        </button>
-                        <small>
-                            The report excludes the submitted nucleotide sequence, the reference FASTA,
-                            the curated metadata table, alignments, and the master tree.
-                        </small>
-                    </div>
-
-                    <div class="analysis-result-grid">
-                        <article class="analysis-result-card">
-                            <span>Valid sequence length</span>
-                            <strong id="resultLength">—</strong>
-                            <small>After removing the FASTA header and whitespace</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Estimated ORF5 coverage</span>
-                            <strong id="resultCoverage">—</strong>
-                            <small>Relative to a 603 nt complete ORF5 sequence</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Ambiguous bases</span>
-                            <strong id="resultAmbiguous">—</strong>
-                            <small>Number and percentage of N characters</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Input quality status</span>
-                            <strong id="resultQuality">—</strong>
-                            <small>Preliminary syntax and length assessment</small>
-                        </article>
-                    </div>
-
-                    <div class="analysis-result-grid analysis-api-summary-grid" aria-label="API analysis summary">
-                        <article class="analysis-result-card analysis-lineage-card">
-                            <span>Lineage screening result</span>
-                            <strong id="resultLineage">—</strong>
-                            <small>Based on the current reference panel and v3.1 support thresholds</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Best reference match</span>
-                            <strong id="resultBestMatch">—</strong>
-                            <small id="resultBestMatchDetails">Reference metadata will appear here</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Nucleotide identity</span>
-                            <strong id="resultIdentity">—</strong>
-                            <small id="resultIdentityDetails">Comparable positions and mismatches</small>
-                        </article>
-
-                        <article class="analysis-result-card analysis-orientation-card">
-                            <span>Sequence orientation</span>
-                            <strong id="resultOrientation">—</strong>
-                            <small id="resultOrientationDetails">Orientation used for closest-reference screening</small>
-                        </article>
-
-                        <article class="analysis-result-card">
-                            <span>Confidence</span>
-                            <strong id="resultConfidence">—</strong>
-                            <small id="resultGap">Gap to closest different lineage</small>
-                        </article>
-                    </div>
-
-                    <div class="analysis-api-output">
-                        <div class="analysis-api-output-header">
+                    <section class="analysis-panel analysis-results-step analysis-screening-step" aria-labelledby="screeningResultsHeading">
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number analysis-step-result" aria-hidden="true">4</div>
                             <div>
-                                <span class="analysis-placeholder-label">Reference screening</span>
-                                <h4>Closest PRRSV-2 ORF5 references</h4>
-                                <p>
-                                    This table summarizes the closest references returned by the Python engine.
-                                    Closest references are reported for context. A reliable lineage signal is reported only when v3 support thresholds are met.
+                                <p class="analysis-section-label">Closest-reference screening</p>
+                                <h3 id="screeningResultsHeading">Preliminary screening result</h3>
+                                <p id="resultRequestCode">Analysis ID: —</p>
+                            </div>
+                        </div>
+
+                        <div id="apiStatusAlert" class="analysis-result-alert analysis-result-alert-info">
+                            <strong id="apiStatusTitle">Waiting for analysis.</strong>
+                            <p id="apiStatusText">
+                                Results will appear after the analysis engine returns a response.
+                            </p>
+                        </div>
+
+                        <div class="analysis-workflow-note">
+                            <strong>What this step shows</strong>
+                            <p>
+                                This step summarizes query quality control and the closest-reference screening process:
+                                sequence length, ORF5 coverage, ambiguity, best reference match, nucleotide identity,
+                                orientation, confidence, and the closest references returned by the engine.
+                            </p>
+                        </div>
+
+                        <div class="analysis-result-grid">
+                            <article class="analysis-result-card">
+                                <span>Valid sequence length</span>
+                                <strong id="resultLength">—</strong>
+                                <small>After removing the FASTA header and whitespace</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Estimated ORF5 coverage</span>
+                                <strong id="resultCoverage">—</strong>
+                                <small>Relative to a 603 nt complete ORF5 sequence</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Ambiguous bases</span>
+                                <strong id="resultAmbiguous">—</strong>
+                                <small>Number and percentage of N characters</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Input quality status</span>
+                                <strong id="resultQuality">—</strong>
+                                <small>Preliminary syntax and length assessment</small>
+                            </article>
+                        </div>
+
+                        <div class="analysis-result-grid analysis-api-summary-grid" aria-label="Closest-reference screening summary">
+                            <article class="analysis-result-card analysis-lineage-card">
+                                <span>Lineage screening result</span>
+                                <strong id="resultLineage">—</strong>
+                                <small>Based on the current reference panel and v3 support thresholds</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Best reference match</span>
+                                <strong id="resultBestMatch">—</strong>
+                                <small id="resultBestMatchDetails">Reference metadata will appear here</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Nucleotide identity</span>
+                                <strong id="resultIdentity">—</strong>
+                                <small id="resultIdentityDetails">Comparable positions and mismatches</small>
+                            </article>
+
+                            <article class="analysis-result-card analysis-orientation-card">
+                                <span>Sequence orientation</span>
+                                <strong id="resultOrientation">—</strong>
+                                <small id="resultOrientationDetails">Orientation used for closest-reference screening</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Confidence</span>
+                                <strong id="resultConfidence">—</strong>
+                                <small id="resultGap">Gap to closest different lineage</small>
+                            </article>
+                        </div>
+
+                        <div class="analysis-api-output">
+                            <div class="analysis-api-output-header">
+                                <div>
+                                    <span class="analysis-placeholder-label">Screening process</span>
+                                    <h4>Closest PRRSV-2 ORF5 references</h4>
+                                    <p>
+                                        This table summarizes the closest references returned by the Python engine.
+                                        Closest references are reported for context. A reliable lineage signal is reported only when v3 support thresholds are met.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="analysis-match-table-wrapper">
+                                <table class="analysis-match-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Reference</th>
+                                            <th>Lineage</th>
+                                            <th>Identity</th>
+                                            <th>Mismatches</th>
+                                            <th>Orientation</th>
+                                            <th>Metadata</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultTopMatchesBody">
+                                        <tr>
+                                            <td colspan="7">Run the analysis to display closest references.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="treeContextSection" class="analysis-panel analysis-results-step analysis-tree-context" aria-labelledby="treeContextHeading" hidden>
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number analysis-step-tree" aria-hidden="true">5</div>
+                            <div>
+                                <p class="analysis-section-label">Master tree context</p>
+                                <h3 id="treeContextHeading">Phylogenetic context from the PRRSV-2 ORF5 master tree</h3>
+                                <p id="treeContextSummary">
+                                    Tree context will appear when the closest reference is represented in the local master tree.
                                 </p>
                             </div>
                         </div>
 
-                        <div class="analysis-match-table-wrapper">
-                            <table class="analysis-match-table">
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Reference</th>
-                                        <th>Lineage</th>
-                                        <th>Identity</th>
-                                        <th>Mismatches</th>
-                                        <th>Orientation</th>
-                                        <th>Metadata</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="resultTopMatchesBody">
-                                    <tr>
-                                        <td colspan="7">Run the analysis to display closest references.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="analysis-workflow-note analysis-workflow-note-tree">
+                            <strong>What this step shows</strong>
+                            <p>
+                                This step links the closest reference from the screening step to the local PRRSV-2 ORF5 master tree.
+                                It reports whether the closest reference is represented in the tree and shows a pruned local tree view around that reference,
+                                not the full Newick tree, alignment, FASTA, or curated metadata table.
+                            </p>
+                        </div>
+
+                        <div class="analysis-result-grid analysis-tree-context-grid">
+                            <article class="analysis-result-card">
+                                <span>Tree representation</span>
+                                <strong id="resultTreeRepresentation">—</strong>
+                                <small id="resultTreeRepresentationDetails">Best reference presence in the master tree</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Tree display group</span>
+                                <strong id="resultTreeGroup">—</strong>
+                                <small id="resultTreeGroupSize">Group size in tree metadata</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Tree label</span>
+                                <strong id="resultTreeLabel">—</strong>
+                                <small>Public display label for the represented reference</small>
+                            </article>
+                        </div>
+
+                        <div id="treeGraphicContainer" class="analysis-tree-graphic" hidden>
+                            <div class="analysis-tree-graphic-header">
+                                <div>
+                                    <h5>Local master-tree view</h5>
+                                    <p id="treeGraphicCaption">Pruned visualization around the closest reference.</p>
+                                </div>
+                                <span id="treeGraphicBadge">Local view</span>
+                            </div>
+                            <div id="treeLegend" class="analysis-tree-legend" aria-label="Tree group legend"></div>
+                            <div class="analysis-tree-svg-scroll">
+                                <svg id="masterTreeSvg" class="analysis-tree-svg" role="img" aria-label="Local PRRSV-2 ORF5 master-tree view"></svg>
+                            </div>
+                        </div>
+
+                        <div id="treeNeighborhoodContainer" class="analysis-tree-neighborhood" hidden>
+                            <h5>Local tree metadata window</h5>
+                            <p>
+                                Small capped metadata window around the closest reference. The graphical tree view above is pruned to the displayed references and does not expose the full tree, alignment, FASTA, or curated metadata table.
+                            </p>
+
+                            <div class="analysis-match-table-wrapper">
+                                <table class="analysis-match-table analysis-tree-neighborhood-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tree ID</th>
+                                            <th>Accession</th>
+                                            <th>Group</th>
+                                            <th>Lineage</th>
+                                            <th>Best match</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultTreeNeighborhoodBody">
+                                        <tr>
+                                            <td colspan="5">Tree neighborhood will appear after analysis.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="analysis-panel analysis-results-step analysis-report-step" aria-labelledby="reportHeading">
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number analysis-step-report" aria-hidden="true">6</div>
+                            <div>
+                                <p class="analysis-section-label">Report and traceability</p>
+                                <h3 id="reportHeading">Downloadable public analysis summary</h3>
+                                <p>
+                                    Download a limited report for review and traceability after the analysis is completed.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-report-actions">
+                            <button type="button"
+                                    id="downloadReportButton"
+                                    class="analysis-button analysis-button-secondary"
+                                    disabled>
+                                Download analysis report
+                            </button>
+                            <small>
+                                The report is limited to a public analysis summary and excludes the submitted nucleotide sequence,
+                                the reference FASTA, the curated metadata table, alignments, and the master tree file.
+                            </small>
                         </div>
 
                         <details class="analysis-json-details">
                             <summary>View raw JSON response</summary>
                             <pre id="resultJson">No API response yet.</pre>
                         </details>
-                    </div>
+                    </section>
                 </section>
             </div>
 
