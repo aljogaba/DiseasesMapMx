@@ -13,6 +13,9 @@ const clearSequenceButton = document.getElementById("clearSequenceButton");
 const collectionDateInput = document.getElementById("collectionDate");
 const collectionYearInput = document.getElementById("collectionYear");
 const submitButton = form.querySelector("button[type='submit']");
+const downloadReportButton = document.getElementById("downloadReportButton");
+
+let latestAnalysisResult = null;
 
 const COMPLETE_ORF5_LENGTH = 603;
 const MIN_ACCEPTED_LENGTH = 250;
@@ -196,6 +199,8 @@ function setApiStatus(status, title, text) {
 }
 
 function clearApiOutput() {
+    latestAnalysisResult = null;
+    updateReportButtonState(false);
     document.getElementById("resultRequestCode").textContent = "Analysis request: pending";
     document.getElementById("resultLineage").textContent = "—";
     const lineageCard = document.querySelector(".analysis-lineage-card");
@@ -238,6 +243,158 @@ function formatOrientation(value) {
     }
 
     return String(value).replace(/_/g, " ");
+}
+
+function reportValue(value, fallback = "Not provided") {
+    if (value === null || value === undefined || value === "") {
+        return fallback;
+    }
+
+    return String(value);
+}
+
+function sanitizeFilename(value) {
+    return reportValue(value, "analysis")
+        .replace(/[^a-zA-Z0-9._-]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 120) || "analysis";
+}
+
+function buildSanitizedReport(result) {
+    const qc = result.qc || {};
+    const metadata = result.submitted_metadata || {};
+    const bestMatch = result.closest_reference_match || result.best_match || {};
+    const mexicanMatch = result.closest_mexican_reference_match || null;
+    const topMatches = Array.isArray(result.top_matches) ? result.top_matches : [];
+    const warnings = Array.isArray(qc.warnings) ? qc.warnings : [];
+    const errors = Array.isArray(qc.errors) ? qc.errors : [];
+    const now = new Date();
+
+    const lines = [
+        "DISEASESMAPMX PRRSV-2 ORF5 ANALYSIS REPORT",
+        "Preliminary closest-reference screening",
+        "",
+        "============================================================",
+        "1. ANALYSIS IDENTIFICATION",
+        "============================================================",
+        `Analysis ID: ${reportValue(result.analysis_id, "Not available")}`,
+        `Report generated: ${now.toISOString()}`,
+        `Engine version: ${reportValue(result.engine_version, "Not available")}`,
+        `API target: PRRSV-2 ORF5`,
+        "",
+        "============================================================",
+        "2. SUBMITTED METADATA",
+        "============================================================",
+        `Sample ID: ${reportValue(metadata.sample_id)}`,
+        `Country: ${reportValue(metadata.country)}`,
+        `State / administrative area: ${reportValue(metadata.state)}`,
+        `Municipality: ${reportValue(metadata.municipality)}`,
+        `Collection date: ${reportValue(metadata.collection_date)}`,
+        `Sample type: ${reportValue(metadata.sample_type)}`,
+        `Production stage: ${reportValue(metadata.production_stage)}`,
+        `Submitting institution/laboratory: ${reportValue(metadata.institution)}`,
+        `Contact email: ${reportValue(metadata.contact_email)}`,
+        `Private storage authorized: ${metadata.allow_private_storage ? "Yes" : "No"}`,
+        `Future public use authorized: ${metadata.allow_public_use ? "Yes" : "No"}`,
+        "",
+        "============================================================",
+        "3. QUERY QUALITY CONTROL",
+        "============================================================",
+        `Valid sequence input: ${qc.valid ? "Yes" : "No"}`,
+        `Sequence length after cleaning: ${reportValue(qc.length, "Not available")} nt`,
+        `Estimated ORF5 coverage: ${formatPercent(qc.coverage_percent)}`,
+        `Ambiguous bases: ${reportValue(qc.ambiguous_bases, "0")} (${Number(qc.ambiguous_percent ?? 0).toFixed(2)}%)`,
+        "",
+        "Warnings:",
+        ...(warnings.length ? warnings.map((warning) => `- ${warning}`) : ["- None"]),
+        "",
+        "Errors:",
+        ...(errors.length ? errors.map((error) => `- ${error}`) : ["- None"]),
+        "",
+        "============================================================",
+        "4. CLOSEST-REFERENCE SCREENING RESULT",
+        "============================================================",
+        `Lineage screening result: ${reportValue(result.lineage_screening_result || result.closest_lineage_candidate, "Not available")}`,
+        `Classification status: ${reportValue(result.classification_status, "Not available")}`,
+        `Confidence: ${reportValue(result.confidence, "Not available")}`,
+        `Interpretation: ${reportValue(result.interpretation, "Not available")}`,
+        `Gap to closest different lineage: ${result.lineage_gap_to_closest_different_lineage_percent === null || result.lineage_gap_to_closest_different_lineage_percent === undefined ? "Not available" : formatPercent(result.lineage_gap_to_closest_different_lineage_percent)}`,
+        "",
+        "Best reference match:",
+        `- Reference ID: ${reportValue(bestMatch.reference_id, "Not available")}`,
+        `- GenBank accession: ${reportValue(bestMatch.accession, "Not available")}`,
+        `- Lineage: ${reportValue(bestMatch.lineage, "Not available")}`,
+        `- Sublineage: ${reportValue(bestMatch.sublineage, "Not available")}`,
+        `- Identity: ${formatPercent(bestMatch.identity_percent)}`,
+        `- Comparable positions: ${reportValue(bestMatch.comparable_positions, "Not available")}`,
+        `- Matches: ${reportValue(bestMatch.matches, "Not available")}`,
+        `- Mismatches: ${reportValue(bestMatch.mismatches, "Not available")}`,
+        `- Query start in reference: ${reportValue(bestMatch.query_start_in_reference, "Not available")}`,
+        `- Orientation: ${formatOrientation(bestMatch.orientation)}`,
+        "",
+        "Closest Mexican reference:",
+        mexicanMatch
+            ? `- ${reportValue(mexicanMatch.reference_id, "Not available")} | ${reportValue(mexicanMatch.accession, "No accession")} | ${reportValue(mexicanMatch.lineage, "No lineage")} | ${formatPercent(mexicanMatch.identity_percent)} identity`
+            : "- Not available",
+        "",
+        "============================================================",
+        "5. TOP CLOSEST REFERENCES RETURNED BY THE ENGINE",
+        "============================================================",
+        ...(topMatches.length
+            ? topMatches.map((match, index) => {
+                return [
+                    `${index + 1}. ${reportValue(match.reference_id, "Not available")}`,
+                    `   Accession: ${reportValue(match.accession, "Not available")}`,
+                    `   Lineage: ${reportValue(match.lineage, "Not available")}`,
+                    `   Sublineage: ${reportValue(match.sublineage, "Not available")}`,
+                    `   Identity: ${formatPercent(match.identity_percent)}`,
+                    `   Mismatches: ${reportValue(match.mismatches, "Not available")}`,
+                    `   Orientation: ${formatOrientation(match.orientation)}`
+                ].join("\n");
+            })
+            : ["No closest references were returned."]),
+        "",
+        "============================================================",
+        "6. DATA PROTECTION NOTE",
+        "============================================================",
+        "This report is intentionally sanitized.",
+        "It does not include the submitted nucleotide sequence, the complete reference FASTA,",
+        "the curated metadata table, alignments, or the master Newick tree.",
+        "GenBank accessions may be shown because they correspond to public sequence records.",
+        "",
+        "============================================================",
+        "7. METHODOLOGICAL NOTE",
+        "============================================================",
+        "This result corresponds to preliminary closest-reference screening based on nucleotide identity.",
+        "It should not be interpreted as a formal phylogenetic lineage assignment.",
+        "Formal interpretation should consider sequence quality, reference-panel coverage,",
+        "phylogenetic context, epidemiological information, and expert review.",
+        ""
+    ];
+
+    return lines.join("\n");
+}
+
+function downloadTextFile(filename, content) {
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
+}
+
+function updateReportButtonState(enabled) {
+    if (!downloadReportButton) {
+        return;
+    }
+
+    downloadReportButton.disabled = !enabled;
 }
 
 function setLineageCardState(result) {
@@ -327,6 +484,8 @@ function getResultTitle(result) {
 }
 
 function renderApiResult(result) {
+    latestAnalysisResult = result;
+    updateReportButtonState(true);
     const qc = result.qc || {};
     const bestMatch = result.closest_reference_match || result.best_match || {};
     const mexicanMatch = result.closest_mexican_reference_match || null;
@@ -400,6 +559,8 @@ function renderApiResult(result) {
 }
 
 function renderApiError(error) {
+    latestAnalysisResult = null;
+    updateReportButtonState(false);
     setApiStatus(
         "error",
         "The analysis engine could not complete the request.",
@@ -478,6 +639,23 @@ clearSequenceButton.addEventListener("click", () => {
     setSequenceFeedback(evaluateSequence(""));
     sequenceInput.focus();
 });
+
+
+if (downloadReportButton) {
+    downloadReportButton.addEventListener("click", () => {
+        if (!latestAnalysisResult) {
+            showFormMessage("Run an analysis before downloading the report.", "error");
+            return;
+        }
+
+        const analysisId = sanitizeFilename(latestAnalysisResult.analysis_id || "analysis");
+        const sampleId = sanitizeFilename(latestAnalysisResult.submitted_metadata?.sample_id || "sample");
+        const filename = `DiseasesMapMx_PRRSV_ORF5_report_${sampleId}_${analysisId}.txt`;
+        const report = buildSanitizedReport(latestAnalysisResult);
+
+        downloadTextFile(filename, report);
+    });
+}
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();

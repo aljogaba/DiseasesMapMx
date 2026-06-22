@@ -628,6 +628,25 @@
     line-height: 1.55;
 }
 
+.analysis-report-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: -6px 0 22px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.analysis-report-actions small {
+    flex: 1 1 260px;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
 .analysis-result-alert-info {
     border: 1px solid #bfdbfe;
     background: #eff6ff;
@@ -1044,7 +1063,7 @@
 }
 
 .analysis-button:disabled {
-    cursor: wait;
+    cursor: not-allowed;
     opacity: 0.72;
     transform: none;
 }
