@@ -692,16 +692,31 @@ function buildPdfReadyReportHtml(result) {
 }
 
 function openPdfReadyReport(result) {
-    const reportWindow = window.open("", "_blank", "noopener,noreferrer");
+    const reportWindow = window.open("", "_blank");
+
+    /*
+     * Important:
+     * Do not pass "noopener,noreferrer" here because this function must write
+     * the report HTML into the newly opened window. Some browsers return null
+     * when noopener is used, which looks exactly like a blocked pop-up.
+     */
+
 
     if (!reportWindow) {
         showFormMessage("The PDF report window was blocked by the browser. Allow pop-ups for this site and try again.", "error");
         return;
     }
 
+    try {
+        reportWindow.opener = null;
+    } catch (error) {
+        // Non-critical: the report window is local/generated content.
+    }
+
     reportWindow.document.open();
     reportWindow.document.write(buildPdfReadyReportHtml(result));
     reportWindow.document.close();
+    reportWindow.focus();
 }
 
 function buildPublicSummaryReport(result) {
