@@ -219,6 +219,7 @@ function clearApiOutput() {
     document.getElementById("resultTopMatchesBody").innerHTML =
         `<tr><td colspan="7">Waiting for API response.</td></tr>`;
     resetTreeContextOutput();
+    resetProteinAnalysisOutput();
     document.getElementById("resultJson").textContent = "No API response yet.";
 }
 
@@ -408,11 +409,11 @@ function reportCard(title, value, note = "") {
     `;
 }
 
-function pdfTable(headers, rows) {
+function pdfTable(headers, rows, emptyMessage = "Not available") {
     const head = headers.map((header) => `<th>${escapeHtml(header)}</th>`).join("");
     const body = rows.length
         ? rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
-        : `<tr><td colspan="${headers.length}">Not available</td></tr>`;
+        : `<tr><td colspan="${headers.length}">${escapeHtml(emptyMessage)}</td></tr>`;
 
     return `
         <div class="pdf-table-wrap">
@@ -431,6 +432,13 @@ function buildPdfReadyReportHtml(result) {
     const topMatches = Array.isArray(result.top_matches) ? result.top_matches : [];
     const treeContext = result.tree_context || {};
     const treeNeighborhood = Array.isArray(treeContext.local_display_neighborhood) ? treeContext.local_display_neighborhood : [];
+    const proteinAnalysis = result.protein_analysis || {};
+    const proteinSummary = proteinAnalysis.summary || {};
+    const proteinWarnings = Array.isArray(proteinAnalysis.warnings) ? proteinAnalysis.warnings : [];
+    const vaccineComparisons = Array.isArray(proteinAnalysis.vaccine_comparisons) ? proteinAnalysis.vaccine_comparisons : [];
+    const proteinDifferences = Array.isArray(proteinAnalysis.best_match_protein?.comparison_to_query?.difference_positions)
+        ? proteinAnalysis.best_match_protein.comparison_to_query.difference_positions
+        : [];
     const warnings = Array.isArray(qc.warnings) ? qc.warnings : [];
     const now = new Date();
 
@@ -456,6 +464,18 @@ function buildPdfReadyReportHtml(result) {
     const treeView = treeContext.local_tree_view || {};
     const renderedTreeSvg = document.getElementById("masterTreeSvg")?.outerHTML || "";
     const renderedTreeLegend = document.getElementById("treeLegend")?.innerHTML || "";
+    const vaccineRows = vaccineComparisons.map((item) => [
+        reportValue(item.display_label || item.reference_id, "Not available"),
+        reportValue(item.lineage, "—"),
+        formatPercent(item.identity_percent),
+        reportValue(item.differences, "—"),
+        reportValue(item.comparable_positions, "—")
+    ]);
+    const proteinDifferenceRows = proteinDifferences.slice(0, 40).map((item) => [
+        reportValue(item.position, "—"),
+        reportValue(item.reference_aa, "—"),
+        reportValue(item.query_aa, "—")
+    ]);
     const gapValue = result.lineage_gap_to_closest_different_lineage_percent ?? result.lineage_gap_to_second_best_percent;
 
     return `<!DOCTYPE html>
@@ -740,9 +760,33 @@ function buildPdfReadyReportHtml(result) {
         ${pdfTable(["Tree ID", "Accession", "Country", "Lineage", "Sublineage", "Best match"], treeRows)}
     </section>
     <section>
-        <h2>6. Data protection and interpretation</h2>
-        <p>This public report excludes the submitted nucleotide sequence, the complete reference FASTA, the curated metadata table, alignments, and the master tree file. GenBank accessions may be shown because they correspond to public sequence records.</p>
-        <p>This result corresponds to preliminary closest-reference screening based on nucleotide identity and local master-tree context. It should not be interpreted as a formal phylogenetic lineage assignment. Formal interpretation should consider sequence quality, reference-panel coverage, phylogenetic context, epidemiological information, and expert review.</p>
+        <h2>6. ORF5 amino acid comparison</h2>
+        <div class="card-grid">
+            ${reportCard("Translation status", proteinAnalysis.available ? "Completed" : "Not available", proteinAnalysis.available ? `Covered ${reportValue(proteinSummary.covered_aa_positions, "-")}/200 GP5 positions` : "Protein module did not return a comparison")}
+            ${reportCard("AA identity vs best match", formatPercent(proteinSummary.aa_identity_vs_best_match_percent), `${reportValue(proteinSummary.aa_differences_vs_best_match, "-")} amino acid differences`)}
+            ${reportCard("Closest vaccine AA match", reportValue(proteinSummary.closest_vaccine_reference_id, "Not available"), `${formatPercent(proteinSummary.closest_vaccine_aa_identity_percent)} identity | ${reportValue(proteinSummary.closest_vaccine_aa_differences, "-")} differences`)}
+            ${reportCard("Protein QC", `${reportValue(proteinSummary.ambiguous_amino_acids, "0")} X | ${reportValue(proteinSummary.internal_stop_codons, "0")} stops`, proteinSummary.terminal_stop_detected === null || proteinSummary.terminal_stop_detected === undefined ? "Terminal stop not covered" : proteinSummary.terminal_stop_detected ? "Terminal stop detected when covered" : "Terminal stop covered but not detected")}
+        </div>
+        <div class="note" style="margin-top:12px;">
+            ${escapeHtml(reportValue(proteinAnalysis.interpretation, "Amino acid comparison was not available."))}
+            ${proteinWarnings.length ? ` Protein warnings: ${escapeHtml(proteinWarnings.join(" "))}` : ""}
+        </div>
+        <h3 style="font-size:14px;margin:16px 0 8px;">Vaccine amino acid comparison</h3>
+        ${pdfTable(["Vaccine reference", "Lineage", "AA identity", "AA differences", "Comparable AA"], vaccineRows)}
+        <h3 style="font-size:14px;margin:16px 0 8px;">AA differences versus best match</h3>
+        ${pdfTable(
+            ["Position", "Best-match AA", "Submitted AA"],
+            proteinDifferenceRows,
+            proteinAnalysis.available
+                ? "No amino acid differences detected across comparable positions."
+                : "Amino acid comparison was not available."
+        )}
+        ${proteinDifferences.length > 40 ? `<small>Only the first 40 amino acid differences are shown in this PDF-ready report.</small>` : ""}
+    </section>
+    <section>
+        <h2>7. Data protection and interpretation</h2>
+        <p>This public report excludes the submitted nucleotide sequence, the complete reference FASTA, the curated metadata table, alignments, and the master tree file. It may include derived amino acid summaries produced from the submitted sequence for local review. GenBank accessions may be shown because they correspond to public sequence records.</p>
+        <p>This result corresponds to preliminary closest-reference screening based on nucleotide identity, local master-tree context, and derived ORF5 amino acid comparison. It should not be interpreted as a formal phylogenetic lineage assignment. Formal interpretation should consider sequence quality, reference-panel coverage, phylogenetic context, epidemiological information, amino acid changes, and expert review.</p>
     </section>
 </main>
 <footer>
@@ -791,6 +835,13 @@ function buildPublicSummaryReport(result) {
     const topMatches = Array.isArray(result.top_matches) ? result.top_matches : [];
     const treeContext = result.tree_context || {};
     const treeNeighborhood = Array.isArray(treeContext.local_display_neighborhood) ? treeContext.local_display_neighborhood : [];
+    const proteinAnalysis = result.protein_analysis || {};
+    const proteinSummary = proteinAnalysis.summary || {};
+    const proteinWarnings = Array.isArray(proteinAnalysis.warnings) ? proteinAnalysis.warnings : [];
+    const vaccineComparisons = Array.isArray(proteinAnalysis.vaccine_comparisons) ? proteinAnalysis.vaccine_comparisons : [];
+    const proteinDifferences = Array.isArray(proteinAnalysis.best_match_protein?.comparison_to_query?.difference_positions)
+        ? proteinAnalysis.best_match_protein.comparison_to_query.difference_positions
+        : [];
     const warnings = Array.isArray(qc.warnings) ? qc.warnings : [];
     const errors = Array.isArray(qc.errors) ? qc.errors : [];
     const now = new Date();
@@ -901,26 +952,61 @@ function buildPublicSummaryReport(result) {
             : ["- Not available"]),
         "",
         "============================================================",
-        "6. DATA PROTECTION NOTE",
+        "6. ORF5 AMINO ACID COMPARISON",
+        "============================================================",
+        `Protein module available: ${proteinAnalysis.available ? "Yes" : "No"}`,
+        `Translation status: ${proteinAnalysis.status || "Not available"}`,
+        `Protein interpretation: ${reportValue(proteinAnalysis.interpretation, "Not available")}`,
+        `Covered GP5 amino acid positions: ${reportValue(proteinSummary.covered_aa_positions, "Not available")}/200`,
+        `Covered GP5 range: ${proteinSummary.covered_aa_start && proteinSummary.covered_aa_end ? `${proteinSummary.covered_aa_start}-${proteinSummary.covered_aa_end}` : "Not available"}`,
+        `AA identity vs best match: ${formatPercent(proteinSummary.aa_identity_vs_best_match_percent)}`,
+        `AA differences vs best match: ${reportValue(proteinSummary.aa_differences_vs_best_match, "Not available")}`,
+        `Comparable AA vs best match: ${reportValue(proteinSummary.aa_comparable_positions_vs_best_match, "Not available")}`,
+        `Ambiguous amino acids: ${reportValue(proteinSummary.ambiguous_amino_acids, "0")}`,
+        `Internal stop codons: ${reportValue(proteinSummary.internal_stop_codons, "0")}`,
+        `Terminal stop detected when covered: ${proteinSummary.terminal_stop_detected === null || proteinSummary.terminal_stop_detected === undefined ? "Not covered" : proteinSummary.terminal_stop_detected ? "Yes" : "No"}`,
+        `Closest vaccine AA match: ${reportValue(proteinSummary.closest_vaccine_reference_id, "Not available")}`,
+        `Closest vaccine lineage: ${reportValue(proteinSummary.closest_vaccine_lineage, "Not available")}`,
+        `Closest vaccine AA identity: ${formatPercent(proteinSummary.closest_vaccine_aa_identity_percent)}`,
+        `Closest vaccine AA differences: ${reportValue(proteinSummary.closest_vaccine_aa_differences, "Not available")}`,
+        "",
+        "Protein-level warnings:",
+        ...(proteinWarnings.length ? proteinWarnings.map((warning) => `- ${warning}`) : ["- None"]),
+        "",
+        "Vaccine amino acid comparison:",
+        ...(vaccineComparisons.length
+            ? vaccineComparisons.map((item, index) => `${index + 1}. ${reportValue(item.display_label || item.reference_id, "Not available")} | ${reportValue(item.lineage, "-")} | ${formatPercent(item.identity_percent)} identity | ${reportValue(item.differences, "-")} differences`)
+            : ["- Not available"]),
+        "",
+        "AA differences versus best match:",
+        ...(proteinDifferences.length
+            ? proteinDifferences.slice(0, 40).map((item) => `- Position ${item.position}: best match ${item.reference_aa} → submitted ${item.query_aa}`)
+            : ["- None detected across comparable positions"]),
+        proteinDifferences.length > 40 ? `- ${proteinDifferences.length - 40} additional differences not listed in this TXT summary.` : "",
+        "",
+        "============================================================",
+        "7. DATA PROTECTION NOTE",
         "============================================================",
         "This report is limited to a public analysis summary.",
         "It does not include the submitted nucleotide sequence, the complete reference FASTA,",
         "the curated metadata table, alignments, or the master Newick tree file.",
+        "It may include derived amino acid summaries produced from the submitted sequence for local review.",
         "GenBank accessions may be shown because they correspond to public sequence records.",
         "",
         "============================================================",
-        "7. AUTHOR AND PROJECT CONTACT",
+        "8. AUTHOR AND PROJECT CONTACT",
         "============================================================",
         "Prepared for DiseasesMapMx by Alberto Jorge Galindo-Barboza.",
         "Professional website: https://aljogaba.github.io/",
         "",
         "============================================================",
-        "8. METHODOLOGICAL NOTE",
+        "9. METHODOLOGICAL NOTE",
         "============================================================",
-        "This result corresponds to preliminary closest-reference screening based on nucleotide identity.",
+        "This result corresponds to preliminary closest-reference screening based on nucleotide identity,",
+        "local master-tree context, and derived ORF5 amino acid comparison.",
         "It should not be interpreted as a formal phylogenetic lineage assignment.",
         "Formal interpretation should consider sequence quality, reference-panel coverage,",
-        "phylogenetic context, epidemiological information, and expert review.",
+        "phylogenetic context, epidemiological information, amino acid changes, and expert review.",
         ""
     ];
 
@@ -1111,6 +1197,231 @@ function renderTreeContext(result) {
     }).join("");
 }
 
+function resetProteinAnalysisOutput() {
+    const section = document.getElementById("proteinAnalysisSection");
+    const viewer = document.getElementById("proteinAlignmentViewer");
+    const rows = document.getElementById("proteinAlignmentRows");
+    const ruler = document.getElementById("proteinAlignmentRuler");
+    const vaccineBody = document.getElementById("resultVaccineComparisonBody");
+    const warningBox = document.getElementById("proteinWarnings");
+
+    if (section) {
+        section.hidden = true;
+    }
+    if (viewer) {
+        viewer.hidden = true;
+    }
+    if (rows) {
+        rows.innerHTML = "";
+    }
+    if (ruler) {
+        ruler.innerHTML = "";
+    }
+    if (vaccineBody) {
+        vaccineBody.innerHTML = `<tr><td colspan="5">Vaccine amino acid comparison will appear after analysis.</td></tr>`;
+    }
+    if (warningBox) {
+        warningBox.hidden = true;
+    }
+
+    const defaults = {
+        resultProteinStatus: "—",
+        resultProteinFrame: "ORF5 coding-frame context",
+        resultProteinCoverage: "—",
+        resultProteinRange: "Displayed GP5 positions covered by the query",
+        resultProteinIdentity: "—",
+        resultProteinDifferences: "Coding-level differences versus closest reference",
+        resultClosestVaccine: "—",
+        resultClosestVaccineDetails: "Fixed vaccine reference panel",
+        resultProteinQc: "—",
+        resultProteinQcDetails: "Ambiguous amino acids and internal stop codons",
+        proteinAnalysisSummary: "Amino acid comparison will appear after the sequence is translated in the inferred ORF5 coding frame."
+    };
+
+    Object.entries(defaults).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = value;
+        }
+    });
+}
+
+function renderAminoAcidRuler(length = 200) {
+    const ruler = document.getElementById("proteinAlignmentRuler");
+    if (!ruler) {
+        return;
+    }
+
+    let html = `<div class="analysis-aa-ruler-label">AA position</div>`;
+    for (let position = 1; position <= length; position += 1) {
+        const label = position === 1 || position % 10 === 0 ? String(position) : "·";
+        html += `<div class="analysis-aa-position">${label}</div>`;
+    }
+    ruler.innerHTML = html;
+}
+
+function aminoAcidCellClass(aminoAcid, rowRole, positionIndex, querySequence, bestSequence) {
+    if (!aminoAcid || aminoAcid === "-") {
+        return "analysis-aa-cell-gap";
+    }
+    if (aminoAcid === "X") {
+        return "analysis-aa-cell-ambiguous";
+    }
+    if (aminoAcid === "*") {
+        return "analysis-aa-cell-stop";
+    }
+
+    const queryAminoAcid = querySequence[positionIndex] || "-";
+    const bestAminoAcid = bestSequence[positionIndex] || "-";
+
+    if (rowRole === "submitted_sequence") {
+        if (queryAminoAcid === "-" || bestAminoAcid === "-") {
+            return "analysis-aa-cell-gap";
+        }
+        return queryAminoAcid === bestAminoAcid
+            ? "analysis-aa-cell-same"
+            : "analysis-aa-cell-query-different";
+    }
+
+    if (queryAminoAcid === "-") {
+        return "analysis-aa-cell-gap";
+    }
+
+    return aminoAcid === queryAminoAcid
+        ? "analysis-aa-cell-same"
+        : "analysis-aa-cell-different";
+}
+
+function renderAminoAcidRow(row, querySequence, bestSequence) {
+    const sequence = row.aa_sequence || "";
+    const roleClass = row.role === "submitted_sequence"
+        ? "analysis-aa-row-submitted"
+        : row.role === "best_match_reference"
+            ? "analysis-aa-row-best"
+            : "analysis-aa-row-vaccine";
+    const meta = [row.reference_id, row.lineage, row.sublineage].filter(Boolean).join(" · ");
+
+    let cells = "";
+    for (let index = 0; index < 200; index += 1) {
+        const aminoAcid = sequence[index] || "-";
+        const cellClass = aminoAcidCellClass(aminoAcid, row.role, index, querySequence, bestSequence);
+        cells += `<div class="analysis-aa-cell ${cellClass}" title="Position ${index + 1}: ${escapeHtml(aminoAcid)}">${escapeHtml(aminoAcid)}</div>`;
+    }
+
+    return `
+        <div class="analysis-aa-row ${roleClass}">
+            <div class="analysis-aa-label">
+                <span>${escapeHtml(row.label || row.reference_id || "Reference")}</span>
+                <small>${escapeHtml(meta || row.role || "reference")}</small>
+            </div>
+            ${cells}
+        </div>
+    `;
+}
+
+function renderProteinAlignmentView(proteinAnalysis = {}) {
+    const viewer = document.getElementById("proteinAlignmentViewer");
+    const rowsContainer = document.getElementById("proteinAlignmentRows");
+    if (!viewer || !rowsContainer) {
+        return;
+    }
+
+    const alignmentView = proteinAnalysis.alignment_view || {};
+    const rows = Array.isArray(alignmentView.rows) ? alignmentView.rows : [];
+    if (!proteinAnalysis.available || !rows.length) {
+        viewer.hidden = true;
+        rowsContainer.innerHTML = "";
+        return;
+    }
+
+    const queryRow = rows.find((row) => row.role === "submitted_sequence") || {};
+    const bestRow = rows.find((row) => row.role === "best_match_reference") || {};
+    const querySequence = queryRow.aa_sequence || "";
+    const bestSequence = bestRow.aa_sequence || "";
+
+    renderAminoAcidRuler(200);
+    rowsContainer.innerHTML = rows.map((row) => renderAminoAcidRow(row, querySequence, bestSequence)).join("");
+    viewer.hidden = false;
+}
+
+function renderVaccineComparisonTable(proteinAnalysis = {}) {
+    const body = document.getElementById("resultVaccineComparisonBody");
+    if (!body) {
+        return;
+    }
+
+    const vaccines = Array.isArray(proteinAnalysis.vaccine_comparisons)
+        ? proteinAnalysis.vaccine_comparisons
+        : [];
+
+    if (!proteinAnalysis.available || !vaccines.length) {
+        body.innerHTML = `<tr><td colspan="5">No vaccine amino acid comparison was returned.</td></tr>`;
+        return;
+    }
+
+    body.innerHTML = vaccines.map((item) => `
+        <tr>
+            <td>${escapeHtml(item.display_label || item.reference_id || "—")}</td>
+            <td>${escapeHtml(item.lineage || "—")}</td>
+            <td>${formatPercent(item.identity_percent)}</td>
+            <td>${escapeHtml(item.differences ?? "—")}</td>
+            <td>${escapeHtml(item.comparable_positions ?? "—")}</td>
+        </tr>
+    `).join("");
+}
+
+function renderProteinAnalysis(result) {
+    const proteinAnalysis = result.protein_analysis || {};
+    const section = document.getElementById("proteinAnalysisSection");
+    if (!section) {
+        return;
+    }
+
+    if (!proteinAnalysis.available) {
+        section.hidden = true;
+        return;
+    }
+
+    section.hidden = false;
+    const summary = proteinAnalysis.summary || {};
+    const context = proteinAnalysis.translation_context || {};
+    const warnings = Array.isArray(proteinAnalysis.warnings) ? proteinAnalysis.warnings : [];
+    const warningBox = document.getElementById("proteinWarnings");
+
+    document.getElementById("proteinAnalysisSummary").textContent = proteinAnalysis.interpretation || "ORF5 amino acid comparison completed.";
+    document.getElementById("resultProteinStatus").textContent = proteinAnalysis.status === "ok" ? "Translated" : "Review required";
+    document.getElementById("resultProteinFrame").textContent = `Orientation: ${formatOrientation(context.orientation_used)} · query start nt ${context.query_start_in_reference_nt ?? "—"} · frame offset ${context.codon_frame_offset ?? "—"}`;
+    document.getElementById("resultProteinCoverage").textContent = `${summary.covered_aa_positions ?? "—"}/200 aa`;
+    document.getElementById("resultProteinRange").textContent = summary.covered_aa_start && summary.covered_aa_end
+        ? `Covered GP5 positions ${summary.covered_aa_start}–${summary.covered_aa_end}`
+        : "Covered GP5 range unavailable";
+    document.getElementById("resultProteinIdentity").textContent = formatPercent(summary.aa_identity_vs_best_match_percent);
+    document.getElementById("resultProteinDifferences").textContent = `${summary.aa_differences_vs_best_match ?? "—"} amino acid differences across ${summary.aa_comparable_positions_vs_best_match ?? "—"} comparable positions`;
+    document.getElementById("resultClosestVaccine").textContent = summary.closest_vaccine_lineage
+        ? `${summary.closest_vaccine_lineage} vaccine`
+        : "—";
+    document.getElementById("resultClosestVaccineDetails").textContent = summary.closest_vaccine_reference_id
+        ? `${summary.closest_vaccine_reference_id} · ${formatPercent(summary.closest_vaccine_aa_identity_percent)} identity · ${summary.closest_vaccine_aa_differences ?? "—"} differences`
+        : "Vaccine comparison unavailable";
+    document.getElementById("resultProteinQc").textContent = `${summary.ambiguous_amino_acids ?? 0} X · ${summary.internal_stop_codons ?? 0} stops`;
+    document.getElementById("resultProteinQcDetails").textContent = summary.terminal_stop_detected === null || summary.terminal_stop_detected === undefined
+        ? "Terminal stop codon was not covered by the submitted sequence"
+        : summary.terminal_stop_detected
+            ? "Terminal stop codon detected when covered"
+            : "Terminal stop codon was covered but not detected";
+
+    if (warningBox) {
+        warningBox.hidden = !warnings.length;
+        const warningText = document.getElementById("proteinWarningsText");
+        if (warningText) {
+            warningText.textContent = warnings.length ? warnings.join(" ") : "No protein-level warnings were returned.";
+        }
+    }
+
+    renderProteinAlignmentView(proteinAnalysis);
+    renderVaccineComparisonTable(proteinAnalysis);
+}
+
 function getAlertType(result) {
     const status = result.classification_status || "";
     const confidence = result.confidence || "";
@@ -1206,6 +1517,7 @@ function renderApiResult(result) {
 
     renderTopMatches(result.top_matches || []);
     renderTreeContext(result);
+    renderProteinAnalysis(result);
     document.getElementById("resultJson").textContent = JSON.stringify(result, null, 2);
 
     const warnings = qc.warnings && qc.warnings.length ? ` Warnings: ${qc.warnings.join(" ")}` : "";

@@ -524,9 +524,118 @@
                         </div>
                     </section>
 
+
+                    <section id="proteinAnalysisSection" class="analysis-panel analysis-results-step analysis-protein-step" aria-labelledby="proteinAnalysisHeading" hidden>
+                        <div class="analysis-panel-header">
+                            <div class="analysis-step-number analysis-step-protein" aria-hidden="true">6</div>
+                            <div>
+                                <p class="analysis-section-label">ORF5 amino acid comparison</p>
+                                <h3 id="proteinAnalysisHeading">Translated GP5 comparison</h3>
+                                <p id="proteinAnalysisSummary">
+                                    Amino acid comparison will appear after the sequence is translated in the inferred ORF5 coding frame.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-workflow-note analysis-workflow-note-protein">
+                            <strong>What this step shows</strong>
+                            <p>
+                                This step translates the submitted ORF5 sequence into amino acids using the orientation and
+                                reference-frame context inferred by the nucleotide screening. It compares the derived GP5
+                                sequence against the closest reference and a fixed vaccine reference panel, helping separate
+                                coding-level amino acid changes from synonymous nucleotide variation.
+                            </p>
+                        </div>
+
+                        <div class="analysis-result-grid analysis-protein-summary-grid">
+                            <article class="analysis-result-card">
+                                <span>Translation status</span>
+                                <strong id="resultProteinStatus">—</strong>
+                                <small id="resultProteinFrame">ORF5 coding-frame context</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>AA coverage</span>
+                                <strong id="resultProteinCoverage">—</strong>
+                                <small id="resultProteinRange">Displayed GP5 positions covered by the query</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>AA identity vs best match</span>
+                                <strong id="resultProteinIdentity">—</strong>
+                                <small id="resultProteinDifferences">Coding-level differences versus closest reference</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Closest vaccine AA match</span>
+                                <strong id="resultClosestVaccine">—</strong>
+                                <small id="resultClosestVaccineDetails">Fixed vaccine reference panel</small>
+                            </article>
+
+                            <article class="analysis-result-card">
+                                <span>Protein QC</span>
+                                <strong id="resultProteinQc">—</strong>
+                                <small id="resultProteinQcDetails">Ambiguous amino acids and internal stop codons</small>
+                            </article>
+                        </div>
+
+                        <div id="proteinWarnings" class="analysis-result-alert analysis-result-alert-info" hidden>
+                            <strong>Protein interpretation note</strong>
+                            <p id="proteinWarningsText">No protein-level warnings were returned.</p>
+                        </div>
+
+                        <div class="analysis-api-output analysis-protein-output">
+                            <div class="analysis-api-output-header">
+                                <div>
+                                    <span class="analysis-placeholder-label">Jalview-style protein view</span>
+                                    <h4>ORF5 amino acid alignment viewer</h4>
+                                    <p>
+                                        Rows include fixed vaccine references, the closest nucleotide reference, and the submitted
+                                        sequence translated into the ORF5 frame. Scroll horizontally to inspect positions 1–200.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="analysis-aa-legend" aria-label="Amino acid comparison legend">
+                                <span><i class="analysis-aa-same"></i>Same as submitted sequence</span>
+                                <span><i class="analysis-aa-different"></i>Different amino acid</span>
+                                <span><i class="analysis-aa-query-different"></i>Submitted sequence differs from best match</span>
+                                <span><i class="analysis-aa-gap"></i>Not covered / gap</span>
+                                <span><i class="analysis-aa-ambiguous"></i>Ambiguous amino acid</span>
+                                <span><i class="analysis-aa-stop"></i>Stop codon</span>
+                            </div>
+
+                            <div id="proteinAlignmentViewer" class="analysis-aa-viewer" hidden>
+                                <div class="analysis-aa-scroll" role="region" aria-label="Scrollable ORF5 amino acid comparison">
+                                    <div id="proteinAlignmentRuler" class="analysis-aa-ruler"></div>
+                                    <div id="proteinAlignmentRows" class="analysis-aa-rows"></div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-match-table-wrapper analysis-vaccine-table-wrapper">
+                                <table class="analysis-match-table analysis-vaccine-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Vaccine reference</th>
+                                            <th>Lineage</th>
+                                            <th>AA identity</th>
+                                            <th>AA differences</th>
+                                            <th>Comparable AA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultVaccineComparisonBody">
+                                        <tr>
+                                            <td colspan="5">Vaccine amino acid comparison will appear after analysis.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
                     <section class="analysis-panel analysis-results-step analysis-report-step" aria-labelledby="reportHeading">
                         <div class="analysis-panel-header">
-                            <div class="analysis-step-number analysis-step-report" aria-hidden="true">6</div>
+                            <div class="analysis-step-number analysis-step-report" aria-hidden="true">7</div>
                             <div>
                                 <p class="analysis-section-label">Report and traceability</p>
                                 <h3 id="reportHeading">Public analysis report</h3>
@@ -562,8 +671,9 @@
                                 <p>
                                     This section is intended for validation, debugging, and traceability during testing.
                                     It does not include the submitted nucleotide sequence, the complete reference FASTA,
-                                    the master Newick tree, the alignment, or the curated metadata table. Submitted
-                                    form metadata may still appear because it is part of the analysis request.
+                                    the master Newick tree, the alignment, or the curated metadata table. It may include
+                                    the derived translated amino acid sequence used for the on-screen protein comparison.
+                                    Submitted form metadata may still appear because it is part of the analysis request.
                                 </p>
                             </div>
                             <pre id="resultJson">No API response yet.</pre>
@@ -583,6 +693,7 @@
                         <li>Closest-reference signal against curated ORF5 references</li>
                         <li>Closest reference and closest Mexican reference signals</li>
                         <li>Local master-tree context for represented references</li>
+                        <li>ORF5 amino acid translation and vaccine-reference comparison</li>
                     </ul>
                 </section>
 
@@ -659,6 +770,11 @@
                     </article>
                     <article>
                         <span>04</span>
+                        <h3>Translate</h3>
+                        <p>Translate ORF5 into GP5 amino acids and highlight coding-level differences against closest and vaccine references.</p>
+                    </article>
+                    <article>
+                        <span>05</span>
                         <h3>Review</h3>
                         <p>Store authorized requests privately for manual scientific review before any public use.</p>
                     </article>
