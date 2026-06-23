@@ -1,6 +1,6 @@
 "use strict";
 
-const API_ENDPOINT = "http://127.0.0.1:8000/analyze";
+const API_ENDPOINT = "https://amy-mother-approx-listing.trycloudflare.com/analyze";
 
 const form = document.getElementById("sequenceAnalysisForm");
 const sequenceInput = document.getElementById("sequenceInput");
