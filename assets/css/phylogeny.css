@@ -606,6 +606,13 @@
     text-align: right;
 }
 
+
+/* v3.4.4 — Keep post-analysis workflow hidden until an analysis has been executed. */
+.analysis-results[hidden],
+#analysisResults[hidden] {
+    display: none !important;
+}
+
 .analysis-results {
     display: grid;
     gap: 24px;
@@ -1461,4 +1468,29 @@
     .analysis-submit-bar {
         box-shadow: none !important;
     }
+}
+
+
+/* v3.4.5 — Advanced technical JSON output note */
+.analysis-json-note {
+    margin: 12px 0 12px;
+    padding: 13px 14px;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+    background: #f8fbff;
+    color: #334155;
+}
+
+.analysis-json-note strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #1e3a8a;
+    font-size: 0.88rem;
+}
+
+.analysis-json-note p {
+    margin: 0;
+    color: #475569;
+    font-size: 0.82rem;
+    line-height: 1.55;
 }

@@ -470,9 +470,9 @@
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Master-tree group</span>
+                                <span>Master-tree lineage</span>
                                 <strong id="resultTreeGroup">—</strong>
-                                <small id="resultTreeGroupSize">Group size in the visualization metadata</small>
+                                <small id="resultTreeGroupSize">Lineage size in the visualization metadata</small>
                             </article>
 
                             <article class="analysis-result-card">
@@ -490,7 +490,7 @@
                                 </div>
                                 <span id="treeGraphicBadge">Local view</span>
                             </div>
-                            <div id="treeLegend" class="analysis-tree-legend" aria-label="Tree group legend"></div>
+                            <div id="treeLegend" class="analysis-tree-legend" aria-label="Tree lineage legend"></div>
                             <div class="analysis-tree-svg-scroll">
                                 <svg id="masterTreeSvg" class="analysis-tree-svg" role="img" aria-label="Local PRRSV-2 ORF5 phylogenetic context"></svg>
                             </div>
@@ -508,14 +508,15 @@
                                         <tr>
                                             <th>Tree ID</th>
                                             <th>Accession</th>
-                                            <th>Group</th>
+                                            <th>Country</th>
                                             <th>Lineage</th>
+                                            <th>Sublineage</th>
                                             <th>Best match</th>
                                         </tr>
                                     </thead>
                                     <tbody id="resultTreeNeighborhoodBody">
                                         <tr>
-                                            <td colspan="5">Tree neighborhood will appear after analysis.</td>
+                                            <td colspan="6">Tree neighborhood will appear after analysis.</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -555,7 +556,16 @@
                         </div>
 
                         <details class="analysis-json-details">
-                            <summary>View raw JSON response</summary>
+                            <summary>Advanced technical output: raw JSON response</summary>
+                            <div class="analysis-json-note">
+                                <strong>Technical review only.</strong>
+                                <p>
+                                    This section is intended for validation, debugging, and traceability during testing.
+                                    It does not include the submitted nucleotide sequence, the complete reference FASTA,
+                                    the master Newick tree, the alignment, or the curated metadata table. Submitted
+                                    form metadata may still appear because it is part of the analysis request.
+                                </p>
+                            </div>
                             <pre id="resultJson">No API response yet.</pre>
                         </details>
                     </section>

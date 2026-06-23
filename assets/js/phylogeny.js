@@ -299,12 +299,12 @@ function renderTreeLegend(legend = [], colorMap = new Map()) {
 
     legendContainer.hidden = false;
     legendContainer.innerHTML = legend.map((item) => {
-        const group = item.display_group || "Unassigned";
-        const colorClass = treeGroupClass(group, colorMap);
+        const lineage = item.lineage || item.display_group || "Unassigned";
+        const colorClass = treeGroupClass(lineage, colorMap);
         return `
             <span class="analysis-tree-legend-item">
                 <i class="${colorClass}" aria-hidden="true"></i>
-                ${escapeHtml(group)} <small>${item.count ?? 0}</small>
+                ${escapeHtml(lineage)} <small>${item.count ?? 0}</small>
             </span>
         `;
     }).join("");
@@ -337,7 +337,7 @@ function renderLocalTreeGraphic(treeContext = {}) {
     const legend = Array.isArray(view.legend) ? view.legend : [];
     const colorMap = new Map();
     legend.forEach((item, index) => {
-        colorMap.set(item.display_group || "Unassigned", index % 12);
+        colorMap.set(item.lineage || item.display_group || "Unassigned", index % 12);
     });
     renderTreeLegend(legend, colorMap);
 
@@ -362,11 +362,12 @@ function renderLocalTreeGraphic(treeContext = {}) {
     const leafMarkup = leaves.map((leaf) => {
         const x = scaleX(leaf.x);
         const y = scaleY(leaf.y);
-        const group = leaf.display_group || leaf.sublineage || leaf.lineage || "Unassigned";
-        const colorClass = treeGroupClass(group, colorMap);
+        const lineage = leaf.lineage || "Unassigned";
+        const sublineage = leaf.sublineage && leaf.sublineage !== lineage ? leaf.sublineage : "";
+        const colorClass = treeGroupClass(lineage, colorMap);
         const isBest = Boolean(leaf.is_best_match);
-        const label = leaf.display_label || leaf.tree_id || "Reference";
-        const subtitle = [leaf.tree_id, leaf.lineage].filter(Boolean).join(" · ");
+        const label = `${leaf.accession || leaf.tree_id || "Reference"} | ${lineage}`;
+        const subtitle = [leaf.tree_id, leaf.country, sublineage].filter(Boolean).join(" · ");
         return `
             <g class="analysis-tree-tip ${isBest ? "analysis-tree-tip-best" : ""}" transform="translate(${x.toFixed(2)}, ${y.toFixed(2)})">
                 <circle class="analysis-tree-tip-dot ${colorClass}" r="${isBest ? 5.5 : 4.2}"></circle>
@@ -446,12 +447,15 @@ function buildPdfReadyReportHtml(result) {
     const treeRows = treeNeighborhood.map((item) => [
         reportValue(item.tree_id, "Not available"),
         reportValue(item.accession, "No accession"),
-        reportValue(item.display_group, "No group"),
+        reportValue(item.country, "—"),
         reportValue(item.lineage, "No lineage"),
+        reportValue(item.sublineage, "—"),
         item.is_best_match === "yes" ? "Yes" : "No"
     ]);
 
     const treeView = treeContext.local_tree_view || {};
+    const renderedTreeSvg = document.getElementById("masterTreeSvg")?.outerHTML || "";
+    const renderedTreeLegend = document.getElementById("treeLegend")?.innerHTML || "";
     const gapValue = result.lineage_gap_to_closest_different_lineage_percent ?? result.lineage_gap_to_second_best_percent;
 
     return `<!DOCTYPE html>
@@ -584,6 +588,58 @@ function buildPdfReadyReportHtml(result) {
     tr:last-child td { border-bottom: 0; }
     ul { margin: 8px 0 0 18px; padding: 0; }
     li { margin-bottom: 5px; }
+
+    .pdf-tree-figure {
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid #dbeafe;
+        border-radius: 14px;
+        background: #f8fbff;
+        overflow-x: auto;
+    }
+    .pdf-tree-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    .pdf-tree-legend .analysis-tree-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 8px;
+        border: 1px solid #e2e8f0;
+        border-radius: 999px;
+        background: #ffffff;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .pdf-tree-legend i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .pdf-tree-svg-wrap { min-width: 820px; }
+    .analysis-tree-svg { width: 100%; height: auto; display: block; }
+    .analysis-tree-segment { stroke: #94a3b8; stroke-width: 1.6; fill: none; }
+    .analysis-tree-root-line { stroke: #bfdbfe; stroke-width: 1.2; stroke-dasharray: 5 5; }
+    .analysis-tree-tip-label { font-size: 12px; font-weight: 800; fill: #0f172a; }
+    .analysis-tree-tip-sublabel { font-size: 10px; fill: #475569; }
+    .analysis-tree-tip-best .analysis-tree-tip-label { fill: #1d4ed8; font-weight: 900; }
+    .analysis-tree-tip-best .analysis-tree-tip-dot { stroke: #1d4ed8; stroke-width: 2.5; }
+    .analysis-tree-color-0 { fill: #2563eb; background: #2563eb; }
+    .analysis-tree-color-1 { fill: #059669; background: #059669; }
+    .analysis-tree-color-2 { fill: #dc2626; background: #dc2626; }
+    .analysis-tree-color-3 { fill: #7c3aed; background: #7c3aed; }
+    .analysis-tree-color-4 { fill: #ea580c; background: #ea580c; }
+    .analysis-tree-color-5 { fill: #0891b2; background: #0891b2; }
+    .analysis-tree-color-6 { fill: #be123c; background: #be123c; }
+    .analysis-tree-color-7 { fill: #4f46e5; background: #4f46e5; }
+    .analysis-tree-color-8 { fill: #65a30d; background: #65a30d; }
+    .analysis-tree-color-9 { fill: #9333ea; background: #9333ea; }
+    .analysis-tree-color-10 { fill: #0d9488; background: #0d9488; }
+    .analysis-tree-color-11 { fill: #ca8a04; background: #ca8a04; }
     footer {
         padding: 22px 38px 30px;
         background: #0f172a;
@@ -665,15 +721,23 @@ function buildPdfReadyReportHtml(result) {
         <h2>5. Master-tree context</h2>
         <div class="card-grid">
             ${reportCard("Reference in master tree", treeContext.best_match_present_in_tree ? "Represented" : "Not represented", treeContext.master_tree_available ? `Master tree contains ${reportValue(treeContext.tree_taxa_count, "-")} taxa` : "Master-tree context unavailable")}
-            ${reportCard("Master-tree group", reportValue(treeContext.display_group, "Not available"), `${reportValue(treeContext.group_size_in_tree_metadata, "-")} references in this group`)}
+            ${reportCard("Master-tree lineage", reportValue(treeContext.lineage, "Not available"), `${reportValue(treeContext.lineage_size_in_tree_metadata, "-")} references in this lineage`)}
             ${reportCard("Displayed label", reportValue(treeContext.display_label || treeContext.tree_id, "Not available"))}
         </div>
         <div class="note" style="margin-top:12px;">
             ${escapeHtml(reportValue(treeContext.interpretation, "The closest reference was linked to the master-tree context when available."))}
             ${treeView.available ? ` Local tree view displayed ${escapeHtml(reportValue(treeView.selected_leaf_count, "-"))} taxa; the closest shared ancestor contains ${escapeHtml(reportValue(treeView.mrca_leaf_count_in_full_tree, "-"))} taxa in the full master tree.` : ""}
         </div>
+        ${treeView.available && renderedTreeSvg ? `
+            <h3 style="font-size:14px;margin:16px 0 8px;">Local phylogenetic context</h3>
+            <div class="pdf-tree-figure">
+                <div class="pdf-tree-legend">${renderedTreeLegend}</div>
+                <div class="pdf-tree-svg-wrap">${renderedTreeSvg}</div>
+                <small>This reduced local tree view is included for visual context only. The full Newick tree and alignment are not exposed.</small>
+            </div>
+        ` : ""}
         <h3 style="font-size:14px;margin:16px 0 8px;">Displayed reference window</h3>
-        ${pdfTable(["Tree ID", "Accession", "Group", "Lineage", "Best match"], treeRows)}
+        ${pdfTable(["Tree ID", "Accession", "Country", "Lineage", "Sublineage", "Best match"], treeRows)}
     </section>
     <section>
         <h2>6. Data protection and interpretation</h2>
@@ -820,8 +884,9 @@ function buildPublicSummaryReport(result) {
         `Best reference present in tree: ${treeContext.best_match_present_in_tree ? "Yes" : "No"}`,
         `Tree ID: ${reportValue(treeContext.tree_id, "Not available")}`,
         `Tree display label: ${reportValue(treeContext.display_label, "Not available")}`,
-        `Tree display group: ${reportValue(treeContext.display_group, "Not available")}`,
-        `Tree group size in metadata: ${reportValue(treeContext.group_size_in_tree_metadata, "Not available")}`,
+        `Tree lineage: ${reportValue(treeContext.lineage, "Not available")}`,
+        `Tree sublineage: ${reportValue(treeContext.sublineage, "Not available")}`,
+        `Tree lineage size in metadata: ${reportValue(treeContext.lineage_size_in_tree_metadata, "Not available")}`,
         `Tree interpretation: ${reportValue(treeContext.interpretation, "Not available")}`,
         `Local tree view: ${treeContext.local_tree_view?.available ? "Available" : "Not available"}`,
         `Displayed taxa in local tree view: ${reportValue(treeContext.local_tree_view?.selected_leaf_count, "Not available")}`,
@@ -831,7 +896,7 @@ function buildPublicSummaryReport(result) {
         ...(treeNeighborhood.length
             ? treeNeighborhood.map((item, index) => {
                 const marker = item.is_best_match === "yes" ? "*" : "-";
-                return `${marker} ${index + 1}. ${reportValue(item.tree_id, "Not available")} | ${reportValue(item.accession, "No accession")} | ${reportValue(item.display_group, "No group")} | ${reportValue(item.lineage, "No lineage")}`;
+                return `${marker} ${index + 1}. ${reportValue(item.tree_id, "Not available")} | ${reportValue(item.accession, "No accession")} | ${reportValue(item.country, "—")} | ${reportValue(item.lineage, "No lineage")} | ${reportValue(item.sublineage, "—")}`;
             })
             : ["- Not available"]),
         "",
@@ -965,14 +1030,14 @@ function resetTreeContextOutput() {
         neighborhoodContainer.hidden = true;
     }
     if (neighborhoodBody) {
-        neighborhoodBody.innerHTML = `<tr><td colspan="5">Tree neighborhood will appear after analysis.</td></tr>`;
+        neighborhoodBody.innerHTML = `<tr><td colspan="6">Tree neighborhood will appear after analysis.</td></tr>`;
     }
 
     const defaults = {
         resultTreeRepresentation: "—",
         resultTreeRepresentationDetails: "Best reference presence in the master tree",
         resultTreeGroup: "—",
-        resultTreeGroupSize: "Group size in the visualization metadata",
+        resultTreeGroupSize: "Lineage size in the visualization metadata",
         resultTreeLabel: "—",
         treeContextSummary: "Tree context will appear when the closest reference is represented in the PRRSV-2 ORF5 master tree."
     };
@@ -1010,10 +1075,10 @@ function renderTreeContext(result) {
         ? `Master tree contains ${treeContext.tree_taxa_count ?? "—"} taxa; this card reports presence of the best reference.`
         : (treeContext.tree_context_error || "Master-tree context is not available.");
 
-    document.getElementById("resultTreeGroup").textContent = treeContext.display_group || "—";
-    document.getElementById("resultTreeGroupSize").textContent = treeContext.group_size_in_tree_metadata !== null && treeContext.group_size_in_tree_metadata !== undefined
-        ? `${treeContext.group_size_in_tree_metadata} references in this display group`
-        : "Group size unavailable";
+    document.getElementById("resultTreeGroup").textContent = treeContext.lineage || "—";
+    document.getElementById("resultTreeGroupSize").textContent = treeContext.lineage_size_in_tree_metadata !== null && treeContext.lineage_size_in_tree_metadata !== undefined
+        ? `${treeContext.lineage_size_in_tree_metadata} references in this lineage`
+        : "Lineage size unavailable";
     document.getElementById("resultTreeLabel").textContent = treeContext.display_label || treeContext.tree_id || "—";
     document.getElementById("treeContextSummary").textContent = treeContext.interpretation || "Master-tree context returned by the analysis engine.";
 
@@ -1037,8 +1102,9 @@ function renderTreeContext(result) {
             <tr class="${isBest ? "analysis-tree-best-match-row" : ""}">
                 <td>${escapeHtml(item.tree_id || item.reference_id || "—")}</td>
                 <td>${escapeHtml(item.accession || "—")}</td>
-                <td>${escapeHtml(item.display_group || item.sublineage || item.lineage || "—")}</td>
+                <td>${escapeHtml(item.country || "—")}</td>
                 <td>${escapeHtml(item.lineage || "—")}</td>
+                <td>${escapeHtml(item.sublineage || "—")}</td>
                 <td>${isBest ? "Yes" : "No"}</td>
             </tr>
         `;
