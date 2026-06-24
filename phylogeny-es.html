@@ -20,7 +20,7 @@
 
     <link rel="icon" href="/DiseasesMapMx/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/phylogeny.css">
+    <link rel="stylesheet" href="assets/css/phylogeny.css?v=3.5.6.1">
 </head>
 
 <body>
@@ -272,10 +272,10 @@
                                       required></textarea>
 
                             <div class="analysis-sequence-tools">
-                                <button type="button" id="exampleSecuenciaButton" class="analysis-button analysis-button-secondary">
+                                <button type="button" id="exampleSequenceButton" class="analysis-button analysis-button-secondary">
                                     Insertar ejemplo sintético
                                 </button>
-                                <button type="button" id="clearSecuenciaButton" class="analysis-button analysis-button-ghost">
+                                <button type="button" id="clearSequenceButton" class="analysis-button analysis-button-ghost">
                                     Limpiar secuencia
                                 </button>
                             </div>
@@ -394,7 +394,7 @@
                         <div class="analysis-result-grid analysis-api-summary-grid" aria-label="Tamizaje por referencia cercana summary">
                             <article class="analysis-result-card analysis-lineage-card">
                                 <span>Resultado de tamizaje de linaje</span>
-                                <strong id="resultLinaje">—</strong>
+                                <strong id="resultLineage">—</strong>
                                 <small>Basado en el panel activo de referencias y los umbrales de soporte configurados</small>
                             </article>
 
@@ -406,19 +406,19 @@
 
                             <article class="analysis-result-card">
                                 <span>Identidad nucleotídica</span>
-                                <strong id="resultIdentidad">—</strong>
-                                <small id="resultIdentidadDetails">Posiciones comparables y discrepancias</small>
+                                <strong id="resultIdentity">—</strong>
+                                <small id="resultIdentityDetails">Posiciones comparables y discrepancias</small>
                             </article>
 
                             <article class="analysis-result-card analysis-orientation-card">
                                 <span>Secuencia orientation</span>
-                                <strong id="resultOrientación">—</strong>
-                                <small id="resultOrientaciónDetails">Orientación utilizada para el tamizaje por referencia cercana</small>
+                                <strong id="resultOrientation">—</strong>
+                                <small id="resultOrientationDetails">Orientación utilizada para el tamizaje por referencia cercana</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Confianza</span>
-                                <strong id="resultConfianza">—</strong>
+                                <strong id="resultConfidence">—</strong>
                                 <small id="resultGap">Diferencia respecto al linaje distinto más cercano</small>
                             </article>
                         </div>
@@ -579,7 +579,7 @@
 
                             <article class="analysis-result-card">
                                 <span>Identidad AA vs mejor coincidencia</span>
-                                <strong id="resultProteinIdentidad">—</strong>
+                                <strong id="resultProteinIdentity">—</strong>
                                 <small id="resultProteinDifferences">Diferencias a nivel codificante respecto a la referencia más cercana</small>
                             </article>
 
@@ -784,7 +784,7 @@
                     <article>
                         <span>02</span>
                         <h3>Tamizar</h3>
-                        <p>Compare the submitted Secuencia ORF5 against curated references using ungapped closest-reference identity.</p>
+                        <p>Comparar la secuencia ORF5 enviada contra referencias curadas mediante identidad por referencia cercana sin gaps.</p>
                     </article>
                     <article>
                         <span>03</span>
@@ -794,7 +794,7 @@
                     <article>
                         <span>04</span>
                         <h3>Traducir</h3>
-                        <p>Traducir ORF5 into GP5 amino acids and highlight coding-level differences against closest and vaccine references.</p>
+                        <p>Traducir ORF5 a aminoácidos GP5 y resaltar diferencias a nivel codificante contra referencias cercanas y vacunales.</p>
                     </article>
                     <article>
                         <span>05</span>
@@ -811,8 +811,8 @@
             <p>© 2026 DiseasesMapMx. Todos los derechos reservados.</p>
             <p>Desarrollado por Alberto Jorge Galindo-Barboza</p>
             <p>
-                Veterinary and Zootechnical Research in Molecular Epidemiology and
-                Genomic Surveillance of Swine Pathogens
+                Investigación veterinaria y zootécnica en epidemiología molecular y
+                vigilancia genómica de patógenos porcinos
             </p>
             <p>
                 <a class="professional-link"
@@ -825,7 +825,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/phylogeny.js"></script>
+    <script src="assets/js/phylogeny.js?v=3.5.6.1"></script>
 </body>
 
 </html>
