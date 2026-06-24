@@ -136,6 +136,10 @@
                 <a href="dashboard.html">Dashboard</a>
             </li>
 
+              <li>
+                  <a href="phylogeny.html">Sequence Analysis</a>
+              </li>
+
             <li>
                 <a href="about.html" class="active-page">About</a>
             </li>
@@ -479,7 +483,73 @@
 
     </section>
 
-   </main>
+   
+    <!-- ====================== -->
+    <!-- USER GUIDANCE MODULES -->
+    <!-- ====================== -->
+
+    <section class="info-section">
+
+        <h3>
+            How to Use the Dashboard
+        </h3>
+
+        <p>
+            The dashboard is intended for exploratory visualization of curated, non-identifying
+            molecular surveillance metadata. Users can review summary indicators, filter records by
+            virus, year, region, production stage, gene, lineage or other available variables, and
+            explore spatial, temporal and molecular patterns in the dataset.
+        </p>
+
+        <p>
+            The maps, graphs and tables should be interpreted as descriptive surveillance summaries,
+            not as official estimates of prevalence, incidence or farm-level disease status. Counts
+            represent records included in the curated dataset and may be influenced by sampling design,
+            diagnostic selection, sequence availability and metadata completeness.
+        </p>
+
+        <ul class="scientific-list">
+            <li>Begin by selecting the pathogen or group of records of interest.</li>
+            <li>Use filters to restrict the view by year, region, production stage, gene or lineage.</li>
+            <li>Interpret map outputs at aggregated geographic levels; exact farm locations are not displayed.</li>
+            <li>Use filtered tables and GenBank links, when available, to review record-level context.</li>
+            <li>Consider dashboard outputs as hypothesis-generating tools for epidemiological interpretation and follow-up analysis.</li>
+        </ul>
+
+    </section>
+
+    <section class="info-section">
+
+        <h3>
+            About the Sequence Analysis Module
+        </h3>
+
+        <p>
+            The PRRSV-2 ORF5 sequence-analysis module performs preliminary closest-reference screening
+            against a curated PRRSV-2 ORF5 reference panel. It validates nucleotide input, applies a
+            hard low-identity interpretation gate, compares the query with curated references, links
+            accepted results to a local master-tree context, and translates the ORF5 coding region to
+            summarize GP5 amino acid differences.
+        </p>
+
+        <p>
+            This module is not a diagnostic report and does not constitute formal phylogenetic
+            placement. Results should be interpreted as a preliminary screening layer that requires
+            sequence-quality review, reference-panel context, phylogenetic analysis, epidemiological
+            information and expert interpretation.
+        </p>
+
+        <ul class="scientific-list">
+            <li>Recommended input: PRRSV-2 ORF5 nucleotide sequence in FASTA or raw nucleotide format.</li>
+            <li>Sequences below the minimum ORF5 identity threshold are blocked from lineage interpretation.</li>
+            <li>Authorized submissions can be stored locally for scientific review; public release is never automatic.</li>
+            <li>The public report excludes the submitted nucleotide sequence, complete FASTA database, curated metadata table, alignment and master Newick tree.</li>
+            <li>At this stage, access to the analysis engine is enabled by request and for limited testing periods only.</li>
+        </ul>
+
+    </section>
+
+</main>
 
 <!-- ====================== -->
 <!-- COLLABORATORS -->

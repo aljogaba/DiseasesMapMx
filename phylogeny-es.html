@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DiseasesMapMx | Sequence Analysis PRRSV-2</title>
+    <title>DiseasesMapMx | Análisis de Secuencias PRRSV-2</title>
 
     <meta name="description"
-          content="Interface for preliminary PRRSV-2 ORF5 sequence validation, metadata capture, and closest-reference screening in DiseasesMapMx.">
+          content="Interfaz para validación preliminar de secuencias PRRSV-2 ORF5, captura de metadatos no identificantes, tamizaje por referencia cercana y contexto filogenético local en DiseasesMapMx.">
 
     <meta name="author" content="Alberto Jorge Galindo-Barboza">
     <meta name="robots" content="noindex, nofollow">
 
-    <link rel="canonical" href="https://aljogaba.github.io/DiseasesMapMx/phylogeny.html">
+    <link rel="canonical" href="https://aljogaba.github.io/DiseasesMapMx/phylogeny-es.html">
     <link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/phylogeny.html">
     <link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/phylogeny-es.html">
     <link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/phylogeny.html">
@@ -29,35 +29,35 @@
         <div class="header-top">
             <div class="header-logos">
                 <img src="assets/img/logos/header_inifap.png"
-                     alt="INIFAP Logo"
+                     alt="Logotipo de INIFAP"
                      class="header-logo">
 
                 <img src="assets/img/logos/header_mexico.png"
-                     alt="Mexico Flag"
+                     alt="Bandera de México"
                      class="header-logo mexico-logo">
             </div>
 
             <div class="header-title">
                 <h1>DiseasesMapMx</h1>
-                <p>Swine Genomic Surveillance Platform</p>
+                <p>Plataforma de Vigilancia Genómica Porcina</p>
             </div>
         </div>
 
-        <nav class="navbar" aria-label="Primary navigation">
+        <nav class="navbar" aria-label="Navegación principal">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="prrsv.html">PRRSV</a></li>
-                <li><a href="pcv2.html">PCV2</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="phylogeny.html" class="active-page" aria-current="page">Sequence Analysis</a></li>
-                <li><a href="about.html">About</a></li>
-                <li class="language-switch" aria-label="Language selector">
-                    <a href="phylogeny-es.html">
+                <li><a href="index-es.html">Inicio</a></li>
+                <li><a href="prrsv-es.html">PRRSV</a></li>
+                <li><a href="pcv2-es.html">PCV2</a></li>
+                <li><a href="dashboard-es.html">Tablero</a></li>
+                <li><a href="phylogeny-es.html" class="active-page" aria-current="page">Análisis de Secuencias</a></li>
+                <li><a href="about-es.html">Acerca del proyecto</a></li>
+                <li class="language-switch" aria-label="Selector de idioma">
+                    <a href="phylogeny-es.html" class="active">
                         <img src="assets/img/flags/mx.png" alt="Español" class="flag-icon">
                         ES
                     </a>
                     <span>|</span>
-                    <a href="phylogeny.html" class="active">
+                    <a href="phylogeny.html">
                         <img src="assets/img/flags/us.png" alt="English" class="flag-icon">
                         EN
                     </a>
@@ -69,20 +69,20 @@
     <main>
         <section class="page-hero analysis-hero">
             <div class="page-hero-content">
-                <p class="analysis-eyebrow">Sequence analysis</p>
-                <h2>PRRSV-2 ORF5 Sequence Analysis</h2>
+                <p class="analysis-eyebrow">Análisis de secuencias</p>
+                <h2>Análisis de Secuencias PRRSV-2 ORF5</h2>
                 <p>
-                    Submit an ORF5 nucleotide sequence and non-identifying sample metadata for
-                    preliminary quality assessment, closest-reference screening, and master-tree context.
+                    Envíe una secuencia nucleotídica ORF5 y metadatos no identificantes de la muestra para
+                    evaluación preliminar de calidad, tamizaje por referencia cercana y contexto del árbol maestro.
                 </p>
-                <div class="analysis-hero-badges" aria-label="Analysis scope">
+                <div class="analysis-hero-badges" aria-label="Alcance del análisis">
                     <span>PRRSV-2</span>
                     <span>ORF5</span>
-                    <span>Closest-reference screening</span>
+                    <span>Tamizaje por referencia cercana</span>
                 </div>
                 <div class="analysis-access-notice" role="note">
-                    <strong>Temporary testing access</strong>
-                    <span>This sequence-analysis module is currently enabled by request only and for limited testing periods. To request access, please contact Alberto Jorge Galindo-Barboza.</span>
+                    <strong>Acceso temporal para pruebas</strong>
+                    <span>Por el momento, este módulo de análisis de secuencias se habilita únicamente a petición y por tiempo limitado durante pruebas controladas. Para solicitar acceso, favor de contactar a Alberto Jorge Galindo-Barboza.</span>
                 </div>
             </div>
         </section>
@@ -90,26 +90,26 @@
         <section class="analysis-intro">
             <div class="analysis-intro-content">
                 <div>
-                    <p class="analysis-section-label">Scientific scope</p>
-                    <h2>Sequence submission and reference screening</h2>
+                    <p class="analysis-section-label">Alcance científico</p>
+                    <h2>Envío de secuencias y tamizaje por referencia</h2>
                     <p>
-                        This module captures standardized metadata, validates nucleotide input,
-                        and sends the request to a Python analysis engine for preliminary closest-reference
-                        comparison and local master-tree context against curated PRRSV-2 ORF5 references.
+                        Este módulo captura metadatos estandarizados, valida la entrada nucleotídica
+                        y envía la solicitud a un motor de análisis en Python para comparación preliminar
+                        por referencia cercana y contexto local del árbol maestro contra referencias curadas de PRRSV-2 ORF5.
                     </p>
                 </div>
 
                 <div class="analysis-status-card" role="status">
                     <span class="analysis-status-dot" aria-hidden="true"></span>
                     <div>
-                        <strong>Interpretation status</strong>
-                        <p>This module provides a preliminary closest-reference screening result. It is not a formal phylogenetic lineage assignment and must be interpreted with the current reference panel and tree context.</p>
+                        <strong>Estatus de interpretación</strong>
+                        <p>Este módulo proporciona un resultado preliminar de tamizaje por referencia cercana. No constituye una asignación filogenética formal de linaje y debe interpretarse considerando el panel de referencia actual y el contexto del árbol.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="analysis-shell" aria-label="Sequence analysis workspace">
+        <section class="analysis-shell" aria-label="Análisis de secuencias workspace">
             <div class="analysis-main-column">
 
                 <form id="sequenceAnalysisForm" class="analysis-form" novalidate>
@@ -118,32 +118,32 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number" aria-hidden="true">1</div>
                             <div>
-                                <p class="analysis-section-label">Required information</p>
-                                <h3 id="metadataHeading">Sample metadata</h3>
-                                <p>Fields marked with an asterisk are required for the preliminary request.</p>
+                                <p class="analysis-section-label">Información requerida</p>
+                                <h3 id="metadataHeading">Metadatos de la muestra</h3>
+                                <p>Los campos marcados con asterisco son obligatorios para la solicitud preliminar.</p>
                             </div>
                         </div>
 
                         <div class="analysis-form-grid">
                             <div class="analysis-field">
-                                <label for="sampleId">Sample identifier <span aria-hidden="true">*</span></label>
+                                <label for="sampleId">Identificador de muestra <span aria-hidden="true">*</span></label>
                                 <input type="text"
                                        id="sampleId"
                                        name="sampleId"
                                        maxlength="80"
-                                       placeholder="e.g., FARM23-ORF5-01"
+                                       placeholder="ej., GRANJA23-ORF5-01"
                                        autocomplete="off"
                                        required>
-                                <small>Use a non-identifying laboratory or project code.</small>
+                                <small>Utilice un código de laboratorio o proyecto que no identifique la granja.</small>
                             </div>
 
                             <div class="analysis-field">
-                                <label for="collectionDate">Collection date</label>
+                                <label for="collectionDate">Fecha de muestreo</label>
                                 <input type="date" id="collectionDate" name="collectionDate">
                             </div>
 
                             <div class="analysis-field">
-                                <label for="country">Country <span aria-hidden="true">*</span></label>
+                                <label for="country">País <span aria-hidden="true">*</span></label>
                                 <input type="text"
                                        id="country"
                                        name="country"
@@ -153,75 +153,75 @@
                             </div>
 
                             <div class="analysis-field">
-                                <label for="state">State / administrative area <span aria-hidden="true">*</span></label>
+                                <label for="state">Estado / área administrativa <span aria-hidden="true">*</span></label>
                                 <input type="text"
                                        id="state"
                                        name="state"
-                                       placeholder="e.g., Jalisco"
+                                       placeholder="ej., Jalisco"
                                        maxlength="100"
                                        required>
                             </div>
 
                             <div class="analysis-field">
-                                <label for="municipality">Municipality</label>
+                                <label for="municipality">Municipio</label>
                                 <input type="text"
                                        id="municipality"
                                        name="municipality"
-                                       placeholder="e.g., Tepatitlán de Morelos"
+                                       placeholder="ej., Tepatitlán de Morelos"
                                        maxlength="120">
                             </div>
 
                             <div class="analysis-field">
-                                <label for="sampleType">Sample type <span aria-hidden="true">*</span></label>
+                                <label for="sampleType">Tipo de muestra <span aria-hidden="true">*</span></label>
                                 <select id="sampleType" name="sampleType" required>
-                                    <option value="">Select a sample type</option>
-                                    <option value="serum">Serum</option>
-                                    <option value="oral-fluid">Oral fluid</option>
-                                    <option value="tissue">Tissue</option>
-                                    <option value="lung">Lung</option>
-                                    <option value="processing-fluid">Processing fluid</option>
+                                    <option value="">Seleccione un tipo de muestra</option>
+                                    <option value="serum">Suero</option>
+                                    <option value="oral-fluid">Fluido oral</option>
+                                    <option value="tissue">Tejido</option>
+                                    <option value="lung">Pulmón</option>
+                                    <option value="processing-fluid">Fluido de procesamiento</option>
                                     <option value="semen">Semen</option>
-                                    <option value="other">Other</option>
+                                    <option value="other">Otro</option>
                                 </select>
                             </div>
 
                             <div class="analysis-field">
-                                <label for="productionStage">Production stage</label>
+                                <label for="productionStage">Etapa productiva</label>
                                 <select id="productionStage" name="productionStage">
-                                    <option value="">Not specified</option>
-                                    <option value="suckling">Suckling</option>
-                                    <option value="nursery">Nursery</option>
-                                    <option value="grower">Grower</option>
-                                    <option value="finisher">Finisher</option>
-                                    <option value="breeding">Breeding herd</option>
-                                    <option value="mixed">Mixed / multiple stages</option>
-                                    <option value="unknown">Unknown</option>
+                                    <option value="">No especificado</option>
+                                    <option value="suckling">Lactancia</option>
+                                    <option value="nursery">Destete / transición</option>
+                                    <option value="grower">Crecimiento</option>
+                                    <option value="finisher">Finalización</option>
+                                    <option value="breeding">Pie de cría</option>
+                                    <option value="mixed">Mixta / múltiples etapas</option>
+                                    <option value="unknown">Desconocido</option>
                                 </select>
                             </div>
 
                             <div class="analysis-field">
-                                <label for="collectionYear">Collection year <span aria-hidden="true">*</span></label>
+                                <label for="collectionYear">Año de muestreo <span aria-hidden="true">*</span></label>
                                 <input type="number"
                                        id="collectionYear"
                                        name="collectionYear"
                                        min="1990"
                                        max="2100"
                                        inputmode="numeric"
-                                       placeholder="e.g., 2026"
+                                       placeholder="ej., 2026"
                                        required>
                             </div>
 
                             <div class="analysis-field analysis-field-wide">
-                                <label for="institution">Submitting institution or laboratory</label>
+                                <label for="institution">Institución o laboratorio remitente</label>
                                 <input type="text"
                                        id="institution"
                                        name="institution"
                                        maxlength="160"
-                                       placeholder="Optional">
+                                       placeholder="Opcional">
                             </div>
 
                             <div class="analysis-field analysis-field-wide">
-                                <label for="contactEmail">Contact email</label>
+                                <label for="contactEmail">Correo de contacto</label>
                                 <input type="email"
                                        id="contactEmail"
                                        name="contactEmail"
@@ -235,30 +235,30 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number" aria-hidden="true">2</div>
                             <div>
-                                <p class="analysis-section-label">Nucleotide input</p>
-                                <h3 id="sequenceHeading">ORF5 sequence</h3>
-                                <p>Paste a FASTA-formatted sequence or nucleotide characters only.</p>
+                                <p class="analysis-section-label">Entrada nucleotídica</p>
+                                <h3 id="sequenceHeading">Secuencia ORF5</h3>
+                                <p>Pegue una secuencia en formato FASTA o únicamente caracteres nucleotídicos.</p>
                             </div>
                         </div>
 
                         <div class="analysis-fixed-fields" aria-label="Fixed analysis settings">
                             <div>
-                                <span>Target virus</span>
+                                <span>Virus objetivo</span>
                                 <strong>PRRSV-2</strong>
                             </div>
                             <div>
-                                <span>Target gene</span>
+                                <span>Gen objetivo</span>
                                 <strong>ORF5</strong>
                             </div>
                             <div>
-                                <span>Expected complete length</span>
+                                <span>Longitud completa esperada</span>
                                 <strong>603 nt</strong>
                             </div>
                         </div>
 
                         <div class="analysis-field analysis-sequence-field">
                             <div class="analysis-label-row">
-                                <label for="sequenceInput">Sequence <span aria-hidden="true">*</span></label>
+                                <label for="sequenceInput">Secuencia <span aria-hidden="true">*</span></label>
                                 <span id="sequenceLengthBadge" class="analysis-counter" aria-live="polite">0 nt</span>
                             </div>
 
@@ -272,11 +272,11 @@
                                       required></textarea>
 
                             <div class="analysis-sequence-tools">
-                                <button type="button" id="exampleSequenceButton" class="analysis-button analysis-button-secondary">
-                                    Insert synthetic example
+                                <button type="button" id="exampleSecuenciaButton" class="analysis-button analysis-button-secondary">
+                                    Insertar ejemplo sintético
                                 </button>
-                                <button type="button" id="clearSequenceButton" class="analysis-button analysis-button-ghost">
-                                    Clear sequence
+                                <button type="button" id="clearSecuenciaButton" class="analysis-button analysis-button-ghost">
+                                    Limpiar secuencia
                                 </button>
                             </div>
 
@@ -290,9 +290,9 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number" aria-hidden="true">3</div>
                             <div>
-                                <p class="analysis-section-label">Data governance</p>
-                                <h3 id="permissionsHeading">Analysis permissions</h3>
-                                <p>Analysis and public release are treated as separate decisions.</p>
+                                <p class="analysis-section-label">Gobernanza de datos</p>
+                                <h3 id="permissionsHeading">Permisos de análisis</h3>
+                                <p>El análisis y la liberación pública se tratan como decisiones separadas.</p>
                             </div>
                         </div>
 
@@ -300,24 +300,24 @@
                             <label class="analysis-checkbox-card">
                                 <input type="checkbox" id="analysisConsent" name="analysisConsent" required>
                                 <span>
-                                    <strong>I authorize preliminary analysis of this sequence. <span aria-hidden="true">*</span></strong>
-                                    <small>The sequence will be processed for validation and closest-reference screening.</small>
+                                    <strong>Autorizo el análisis preliminar de esta secuencia. <span aria-hidden="true">*</span></strong>
+                                    <small>La secuencia será procesada para validación y tamizaje por referencia cercana.</small>
                                 </span>
                             </label>
 
                             <label class="analysis-checkbox-card">
                                 <input type="checkbox" id="storageConsent" name="storageConsent">
                                 <span>
-                                    <strong>I authorize private storage of this request for scientific review.</strong>
-                                    <small>This does not authorize publication or inclusion in the public DiseasesMapMx dataset.</small>
+                                    <strong>Autorizo el almacenamiento privado de esta solicitud para revisión científica.</strong>
+                                    <small>Esto no autoriza la publicación ni la inclusión en la base pública de DiseasesMapMx.</small>
                                 </span>
                             </label>
 
                             <label class="analysis-checkbox-card">
                                 <input type="checkbox" id="publicationConsent" name="publicationConsent">
                                 <span>
-                                    <strong>I authorize future public release after scientific review.</strong>
-                                    <small>Public inclusion would remain subject to manual review, metadata verification, and curator approval.</small>
+                                    <strong>Autorizo una posible liberación pública futura después de revisión científica.</strong>
+                                    <small>La inclusión pública permanecerá sujeta a revisión manual, verificación de metadatos y aprobación del curador.</small>
                                 </span>
                             </label>
                         </div>
@@ -327,12 +327,12 @@
 
                     <div class="analysis-submit-bar">
                         <div>
-                            <strong>Ready to run the screening?</strong>
-                            <p>The request is sent to the PRRSV-2 ORF5 analysis engine configured for this page.</p>
+                            <strong>¿Listo para ejecutar el tamizaje?</strong>
+                            <p>La solicitud se envía al motor de análisis PRRSV-2 ORF5 configurado para esta página.</p>
                         </div>
 
                         <button type="submit" class="analysis-button analysis-button-primary">
-                            Run sequence analysis
+                            Ejecutar análisis de secuencia
                         </button>
                     </div>
                 </form>
@@ -343,94 +343,94 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number analysis-step-result" aria-hidden="true">4</div>
                             <div>
-                                <p class="analysis-section-label">Closest-reference screening</p>
-                                <h3 id="screeningResultsHeading">Preliminary screening result</h3>
-                                <p id="resultRequestCode">Analysis ID: —</p>
+                                <p class="analysis-section-label">Tamizaje por referencia cercana</p>
+                                <h3 id="screeningResultsHeading">Resultado preliminar del tamizaje</h3>
+                                <p id="resultRequestCode">ID de análisis: —</p>
                             </div>
                         </div>
 
                         <div id="apiStatusAlert" class="analysis-result-alert analysis-result-alert-info">
-                            <strong id="apiStatusTitle">Waiting for analysis.</strong>
+                            <strong id="apiStatusTitle">Esperando análisis.</strong>
                             <p id="apiStatusText">
-                                Results will appear after the analysis engine returns a response.
+                                Los resultados aparecerán cuando el motor de análisis devuelva una respuesta.
                             </p>
                         </div>
 
                         <div class="analysis-workflow-note">
-                            <strong>What this step shows</strong>
+                            <strong>Qué muestra este paso</strong>
                             <p>
-                                This step summarizes the query quality control and closest-reference screening result:
-                                sequence length, ORF5 coverage, ambiguous bases, best reference match, nucleotide identity,
-                                orientation, support level, and the closest references returned by the engine.
+                                Este paso resume el control de calidad de la consulta y el resultado del tamizaje por referencia cercana:
+                                longitud de secuencia, cobertura ORF5, bases ambiguas, mejor referencia coincidente, identidad nucleotídica,
+                                orientación, nivel de soporte y referencias cercanas devueltas por el motor.
                             </p>
                         </div>
 
                         <div class="analysis-result-grid">
                             <article class="analysis-result-card">
-                                <span>Valid sequence length</span>
+                                <span>Longitud válida de secuencia</span>
                                 <strong id="resultLength">—</strong>
-                                <small>After removing the FASTA header and whitespace</small>
+                                <small>Después de retirar el encabezado FASTA y espacios</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Estimated ORF5 coverage</span>
+                                <span>Cobertura ORF5 estimada</span>
                                 <strong id="resultCoverage">—</strong>
-                                <small>Relative to a 603 nt complete ORF5 sequence</small>
+                                <small>Relative to a 603 nt complete Secuencia ORF5</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Ambiguous bases</span>
+                                <span>Bases ambiguas</span>
                                 <strong id="resultAmbiguous">—</strong>
-                                <small>Number and percentage of N characters</small>
+                                <small>Número y porcentaje de caracteres N</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Input quality status</span>
+                                <span>Estatus de calidad de entrada</span>
                                 <strong id="resultQuality">—</strong>
-                                <small>Preliminary syntax and length assessment</small>
+                                <small>Evaluación preliminar de sintaxis y longitud</small>
                             </article>
                         </div>
 
-                        <div class="analysis-result-grid analysis-api-summary-grid" aria-label="Closest-reference screening summary">
+                        <div class="analysis-result-grid analysis-api-summary-grid" aria-label="Tamizaje por referencia cercana summary">
                             <article class="analysis-result-card analysis-lineage-card">
-                                <span>Lineage screening result</span>
-                                <strong id="resultLineage">—</strong>
-                                <small>Based on the active reference panel and configured support thresholds</small>
+                                <span>Resultado de tamizaje de linaje</span>
+                                <strong id="resultLinaje">—</strong>
+                                <small>Basado en el panel activo de referencias y los umbrales de soporte configurados</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Best reference match</span>
+                                <span>Mejor referencia coincidente</span>
                                 <strong id="resultBestMatch">—</strong>
-                                <small id="resultBestMatchDetails">Reference metadata will appear here</small>
+                                <small id="resultBestMatchDetails">Los metadatos de la referencia aparecerán aquí</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Nucleotide identity</span>
-                                <strong id="resultIdentity">—</strong>
-                                <small id="resultIdentityDetails">Comparable positions and mismatches</small>
+                                <span>Identidad nucleotídica</span>
+                                <strong id="resultIdentidad">—</strong>
+                                <small id="resultIdentidadDetails">Posiciones comparables y discrepancias</small>
                             </article>
 
                             <article class="analysis-result-card analysis-orientation-card">
-                                <span>Sequence orientation</span>
-                                <strong id="resultOrientation">—</strong>
-                                <small id="resultOrientationDetails">Orientation used for closest-reference screening</small>
+                                <span>Secuencia orientation</span>
+                                <strong id="resultOrientación">—</strong>
+                                <small id="resultOrientaciónDetails">Orientación utilizada para el tamizaje por referencia cercana</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Confidence</span>
-                                <strong id="resultConfidence">—</strong>
-                                <small id="resultGap">Gap to closest different lineage</small>
+                                <span>Confianza</span>
+                                <strong id="resultConfianza">—</strong>
+                                <small id="resultGap">Diferencia respecto al linaje distinto más cercano</small>
                             </article>
                         </div>
 
                         <div class="analysis-api-output">
                             <div class="analysis-api-output-header">
                                 <div>
-                                    <span class="analysis-placeholder-label">Screening process</span>
-                                    <h4>Closest PRRSV-2 ORF5 references</h4>
+                                    <span class="analysis-placeholder-label">Proceso de tamizaje</span>
+                                    <h4>Referencias PRRSV-2 ORF5 más cercanas</h4>
                                     <p>
-                                        This table summarizes the closest references returned by the Python engine.
-                                        Closest references are reported for context. A reliable lineage signal is reported only when the configured support thresholds are met.
+                                        Esta tabla resume las referencias más cercanas devueltas por el motor en Python.
+                                        Las referencias cercanas se reportan como contexto. Una señal confiable de linaje se informa solo cuando se cumplen los umbrales de soporte configurados.
                                     </p>
                                 </div>
                             </div>
@@ -439,13 +439,13 @@
                                 <table class="analysis-match-table">
                                     <thead>
                                         <tr>
-                                            <th>Rank</th>
-                                            <th>Reference</th>
-                                            <th>Lineage</th>
-                                            <th>Identity</th>
-                                            <th>Mismatches</th>
-                                            <th>Orientation</th>
-                                            <th>Metadata</th>
+                                            <th>Posición</th>
+                                            <th>Referencia</th>
+                                            <th>Linaje</th>
+                                            <th>Identidad</th>
+                                            <th>Discrepancias</th>
+                                            <th>Orientación</th>
+                                            <th>Metadatos</th>
                                         </tr>
                                     </thead>
                                     <tbody id="resultTopMatchesBody">
@@ -462,16 +462,16 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number analysis-step-tree" aria-hidden="true">5</div>
                             <div>
-                                <p class="analysis-section-label">Master tree context</p>
-                                <h3 id="treeContextHeading">Phylogenetic context from the PRRSV-2 ORF5 master tree</h3>
+                                <p class="analysis-section-label">Contexto del árbol maestro</p>
+                                <h3 id="treeContextHeading">Contexto filogenético del árbol maestro PRRSV-2 ORF5</h3>
                                 <p id="treeContextSummary">
-                                    Tree context will appear when the closest reference is represented in the PRRSV-2 ORF5 master tree.
+                                    El contexto del árbol aparecerá cuando la referencia más cercana esté representada en el árbol maestro PRRSV-2 ORF5.
                                 </p>
                             </div>
                         </div>
 
                         <div class="analysis-workflow-note analysis-workflow-note-tree">
-                            <strong>What this step shows</strong>
+                            <strong>Qué muestra este paso</strong>
                             <p>
                                 This step links the closest reference from the screening result to the PRRSV-2 ORF5 master tree.
                                 It reports whether that reference is represented in the tree and shows a reduced local view around it,
@@ -481,21 +481,21 @@
 
                         <div class="analysis-result-grid analysis-tree-context-grid">
                             <article class="analysis-result-card">
-                                <span>Reference in master tree</span>
+                                <span>Referencia in master tree</span>
                                 <strong id="resultTreeRepresentation">—</strong>
-                                <small id="resultTreeRepresentationDetails">Best reference presence in the master tree</small>
+                                <small id="resultTreeRepresentationDetails">Presencia de la mejor referencia en el árbol maestro</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Master-tree lineage</span>
+                                <span>Linaje en el árbol maestro</span>
                                 <strong id="resultTreeGroup">—</strong>
-                                <small id="resultTreeGroupSize">Lineage size in the visualization metadata</small>
+                                <small id="resultTreeGroupSize">Linaje size in the visualization metadata</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Displayed reference label</span>
+                                <span>Etiqueta de referencia mostrada</span>
                                 <strong id="resultTreeLabel">—</strong>
-                                <small>Public label for the represented reference</small>
+                                <small>Etiqueta pública para la referencia representada</small>
                             </article>
                         </div>
 
@@ -503,9 +503,9 @@
                             <div class="analysis-tree-graphic-header">
                                 <div>
                                     <h5>Local phylogenetic context</h5>
-                                    <p id="treeGraphicCaption">Reduced local tree view around the closest reference.</p>
+                                    <p id="treeGraphicCaption">Vista local reducida del árbol alrededor de la referencia más cercana.</p>
                                 </div>
-                                <span id="treeGraphicBadge">Local view</span>
+                                <span id="treeGraphicBadge">Vista local</span>
                             </div>
                             <div id="treeLegend" class="analysis-tree-legend" aria-label="Tree lineage legend"></div>
                             <div class="analysis-tree-svg-scroll">
@@ -523,12 +523,12 @@
                                 <table class="analysis-match-table analysis-tree-neighborhood-table">
                                     <thead>
                                         <tr>
-                                            <th>Tree ID</th>
-                                            <th>Accession</th>
-                                            <th>Country</th>
-                                            <th>Lineage</th>
+                                            <th>ID del árbol</th>
+                                            <th>Accesión</th>
+                                            <th>País</th>
+                                            <th>Linaje</th>
                                             <th>Sublineage</th>
-                                            <th>Best match</th>
+                                            <th>Mejor coincidencia</th>
                                         </tr>
                                     </thead>
                                     <tbody id="resultTreeNeighborhoodBody">
@@ -546,18 +546,18 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number analysis-step-protein" aria-hidden="true">6</div>
                             <div>
-                                <p class="analysis-section-label">ORF5 amino acid comparison</p>
-                                <h3 id="proteinAnalysisHeading">Translated GP5 comparison</h3>
+                                <p class="analysis-section-label">Comparación de aminoácidos ORF5</p>
+                                <h3 id="proteinAnalysisHeading">Comparación traducida de GP5</h3>
                                 <p id="proteinAnalysisSummary">
-                                    Amino acid comparison will appear after the sequence is translated in the inferred ORF5 coding frame.
+                                    La comparación de aminoácidos aparecerá después de traducir la secuencia en el marco codificante ORF5 inferido.
                                 </p>
                             </div>
                         </div>
 
                         <div class="analysis-workflow-note analysis-workflow-note-protein">
-                            <strong>What this step shows</strong>
+                            <strong>Qué muestra este paso</strong>
                             <p>
-                                This step translates the submitted ORF5 sequence into amino acids using the orientation and
+                                This step translates the submitted Secuencia ORF5 into amino acids using the orientation and
                                 reference-frame context inferred by the nucleotide screening. It compares the derived GP5
                                 sequence against the closest reference and a fixed vaccine reference panel, helping separate
                                 coding-level amino acid changes from synonymous nucleotide variation.
@@ -566,46 +566,46 @@
 
                         <div class="analysis-result-grid analysis-protein-summary-grid">
                             <article class="analysis-result-card">
-                                <span>Translation status</span>
+                                <span>Estatus de traducción</span>
                                 <strong id="resultProteinStatus">—</strong>
-                                <small id="resultProteinFrame">ORF5 coding-frame context</small>
+                                <small id="resultProteinFrame">Contexto del marco codificante ORF5</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>AA coverage</span>
+                                <span>Cobertura de AA</span>
                                 <strong id="resultProteinCoverage">—</strong>
-                                <small id="resultProteinRange">Displayed GP5 positions covered by the query</small>
+                                <small id="resultProteinRange">Posiciones GP5 mostradas cubiertas por la consulta</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>AA identity vs best match</span>
-                                <strong id="resultProteinIdentity">—</strong>
-                                <small id="resultProteinDifferences">Coding-level differences versus closest reference</small>
+                                <span>Identidad AA vs mejor coincidencia</span>
+                                <strong id="resultProteinIdentidad">—</strong>
+                                <small id="resultProteinDifferences">Diferencias a nivel codificante respecto a la referencia más cercana</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Closest vaccine AA match</span>
+                                <span>Referencia vacunal AA más cercana</span>
                                 <strong id="resultClosestVaccine">—</strong>
-                                <small id="resultClosestVaccineDetails">Fixed vaccine reference panel</small>
+                                <small id="resultClosestVaccineDetails">Panel fijo de referencias vacunales</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Protein QC</span>
+                                <span>QC proteico</span>
                                 <strong id="resultProteinQc">—</strong>
-                                <small id="resultProteinQcDetails">Ambiguous amino acids and internal stop codons</small>
+                                <small id="resultProteinQcDetails">Aminoácidos ambiguos y codones de paro internos</small>
                             </article>
                         </div>
 
                         <div id="proteinWarnings" class="analysis-result-alert analysis-result-alert-info" hidden>
-                            <strong>Protein interpretation note</strong>
-                            <p id="proteinWarningsText">No protein-level warnings were returned.</p>
+                            <strong>Nota de interpretación proteica</strong>
+                            <p id="proteinWarningsText">No se devolvieron advertencias a nivel proteico.</p>
                         </div>
 
                         <div class="analysis-api-output analysis-protein-output">
                             <div class="analysis-api-output-header">
                                 <div>
-                                    <span class="analysis-placeholder-label">Jalview-style protein view</span>
-                                    <h4>ORF5 amino acid alignment viewer</h4>
+                                    <span class="analysis-placeholder-label">Vista proteica tipo Jalview</span>
+                                    <h4>Visualizador de alineamiento de aminoácidos ORF5</h4>
                                     <p>
                                         Rows include fixed vaccine references, the closest nucleotide reference, and the submitted
                                         sequence translated into the ORF5 frame. Scroll horizontally to inspect positions 1–200.
@@ -614,16 +614,16 @@
                             </div>
 
                             <div class="analysis-aa-legend" aria-label="Amino acid comparison legend">
-                                <span><i class="analysis-aa-same"></i>Same as submitted sequence</span>
-                                <span><i class="analysis-aa-different"></i>Different amino acid</span>
-                                <span><i class="analysis-aa-query-different"></i>Submitted sequence differs from best match</span>
-                                <span><i class="analysis-aa-gap"></i>Not covered / gap</span>
-                                <span><i class="analysis-aa-ambiguous"></i>Ambiguous amino acid</span>
-                                <span><i class="analysis-aa-stop"></i>Stop codon</span>
+                                <span><i class="analysis-aa-same"></i>Igual a la secuencia enviada</span>
+                                <span><i class="analysis-aa-different"></i>Aminoácido diferente</span>
+                                <span><i class="analysis-aa-query-different"></i>La secuencia enviada difiere de la mejor coincidencia</span>
+                                <span><i class="analysis-aa-gap"></i>No cubierto / gap</span>
+                                <span><i class="analysis-aa-ambiguous"></i>Aminoácido ambiguo</span>
+                                <span><i class="analysis-aa-stop"></i>Codón de paro</span>
                             </div>
 
                             <div id="proteinAlignmentViewer" class="analysis-aa-viewer" hidden>
-                                <div class="analysis-aa-scroll" role="region" aria-label="Scrollable ORF5 amino acid comparison">
+                                <div class="analysis-aa-scroll" role="region" aria-label="Scrollable Comparación de aminoácidos ORF5">
                                     <div id="proteinAlignmentRuler" class="analysis-aa-ruler"></div>
                                     <div id="proteinAlignmentRows" class="analysis-aa-rows"></div>
                                 </div>
@@ -633,11 +633,11 @@
                                 <table class="analysis-match-table analysis-vaccine-table">
                                     <thead>
                                         <tr>
-                                            <th>Vaccine reference</th>
-                                            <th>Lineage</th>
+                                            <th>Referencia vacunal</th>
+                                            <th>Linaje</th>
                                             <th>AA identity</th>
-                                            <th>AA differences</th>
-                                            <th>Comparable AA</th>
+                                            <th>Diferencias AA</th>
+                                            <th>AA comparables</th>
                                         </tr>
                                     </thead>
                                     <tbody id="resultVaccineComparisonBody">
@@ -654,10 +654,10 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number analysis-step-report" aria-hidden="true">7</div>
                             <div>
-                                <p class="analysis-section-label">Report and traceability</p>
-                                <h3 id="reportHeading">Public analysis report</h3>
+                                <p class="analysis-section-label">Reporte y trazabilidad</p>
+                                <h3 id="reportHeading">Reporte público de análisis</h3>
                                 <p>
-                                    Download a single-file HTML report or open a print-optimized PDF-ready report after the analysis is completed.
+                                    Descargue un reporte HTML de archivo único o abra una vista optimizada para impresión/PDF después de completar el análisis.
                                 </p>
                             </div>
                         </div>
@@ -667,36 +667,36 @@
                                     id="downloadReportButton"
                                     class="analysis-button analysis-button-secondary"
                                     disabled>
-                                Download HTML report
+                                Descargar reporte HTML
                             </button>
                             <button type="button"
                                     id="openPdfReportButton"
                                     class="analysis-button analysis-button-secondary analysis-button-pdf"
                                     disabled>
-                                Open PDF-ready report
+                                Abrir reporte listo para PDF
                             </button>
                             <small>
-                                Reports are generated as a single-file HTML report and a print-optimized PDF-ready view.
-                                Both exclude the submitted nucleotide sequence, the reference FASTA, the curated metadata table,
-                                alignments, and the master tree file.
+                                Los reportes se generan como un HTML de archivo único y una vista optimizada para impresión/PDF.
+                                Ambos excluyen la secuencia nucleotídica enviada, el FASTA de referencias, la tabla curada de metadatos,
+                                los alineamientos y el archivo del árbol maestro.
                             </small>
                         </div>
 
                         <div id="storageStatusAlert" class="analysis-storage-status" hidden>
-                            <strong id="storageStatusTitle">Storage status</strong>
-                            <p id="storageStatusText">Storage status will appear after analysis.</p>
+                            <strong id="storageStatusTitle">Estatus de almacenamiento</strong>
+                            <p id="storageStatusText">Estatus de almacenamiento will appear after analysis.</p>
                         </div>
 
                         <details class="analysis-json-details">
-                            <summary>Advanced technical output: raw JSON response</summary>
+                            <summary>Salida técnica avanzada: respuesta JSON cruda</summary>
                             <div class="analysis-json-note">
-                                <strong>Technical review only.</strong>
+                                <strong>Solo para revisión técnica.</strong>
                                 <p>
-                                    This section is intended for validation, debugging, and traceability during testing.
-                                    It does not include the submitted nucleotide sequence, the complete reference FASTA,
-                                    the master Newick tree, the alignment, or the curated metadata table. It may include
-                                    the derived translated amino acid sequence used for the on-screen protein comparison.
-                                    Submitted form metadata may still appear because it is part of the analysis request.
+                                    Esta sección está destinada a validación, depuración y trazabilidad durante las pruebas.
+                                    No incluye la secuencia nucleotídica enviada, el FASTA completo de referencias,
+                                    el árbol maestro en formato Newick, el alineamiento ni la tabla curada de metadatos. Puede incluir
+                                    la secuencia de aminoácidos traducida derivada utilizada para la comparación proteica en pantalla.
+                                    Los metadatos del formulario pueden aparecer porque forman parte de la solicitud de análisis.
                                 </p>
                             </div>
                             <pre id="resultJson">No API response yet.</pre>
@@ -707,11 +707,11 @@
 
             <aside class="analysis-sidebar" aria-label="Analysis information">
                 <section class="analysis-side-card">
-                    <p class="analysis-section-label">Analysis scope</p>
-                    <h3>What this module evaluates</h3>
+                    <p class="analysis-section-label">Alcance del análisis</p>
+                    <h3>Qué evalúa este módulo</h3>
                     <ul class="analysis-check-list">
                         <li>Input format and nucleotide characters</li>
-                        <li>Sequence length and ORF5 coverage</li>
+                        <li>Secuencia length and ORF5 coverage</li>
                         <li>Ambiguous nucleotide proportion</li>
                         <li>Closest-reference signal against curated ORF5 references</li>
                         <li>Closest reference and closest Mexican reference signals</li>
@@ -721,20 +721,20 @@
                 </section>
 
                 <section class="analysis-side-card analysis-side-card-accent">
-                    <p class="analysis-section-label">Interpretation</p>
-                    <h3>Preliminary result only</h3>
+                    <p class="analysis-section-label">Interpretación</p>
+                    <h3>Resultado preliminar únicamente</h3>
                     <p>
-                        Lineage interpretation must be considered together with sequence quality,
+                        Linaje interpretation must be considered together with sequence quality,
                         reference-panel coverage, local master-tree context, and epidemiological information.
                     </p>
                     <p>
-                        Percentage identity alone is not used as the sole criterion for lineage interpretation.
+                        La identidad porcentual por sí sola no se utiliza como criterio único para la interpretación de linaje.
                     </p>
                 </section>
 
                 <section class="analysis-side-card">
-                    <p class="analysis-section-label">Sequence requirements</p>
-                    <h3>Recommended input</h3>
+                    <p class="analysis-section-label">Secuencia requirements</p>
+                    <h3>Entrada recomendada</h3>
                     <dl class="analysis-requirements">
                         <div>
                             <dt>Virus</dt>
@@ -760,8 +760,8 @@
                 </section>
 
                 <section class="analysis-side-card">
-                    <p class="analysis-section-label">Privacy</p>
-                    <h3>Do not submit identifying farm data</h3>
+                    <p class="analysis-section-label">Privacidad</p>
+                    <h3>No envíe datos que identifiquen granjas</h3>
                     <p>
                         Use coded sample identifiers. Farm names, producer names, street addresses,
                         and exact geographic coordinates are not required for this screening.
@@ -772,34 +772,34 @@
 
         <section class="analysis-workflow-section" aria-labelledby="workflowHeading">
             <div class="analysis-workflow-content">
-                <p class="analysis-section-label">Computational workflow</p>
-                <h2 id="workflowHeading">How the screening works</h2>
+                <p class="analysis-section-label">Flujo computacional</p>
+                <h2 id="workflowHeading">Cómo funciona el tamizaje</h2>
 
                 <div class="analysis-workflow-grid">
                     <article>
                         <span>01</span>
-                        <h3>Validate</h3>
-                        <p>Standardize the nucleotide input, remove formatting, and evaluate sequence quality.</p>
+                        <h3>Validar</h3>
+                        <p>Estandarizar la entrada nucleotídica, retirar formato y evaluar la calidad de la secuencia.</p>
                     </article>
                     <article>
                         <span>02</span>
-                        <h3>Screen</h3>
-                        <p>Compare the submitted ORF5 sequence against curated references using ungapped closest-reference identity.</p>
+                        <h3>Tamizar</h3>
+                        <p>Compare the submitted Secuencia ORF5 against curated references using ungapped closest-reference identity.</p>
                     </article>
                     <article>
                         <span>03</span>
-                        <h3>Contextualize</h3>
-                        <p>Link the closest reference to the PRRSV-2 ORF5 master tree and show a reduced local tree view.</p>
+                        <h3>Contextualizar</h3>
+                        <p>Vincular la referencia más cercana con el árbol maestro PRRSV-2 ORF5 y mostrar una vista local reducida del árbol.</p>
                     </article>
                     <article>
                         <span>04</span>
-                        <h3>Translate</h3>
-                        <p>Translate ORF5 into GP5 amino acids and highlight coding-level differences against closest and vaccine references.</p>
+                        <h3>Traducir</h3>
+                        <p>Traducir ORF5 into GP5 amino acids and highlight coding-level differences against closest and vaccine references.</p>
                     </article>
                     <article>
                         <span>05</span>
-                        <h3>Review</h3>
-                        <p>Store authorized requests privately for manual scientific review before any public use.</p>
+                        <h3>Revisar</h3>
+                        <p>Almacenar solicitudes autorizadas de forma privada para revisión científica manual antes de cualquier uso público.</p>
                     </article>
                 </div>
             </div>
@@ -808,8 +808,8 @@
 
     <footer class="main-footer">
         <div class="footer-content">
-            <p>© 2026 DiseasesMapMx. All rights reserved.</p>
-            <p>Developed by Alberto Jorge Galindo-Barboza</p>
+            <p>© 2026 DiseasesMapMx. Todos los derechos reservados.</p>
+            <p>Desarrollado por Alberto Jorge Galindo-Barboza</p>
             <p>
                 Veterinary and Zootechnical Research in Molecular Epidemiology and
                 Genomic Surveillance of Swine Pathogens
@@ -819,7 +819,7 @@
                    href="https://aljogaba.github.io/"
                    target="_blank"
                    rel="noopener noreferrer">
-                    Professional website
+                    Sitio profesional
                 </a>
             </p>
         </div>

@@ -145,6 +145,10 @@
             <a href="dashboard-es.html">Tablero</a>
         </li>
 
+                <li>
+                    <a href="phylogeny-es.html">Análisis de Secuencias</a>
+                </li>
+
         <li>
             <a href="about-es.html" class="active-page">Acerca del proyecto</a>
         </li>
@@ -488,6 +492,74 @@
     
 
 </section>
+
+
+    <!-- ====================== -->
+    <!-- MÓDULOS DE ORIENTACIÓN -->
+    <!-- ====================== -->
+
+    <section class="info-section">
+
+        <h3>
+            Cómo Usar el Tablero
+        </h3>
+
+        <p>
+            El tablero está diseñado para la visualización exploratoria de metadatos moleculares
+            curados y no identificantes. Permite revisar indicadores resumidos, filtrar registros
+            por virus, año, región, etapa productiva, gen, linaje u otras variables disponibles,
+            y explorar patrones espaciales, temporales y moleculares dentro del conjunto de datos.
+        </p>
+
+        <p>
+            Los mapas, gráficas y tablas deben interpretarse como resúmenes descriptivos de vigilancia,
+            no como estimaciones oficiales de prevalencia, incidencia o estatus sanitario a nivel de
+            granja. Los conteos representan los registros incluidos en la base curada y pueden estar
+            influenciados por el diseño de muestreo, la selección diagnóstica, la disponibilidad de
+            secuencias y la completitud de los metadatos.
+        </p>
+
+        <ul class="scientific-list">
+            <li>Inicie seleccionando el patógeno o grupo de registros de interés.</li>
+            <li>Utilice los filtros para restringir la vista por año, región, etapa productiva, gen o linaje.</li>
+            <li>Interprete los mapas en niveles geográficos agregados; no se muestran ubicaciones exactas de granjas.</li>
+            <li>Utilice las tablas filtradas y los enlaces a GenBank, cuando estén disponibles, para revisar el contexto de cada registro.</li>
+            <li>Considere los resultados del tablero como herramientas exploratorias para generar hipótesis epidemiológicas y orientar análisis posteriores.</li>
+        </ul>
+
+    </section>
+
+    <section class="info-section">
+
+        <h3>
+            Acerca del Módulo de Análisis de Secuencias
+        </h3>
+
+        <p>
+            El módulo de análisis de secuencias de PRRSV-2 ORF5 realiza un tamizaje preliminar por
+            referencia cercana contra un panel curado de secuencias ORF5 de PRRSV-2. Valida la entrada
+            nucleotídica, aplica un umbral estricto para detener secuencias con baja identidad, compara
+            la consulta contra referencias curadas, vincula los resultados aceptados con un contexto
+            local del árbol maestro y traduce la región codificante ORF5 para resumir diferencias de
+            aminoácidos en GP5.
+        </p>
+
+        <p>
+            Este módulo no es un reporte diagnóstico ni constituye una asignación filogenética formal.
+            Los resultados deben interpretarse como una capa preliminar de tamizaje que requiere revisión
+            de calidad de secuencia, contexto del panel de referencia, análisis filogenético, información
+            epidemiológica e interpretación experta.
+        </p>
+
+        <ul class="scientific-list">
+            <li>Entrada recomendada: secuencia nucleotídica ORF5 de PRRSV-2 en formato FASTA o nucleótidos crudos.</li>
+            <li>Las secuencias por debajo del umbral mínimo de identidad ORF5 se bloquean para interpretación de linaje.</li>
+            <li>Los envíos autorizados pueden almacenarse localmente para revisión científica; la liberación pública nunca es automática.</li>
+            <li>El reporte público excluye la secuencia nucleotídica enviada, la base FASTA completa, la tabla curada de metadatos, el alineamiento y el árbol maestro en formato Newick.</li>
+            <li>En esta etapa, el acceso al motor de análisis se habilita únicamente a petición y por periodos limitados de prueba.</li>
+        </ul>
+
+    </section>
 
 </main>
 
