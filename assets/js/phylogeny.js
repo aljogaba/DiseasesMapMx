@@ -801,6 +801,549 @@ function buildPdfReadyReportHtml(result) {
 </html>`;
 }
 
+
+function buildProfessionalReportHtml(result) {
+    const qc = result.qc || {};
+    const metadata = result.submitted_metadata || {};
+    const bestMatch = result.closest_reference_match || result.best_match || {};
+    const topMatches = Array.isArray(result.top_matches) ? result.top_matches : [];
+    const treeContext = result.tree_context || {};
+    const treeNeighborhood = Array.isArray(treeContext.local_display_neighborhood) ? treeContext.local_display_neighborhood : [];
+    const treeView = treeContext.local_tree_view || {};
+    const proteinAnalysis = result.protein_analysis || {};
+    const proteinSummary = proteinAnalysis.summary || {};
+    const proteinWarnings = Array.isArray(proteinAnalysis.warnings) ? proteinAnalysis.warnings : [];
+    const vaccineComparisons = Array.isArray(proteinAnalysis.vaccine_comparisons) ? proteinAnalysis.vaccine_comparisons : [];
+    const proteinDifferences = Array.isArray(proteinAnalysis.best_match_protein?.comparison_to_query?.difference_positions)
+        ? proteinAnalysis.best_match_protein.comparison_to_query.difference_positions
+        : [];
+    const warnings = Array.isArray(qc.warnings) ? qc.warnings : [];
+    const storage = result.storage_status || {};
+    const now = new Date();
+    const gapValue = result.lineage_gap_to_closest_different_lineage_percent ?? result.lineage_gap_to_second_best_percent;
+
+    const renderedTreeSvg = document.getElementById("masterTreeSvg")?.outerHTML || "";
+    const renderedTreeLegend = document.getElementById("treeLegend")?.innerHTML || "";
+
+    const topRows = topMatches.slice(0, 8).map((match, index) => [
+        String(index + 1),
+        reportValue(match.reference_id, "Not available"),
+        reportValue(match.accession, "No accession"),
+        reportValue(match.lineage, "Not available"),
+        formatPercent(match.identity_percent),
+        reportValue(match.mismatches, "Not available"),
+        formatOrientation(match.orientation)
+    ]);
+
+    const treeRows = treeNeighborhood.map((item) => [
+        reportValue(item.tree_id, "Not available"),
+        reportValue(item.accession, "No accession"),
+        reportValue(item.country, "—"),
+        reportValue(item.lineage, "No lineage"),
+        reportValue(item.sublineage, "—"),
+        item.is_best_match === "yes" ? "Yes" : "No"
+    ]);
+
+    const vaccineRows = vaccineComparisons.map((item) => [
+        reportValue(item.display_label || item.reference_id, "Not available"),
+        reportValue(item.lineage, "—"),
+        reportValue(item.sublineage, "—"),
+        formatPercent(item.identity_percent),
+        reportValue(item.differences, "—"),
+        reportValue(item.comparable_positions, "—")
+    ]);
+
+    const proteinDifferenceRows = proteinDifferences.slice(0, 60).map((item) => [
+        reportValue(item.position, "—"),
+        reportValue(item.reference_aa, "—"),
+        reportValue(item.query_aa, "—")
+    ]);
+
+    const storageLocations = formatStorageLocations(storage.saved_locations);
+    const reportTitle = "DiseasesMapMx PRRSV-2 ORF5 analysis report";
+    const analysisId = reportValue(result.analysis_id, "No analysis ID");
+    const sampleId = reportValue(metadata.sample_id, "Not provided");
+
+    const aaDifferencePills = proteinDifferences.slice(0, 80).map((item) => {
+        return `<span class="aa-pill">${escapeHtml(reportValue(item.position, "—"))}: ${escapeHtml(reportValue(item.reference_aa, "—"))}→${escapeHtml(reportValue(item.query_aa, "—"))}</span>`;
+    }).join("");
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(reportTitle)} | ${escapeHtml(sampleId)}</title>
+<style>
+:root {
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #dbe4f0;
+    --panel: #ffffff;
+    --soft: #f8fafc;
+    --blue: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --green: #047857;
+    --green-soft: #ecfdf5;
+    --amber: #92400e;
+    --amber-soft: #fffbeb;
+    --slate: #334155;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: #e8eef7;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+.report-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(15, 23, 42, 0.94);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+}
+.report-toolbar button {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 16px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+}
+.report-toolbar span {
+    color: #cbd5e1;
+    font-size: 12px;
+}
+.report {
+    width: min(1060px, calc(100% - 28px));
+    margin: 24px auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 16px 46px rgba(15, 23, 42, 0.16);
+    overflow: hidden;
+}
+.report-header {
+    padding: 38px 42px;
+    background:
+        radial-gradient(circle at top right, rgba(147, 197, 253, 0.20), transparent 35%),
+        linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+}
+.eyebrow {
+    margin: 0 0 10px;
+    color: #bfdbfe;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+.report-header h1 {
+    margin: 0;
+    max-width: 760px;
+    font-size: 30px;
+    line-height: 1.15;
+}
+.report-header p {
+    max-width: 840px;
+    margin: 12px 0 0;
+    color: #dbeafe;
+}
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    color: #f8fafc;
+    font-size: 12px;
+    font-weight: 800;
+}
+main { padding: 32px 42px 42px; }
+section { margin-top: 26px; }
+section:first-child { margin-top: 0; }
+.section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.section-title span {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 900;
+}
+.section-title h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #0f172a;
+}
+.card-grid, .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+.summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.report-card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+.report-card .label {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+.report-card strong {
+    display: block;
+    color: #0f172a;
+    font-size: 17px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+.report-card small {
+    display: block;
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.4;
+}
+.callout {
+    margin-top: 12px;
+    padding: 16px;
+    border: 1px solid #bfdbfe;
+    border-radius: 15px;
+    background: #eff6ff;
+    color: #1e3a8a;
+}
+.callout.good {
+    border-color: #bbf7d0;
+    background: #ecfdf5;
+    color: #14532d;
+}
+.callout.warn {
+    border-color: #fde68a;
+    background: #fffbeb;
+    color: #92400e;
+}
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    table-layout: fixed;
+}
+th, td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+th {
+    background: #eff6ff;
+    color: #1e3a8a;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+tr:last-child td { border-bottom: 0; }
+.tree-figure {
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid #dbeafe;
+    border-radius: 16px;
+    background: #f8fbff;
+    overflow-x: auto;
+}
+.tree-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.tree-legend .analysis-tree-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+}
+.tree-legend i {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+.tree-svg-wrap {
+    min-width: 760px;
+}
+.analysis-tree-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.analysis-tree-segment { stroke: #94a3b8; stroke-width: 1.6; fill: none; }
+.analysis-tree-root-line { stroke: #bfdbfe; stroke-width: 1.2; stroke-dasharray: 5 5; }
+.analysis-tree-tip-label { font-size: 12px; font-weight: 800; fill: #0f172a; }
+.analysis-tree-tip-sublabel { font-size: 10px; fill: #475569; }
+.analysis-tree-tip-best .analysis-tree-tip-label { fill: #1d4ed8; font-weight: 900; }
+.analysis-tree-tip-best .analysis-tree-tip-dot { stroke: #1d4ed8; stroke-width: 2.5; }
+.analysis-tree-color-0 { fill: #2563eb; background: #2563eb; }
+.analysis-tree-color-1 { fill: #059669; background: #059669; }
+.analysis-tree-color-2 { fill: #dc2626; background: #dc2626; }
+.analysis-tree-color-3 { fill: #7c3aed; background: #7c3aed; }
+.analysis-tree-color-4 { fill: #ea580c; background: #ea580c; }
+.analysis-tree-color-5 { fill: #0891b2; background: #0891b2; }
+.analysis-tree-color-6 { fill: #be123c; background: #be123c; }
+.analysis-tree-color-7 { fill: #4f46e5; background: #4f46e5; }
+.analysis-tree-color-8 { fill: #65a30d; background: #65a30d; }
+.analysis-tree-color-9 { fill: #9333ea; background: #9333ea; }
+.analysis-tree-color-10 { fill: #0d9488; background: #0d9488; }
+.analysis-tree-color-11 { fill: #ca8a04; background: #ca8a04; }
+.aa-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+.aa-pill {
+    display: inline-flex;
+    padding: 4px 7px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #3730a3;
+    font-size: 11px;
+    font-weight: 800;
+}
+.report-footer {
+    padding: 24px 42px 32px;
+    background: #0f172a;
+    color: #cbd5e1;
+    text-align: center;
+}
+.report-footer strong { color: #ffffff; }
+.report-footer a { color: #93c5fd; font-weight: 800; }
+@media (max-width: 820px) {
+    .report { width: calc(100% - 12px); margin: 6px auto; border-radius: 14px; }
+    .report-header, main, .report-footer { padding-left: 20px; padding-right: 20px; }
+    .summary-grid, .card-grid { grid-template-columns: 1fr; }
+    .report-header h1 { font-size: 24px; }
+    .report-toolbar { flex-wrap: wrap; }
+}
+@page {
+    size: A4;
+    margin: 12mm;
+}
+@media print {
+    html, body { background: #ffffff; }
+    body { font-size: 10.5pt; }
+    .report-toolbar { display: none !important; }
+    .report {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .report-header {
+        padding: 20px 24px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .report-header h1 { font-size: 20pt; }
+    main { padding: 18px 24px 22px; }
+    section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-top: 18px;
+    }
+    .summary-grid, .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+    .report-card { padding: 10px; }
+    .report-card strong { font-size: 12pt; }
+    table { font-size: 8.4pt; table-layout: fixed; }
+    th, td { padding: 5px 6px; }
+    .tree-figure { overflow: visible; }
+    .tree-svg-wrap { min-width: 0; }
+    .analysis-tree-svg { max-width: 100%; }
+    .report-footer {
+        padding: 16px 24px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+</style>
+</head>
+<body>
+<div class="report-toolbar">
+    <button onclick="window.print()">Print / Save as PDF</button>
+    <span>For PDF: choose "Save as PDF" in the browser print dialog.</span>
+</div>
+<article class="report">
+<header class="report-header">
+    <p class="eyebrow">DiseasesMapMx public analysis report</p>
+    <h1>PRRSV-2 ORF5 closest-reference and amino acid screening</h1>
+    <p>Preliminary analysis based on nucleotide closest-reference screening, local master-tree context, and derived ORF5 amino acid comparison. This report is designed as a shareable, single-file HTML document and as a print-optimized PDF-ready view.</p>
+    <div class="badge-row">
+        <span class="badge">${escapeHtml(analysisId)}</span>
+        <span class="badge">Sample: ${escapeHtml(sampleId)}</span>
+        <span class="badge">Engine ${escapeHtml(reportValue(result.engine_version, "v3.1"))}</span>
+        <span class="badge">Generated ${escapeHtml(now.toLocaleString())}</span>
+    </div>
+</header>
+<main>
+    <section>
+        <div class="section-title"><span>1</span><h2>Analysis summary</h2></div>
+        <div class="summary-grid">
+            <div class="report-card"><span class="label">Lineage result</span><strong>${escapeHtml(reportValue(result.lineage_screening_result || result.closest_lineage_candidate, "Not available"))}</strong><small>Preliminary closest-reference signal</small></div>
+            <div class="report-card"><span class="label">Confidence</span><strong>${escapeHtml(reportValue(result.confidence, "Not available"))}</strong><small>${gapValue !== null && gapValue !== undefined ? `${escapeHtml(formatPercent(gapValue))} gap to closest different lineage` : "Gap unavailable"}</small></div>
+            <div class="report-card"><span class="label">Best reference</span><strong>${escapeHtml(reportValue(bestMatch.reference_id, "Not available"))}</strong><small>${escapeHtml(reportValue(bestMatch.accession, "No accession"))} | ${escapeHtml(reportValue(bestMatch.lineage, "No lineage"))}</small></div>
+            <div class="report-card"><span class="label">Nucleotide identity</span><strong>${escapeHtml(formatPercent(bestMatch.identity_percent))}</strong><small>${escapeHtml(reportValue(bestMatch.comparable_positions, "Not available"))} comparable positions</small></div>
+        </div>
+        <div class="callout good">
+            <strong>Interpretation</strong><br>
+            ${escapeHtml(reportValue(result.interpretation, "Preliminary closest-reference screening result returned."))}
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title"><span>2</span><h2>Submitted metadata</h2></div>
+        <div class="card-grid">
+            <div class="report-card"><span class="label">Sample ID</span><strong>${escapeHtml(sampleId)}</strong></div>
+            <div class="report-card"><span class="label">Country / state</span><strong>${escapeHtml(reportValue(metadata.country))} / ${escapeHtml(reportValue(metadata.state))}</strong></div>
+            <div class="report-card"><span class="label">Municipality</span><strong>${escapeHtml(reportValue(metadata.municipality))}</strong></div>
+            <div class="report-card"><span class="label">Collection date</span><strong>${escapeHtml(reportValue(metadata.collection_date))}</strong></div>
+            <div class="report-card"><span class="label">Sample type</span><strong>${escapeHtml(reportValue(metadata.sample_type))}</strong></div>
+            <div class="report-card"><span class="label">Production stage</span><strong>${escapeHtml(reportValue(metadata.production_stage))}</strong></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title"><span>3</span><h2>Query quality control</h2></div>
+        <div class="card-grid">
+            <div class="report-card"><span class="label">Valid input</span><strong>${qc.valid ? "Yes" : "No"}</strong></div>
+            <div class="report-card"><span class="label">Length</span><strong>${escapeHtml(reportValue(qc.length, "Not available"))} nt</strong><small>After FASTA cleaning</small></div>
+            <div class="report-card"><span class="label">ORF5 coverage</span><strong>${escapeHtml(formatPercent(qc.coverage_percent))}</strong><small>Relative to 603 nt</small></div>
+            <div class="report-card"><span class="label">Ambiguous bases</span><strong>${escapeHtml(reportValue(qc.ambiguous_bases, "0"))}</strong><small>${Number(qc.ambiguous_percent ?? 0).toFixed(2)}%</small></div>
+        </div>
+        <div class="${warnings.length ? "callout warn" : "callout"}"><strong>QC warnings</strong><br>${warnings.length ? escapeHtml(warnings.join(" ")) : "None"}</div>
+    </section>
+
+    <section>
+        <div class="section-title"><span>4</span><h2>Closest-reference screening</h2></div>
+        <div class="card-grid">
+            <div class="report-card"><span class="label">Best match</span><strong>${escapeHtml(reportValue(bestMatch.reference_id, "Not available"))}</strong></div>
+            <div class="report-card"><span class="label">Identity</span><strong>${escapeHtml(formatPercent(bestMatch.identity_percent))}</strong></div>
+            <div class="report-card"><span class="label">Mismatches</span><strong>${escapeHtml(reportValue(bestMatch.mismatches, "Not available"))}</strong></div>
+            <div class="report-card"><span class="label">Orientation</span><strong>${escapeHtml(formatOrientation(bestMatch.orientation))}</strong></div>
+        </div>
+        <h3>Top closest references</h3>
+        ${pdfTable(["Rank", "Reference", "Accession", "Lineage", "Identity", "Mismatches", "Orientation"], topRows)}
+    </section>
+
+    <section>
+        <div class="section-title"><span>5</span><h2>Local master-tree context</h2></div>
+        <div class="card-grid">
+            <div class="report-card"><span class="label">Reference in master tree</span><strong>${treeContext.best_match_present_in_tree ? "Represented" : "Not represented"}</strong><small>${treeContext.master_tree_available ? `Master tree: ${escapeHtml(reportValue(treeContext.tree_taxa_count, "-"))} taxa` : "Master-tree context unavailable"}</small></div>
+            <div class="report-card"><span class="label">Master-tree lineage</span><strong>${escapeHtml(reportValue(treeContext.lineage, "Not available"))}</strong><small>${escapeHtml(reportValue(treeContext.lineage_size_in_tree_metadata, "-"))} references in this lineage</small></div>
+            <div class="report-card"><span class="label">Displayed label</span><strong>${escapeHtml(reportValue(treeContext.display_label || treeContext.tree_id, "Not available"))}</strong></div>
+        </div>
+        <div class="callout">${escapeHtml(reportValue(treeContext.interpretation, "The closest reference was linked to the master-tree context when available."))}${treeView.available ? ` Local tree view displayed ${escapeHtml(reportValue(treeView.selected_leaf_count, "-"))} taxa; the closest shared ancestor contains ${escapeHtml(reportValue(treeView.mrca_leaf_count_in_full_tree, "-"))} taxa in the full master tree.` : ""}</div>
+        ${treeView.available && renderedTreeSvg ? `
+        <div class="tree-figure">
+            <div class="tree-legend">${renderedTreeLegend}</div>
+            <div class="tree-svg-wrap">${renderedTreeSvg}</div>
+            <small>This reduced local tree view is included for visual context only. The full Newick tree and alignment are not exposed.</small>
+        </div>` : ""}
+        <h3>Displayed reference window</h3>
+        ${pdfTable(["Tree ID", "Accession", "Country", "Lineage", "Sublineage", "Best match"], treeRows)}
+    </section>
+
+    <section>
+        <div class="section-title"><span>6</span><h2>ORF5 amino acid comparison</h2></div>
+        <div class="card-grid">
+            <div class="report-card"><span class="label">Translation status</span><strong>${proteinAnalysis.available ? "Completed" : "Not available"}</strong><small>${proteinAnalysis.available ? `Covered ${escapeHtml(reportValue(proteinSummary.covered_aa_positions, "-"))}/200 GP5 positions` : "Protein module did not return a comparison"}</small></div>
+            <div class="report-card"><span class="label">AA identity vs best match</span><strong>${escapeHtml(formatPercent(proteinSummary.aa_identity_vs_best_match_percent))}</strong><small>${escapeHtml(reportValue(proteinSummary.aa_differences_vs_best_match, "-"))} amino acid differences</small></div>
+            <div class="report-card"><span class="label">Closest vaccine AA match</span><strong>${escapeHtml(reportValue(proteinSummary.closest_vaccine_reference_id, "Not available"))}</strong><small>${escapeHtml(formatPercent(proteinSummary.closest_vaccine_aa_identity_percent))} identity | ${escapeHtml(reportValue(proteinSummary.closest_vaccine_aa_differences, "-"))} differences</small></div>
+            <div class="report-card"><span class="label">Protein QC</span><strong>${escapeHtml(reportValue(proteinSummary.ambiguous_amino_acids, "0"))} X | ${escapeHtml(reportValue(proteinSummary.internal_stop_codons, "0"))} stops</strong><small>${proteinSummary.terminal_stop_detected === null || proteinSummary.terminal_stop_detected === undefined ? "Terminal stop not covered" : proteinSummary.terminal_stop_detected ? "Terminal stop detected when covered" : "Terminal stop covered but not detected"}</small></div>
+        </div>
+        <div class="${proteinWarnings.length ? "callout warn" : "callout"}"><strong>Protein interpretation</strong><br>${escapeHtml(reportValue(proteinAnalysis.interpretation, "Amino acid comparison was not available."))}${proteinWarnings.length ? ` Protein warnings: ${escapeHtml(proteinWarnings.join(" "))}` : ""}</div>
+        <h3>Vaccine amino acid comparison</h3>
+        ${pdfTable(["Vaccine reference", "Lineage", "Sublineage", "AA identity", "AA differences", "Comparable AA"], vaccineRows)}
+        <h3>AA differences versus best match</h3>
+        ${pdfTable(
+            ["Position", "Best-match AA", "Submitted AA"],
+            proteinDifferenceRows,
+            proteinAnalysis.available
+                ? "No amino acid differences detected across comparable positions."
+                : "Amino acid comparison was not available."
+        )}
+        ${proteinDifferences.length ? `<div class="aa-pill-row">${aaDifferencePills}${proteinDifferences.length > 80 ? `<span class="aa-pill">+${proteinDifferences.length - 80} more</span>` : ""}</div>` : ""}
+    </section>
+
+    <section>
+        <div class="section-title"><span>7</span><h2>Storage status and data protection</h2></div>
+        <div class="${storage.saved ? "callout good" : "callout"}">
+            <strong>${escapeHtml(storage.saved ? "Authorized submission saved" : "Memory-only analysis")}</strong><br>
+            ${escapeHtml(storage.message || "Storage status not available.")}
+            ${storageLocations ? `<br><small>Local queue: ${escapeHtml(storageLocations)}</small>` : ""}
+        </div>
+        <p>This public report excludes the submitted nucleotide sequence, the complete reference FASTA, the curated metadata table, alignments, and the master tree file. It may include derived amino acid summaries produced from the submitted sequence for local review. GenBank accessions may be shown because they correspond to public sequence records.</p>
+        <p>This result corresponds to preliminary closest-reference screening based on nucleotide identity, local master-tree context, and derived ORF5 amino acid comparison. It should not be interpreted as a formal phylogenetic lineage assignment. Formal interpretation should consider sequence quality, reference-panel coverage, phylogenetic context, epidemiological information, amino acid changes, and expert review.</p>
+    </section>
+</main>
+<footer class="report-footer">
+    <p><strong>Prepared for DiseasesMapMx by Alberto Jorge Galindo-Barboza</strong></p>
+    <p>Veterinary and Zootechnical Research in Molecular Epidemiology and Genomic Surveillance of Swine Pathogens</p>
+    <p><a href="https://aljogaba.github.io/" target="_blank" rel="noopener noreferrer">Professional website: https://aljogaba.github.io/</a></p>
+</footer>
+</article>
+</body>
+</html>`;
+}
+
 function openPdfReadyReport(result) {
     const reportWindow = window.open("", "_blank");
 
@@ -813,7 +1356,7 @@ function openPdfReadyReport(result) {
 
 
     if (!reportWindow) {
-        showFormMessage("The PDF report window was blocked by the browser. Allow pop-ups for this site and try again.", "error");
+        showFormMessage("The PDF-ready report window was blocked by the browser. Allow pop-ups for this site and try again.", "error");
         return;
     }
 
@@ -824,7 +1367,7 @@ function openPdfReadyReport(result) {
     }
 
     reportWindow.document.open();
-    reportWindow.document.write(buildPdfReadyReportHtml(result));
+    reportWindow.document.write(buildProfessionalReportHtml(result));
     reportWindow.document.close();
     reportWindow.focus();
 }
@@ -1038,8 +1581,8 @@ function buildPublicSummaryReport(result) {
     return lines.join("\n");
 }
 
-function downloadTextFile(filename, content) {
-    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+function downloadFile(filename, content, mimeType = "text/plain;charset=utf-8") {
+    const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
 
@@ -1050,6 +1593,10 @@ function downloadTextFile(filename, content) {
     link.remove();
 
     URL.revokeObjectURL(url);
+}
+
+function downloadTextFile(filename, content) {
+    downloadFile(filename, content, "text/plain;charset=utf-8");
 }
 
 function updateReportButtonState(enabled) {
@@ -1785,10 +2332,10 @@ if (downloadReportButton) {
 
         const analysisId = sanitizeFilename(latestAnalysisResult.analysis_id || "analysis");
         const sampleId = sanitizeFilename(latestAnalysisResult.submitted_metadata?.sample_id || "sample");
-        const filename = `DiseasesMapMx_PRRSV_ORF5_report_${sampleId}_${analysisId}.txt`;
-        const report = buildPublicSummaryReport(latestAnalysisResult);
+        const filename = `DiseasesMapMx_PRRSV_ORF5_report_${sampleId}_${analysisId}.html`;
+        const report = buildProfessionalReportHtml(latestAnalysisResult);
 
-        downloadTextFile(filename, report);
+        downloadFile(filename, report, "text/html;charset=utf-8");
     });
 }
 
@@ -1796,7 +2343,7 @@ if (downloadReportButton) {
 if (openPdfReportButton) {
     openPdfReportButton.addEventListener("click", () => {
         if (!latestAnalysisResult) {
-            showFormMessage("Run an analysis before opening the PDF report.", "error");
+            showFormMessage("Run an analysis before opening the PDF-ready report.", "error");
             return;
         }
 
