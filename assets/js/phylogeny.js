@@ -201,6 +201,7 @@ function setApiStatus(status, title, text) {
 
 function clearApiOutput() {
     latestAnalysisResult = null;
+    setInterpretationWorkflowVisibility(true);
     updateReportButtonState(false);
     document.getElementById("resultRequestCode").textContent = "Analysis request: pending";
     document.getElementById("resultLineage").textContent = "—";
@@ -828,6 +829,29 @@ function openPdfReadyReport(result) {
 }
 
 function buildPublicSummaryReport(result) {
+    if (isLowIdentityInterpretationBlocked(result)) {
+        const gate = result.orf5_identity_gate || {};
+        const detectedIdentity = gate.closest_reference_identity_percent;
+        const minimumIdentity = gate.minimum_identity_percent ?? result.thresholds?.minimum_orf5_interpretation_identity_percent ?? 85;
+        return [
+            "DiseasesMapMx PRRSV-2 ORF5 public analysis summary",
+            "====================================================",
+            "",
+            `Analysis ID: ${result.analysis_id || "Not available"}`,
+            "",
+            "Result",
+            "------",
+            "Sequence not suitable for PRRSV-2 ORF5 interpretation.",
+            "",
+            result.interpretation || "The submitted sequence did not pass the minimum ORF5 identity gate.",
+            "",
+            `Closest-reference identity detected: ${detectedIdentity !== undefined && detectedIdentity !== null ? formatPercent(detectedIdentity) : "Not available"}`,
+            `Minimum required identity: ${formatPercent(minimumIdentity)}`,
+            "",
+            "No lineage interpretation, master-tree context, amino acid comparison, or complete public report was generated."
+        ].join("\n");
+    }
+
     const qc = result.qc || {};
     const metadata = result.submitted_metadata || {};
     const bestMatch = result.closest_reference_match || result.best_match || {};
@@ -1451,8 +1475,78 @@ function getResultTitle(result) {
     return "Preliminary closest-reference screening completed.";
 }
 
+
+function isLowIdentityInterpretationBlocked(result = {}) {
+    const gate = result.orf5_identity_gate || {};
+    return Boolean(result.interpretation_blocked)
+        || result.classification_status === "below_orf5_identity_threshold"
+        || gate.passed === false;
+}
+
+function setInterpretationWorkflowVisibility(showInterpretation) {
+    const screeningDetailSelectors = [
+        ".analysis-screening-step .analysis-workflow-note",
+        ".analysis-screening-step .analysis-result-grid",
+        ".analysis-screening-step .analysis-api-output"
+    ];
+
+    screeningDetailSelectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((element) => {
+            element.hidden = !showInterpretation;
+        });
+    });
+
+    const reportSection = document.querySelector(".analysis-report-step");
+    if (reportSection) {
+        reportSection.hidden = !showInterpretation;
+    }
+
+    if (!showInterpretation) {
+        const treeSection = document.getElementById("treeContextSection");
+        const proteinSection = document.getElementById("proteinAnalysisSection");
+        if (treeSection) {
+            treeSection.hidden = true;
+        }
+        if (proteinSection) {
+            proteinSection.hidden = true;
+        }
+        updateReportButtonState(false);
+    }
+}
+
+function renderLowIdentityStop(result) {
+    latestAnalysisResult = null;
+    setInterpretationWorkflowVisibility(false);
+
+    const gate = result.orf5_identity_gate || {};
+    const detectedIdentity = gate.closest_reference_identity_percent ?? result.closest_reference_match?.identity_percent;
+    const minimumIdentity = gate.minimum_identity_percent ?? result.thresholds?.minimum_orf5_interpretation_identity_percent ?? 85;
+
+    document.getElementById("resultRequestCode").textContent =
+        `Analysis ID: ${result.analysis_id || "—"}${result.engine_version ? ` · Engine ${result.engine_version}` : ""}`;
+
+    const identityText = detectedIdentity !== undefined && detectedIdentity !== null
+        ? formatPercent(detectedIdentity)
+        : "not available";
+    const thresholdText = formatPercent(minimumIdentity);
+
+    setApiStatus(
+        "warning",
+        "Sequence not suitable for PRRSV-2 ORF5 interpretation.",
+        `${result.interpretation || "The submitted sequence cannot be processed as PRRSV-2 ORF5 because its closest-reference nucleotide identity is below the minimum threshold required for interpretation against the curated ORF5 reference panel."} Closest-reference identity detected: ${identityText}. Minimum required identity: ${thresholdText}.`
+    );
+
+    document.getElementById("resultJson").textContent = JSON.stringify(result, null, 2);
+}
+
 function renderApiResult(result) {
+    if (isLowIdentityInterpretationBlocked(result)) {
+        renderLowIdentityStop(result);
+        return;
+    }
+
     latestAnalysisResult = result;
+    setInterpretationWorkflowVisibility(true);
     updateReportButtonState(true);
     const qc = result.qc || {};
     const bestMatch = result.closest_reference_match || result.best_match || {};
@@ -1530,6 +1624,7 @@ function renderApiResult(result) {
 
 function renderApiError(error) {
     latestAnalysisResult = null;
+    setInterpretationWorkflowVisibility(false);
     updateReportButtonState(false);
     setApiStatus(
         "error",

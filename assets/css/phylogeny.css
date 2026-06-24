@@ -608,6 +608,21 @@
 
 
 /* v3.4.4 — Keep post-analysis workflow hidden until an analysis has been executed. */
+
+/* v3.5.3 — enforce hidden state for low-identity stop workflow.
+   Some grid/flex display rules can override the browser default [hidden] behavior.
+   This keeps the blocked workflow visually clean: warning box only. */
+.analysis-screening-step [hidden],
+.analysis-result-grid[hidden],
+.analysis-api-output[hidden],
+.analysis-workflow-note[hidden],
+.analysis-results-step[hidden],
+.analysis-report-step[hidden],
+#treeContextSection[hidden],
+#proteinAnalysisSection[hidden] {
+    display: none !important;
+}
+
 .analysis-results[hidden],
 #analysisResults[hidden] {
     display: none !important;
