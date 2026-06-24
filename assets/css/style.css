@@ -1879,3 +1879,22 @@ canvas {
     }
 }
 
+/* =========================================================
+   ESTO LO AGREGUE COPIANDO EL ESTILO DEL ENCABEZADO AZUL 
+   DE LA PAGINA DE ANALISIS DE SECUENCIAS CSS PHYLOGENY, 
+   PARA USARLO EN EL DASHBOARD CSS STYLE.
+   ========================================================= */
+
+.analysis-eyebrow,
+.analysis-section-label {
+    margin: 0 0 8px;
+    color: #1d4ed8;
+    font-size: 0.77rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.analysis-hero .analysis-eyebrow {
+    color: #93c5fd;
+}
