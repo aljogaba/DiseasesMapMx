@@ -87,6 +87,65 @@
 <link rel="stylesheet"
       href="assets/css/style.css">
 
+
+<style>
+/* DiseasesMapMx architecture figure — local About page styling */
+.architecture-figure-section {
+    overflow: hidden;
+}
+
+.architecture-figure {
+    margin: 26px 0 8px;
+}
+
+.architecture-figure img {
+    display: block;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.18);
+    border: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+.architecture-figure figcaption {
+    max-width: 1120px;
+    margin: 14px auto 0;
+    padding: 14px 18px;
+    border-left: 5px solid #1d4ed8;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 0.96rem;
+    line-height: 1.7;
+}
+
+.architecture-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.architecture-tech-tags span {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #eff6ff;
+    color: #1e3a8a;
+    font-size: 0.84rem;
+    font-weight: 700;
+    border: 1px solid #bfdbfe;
+}
+
+@media (max-width: 768px) {
+    .architecture-figure figcaption {
+        font-size: 0.9rem;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -560,6 +619,61 @@
         </ul>
 
     </section>
+
+
+    <!-- ====================== -->
+    <!-- ARCHITECTURE FIGURE -->
+    <!-- ====================== -->
+
+    <section class="info-section architecture-figure-section">
+
+        <h3>
+            Arquitectura de la Plataforma y Motor de Análisis
+        </h3>
+
+        <p>
+            DiseasesMapMx opera como una plataforma web pública separada de su motor local
+            de análisis. La interfaz permite visualizar información, capturar solicitudes y
+            mostrar resultados; el motor analítico realiza la validación, procesamiento,
+            consulta de referencias curadas y devolución de resultados estructurados mediante API.
+        </p>
+
+        <figure class="architecture-figure">
+            <img src="assets/img/arquitectura_diseasesmapmx_motor_analisis.png"
+                 alt="Esquema conceptual de la arquitectura de DiseasesMapMx y su motor de análisis">
+            <figcaption>
+                <strong>Figura.</strong> Esquema conceptual de la arquitectura de DiseasesMapMx y su motor de análisis.
+                El desarrollo de la plataforma fue asistido con OpenAI; la interfaz pública utiliza HTML, CSS y JavaScript;
+                los servicios analíticos y la API se implementan en Python/FastAPI; el intercambio de datos se realiza
+                mediante HTTP y respuestas JSON; el manejo de datos considera archivos CSV, FASTA y Newick; y la
+                visualización, despliegue y pruebas se apoyan en GitHub Pages, Cloudflare Tunnel y un entorno local
+                de ejecución controlada.
+            </figcaption>
+        </figure>
+
+        <div class="architecture-tech-tags" aria-label="Tecnologías y componentes utilizados">
+            <span>OpenAI</span>
+            <span>Python/FastAPI</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>HTTP</span>
+            <span>JSON</span>
+            <span>CSV</span>
+            <span>FASTA</span>
+            <span>Newick</span>
+            <span>GitHub Pages</span>
+            <span>Cloudflare Tunnel</span>
+        </div>
+
+        <p>
+            Esta separación permite mantener una interfaz pública ligera y documentada, mientras
+            el procesamiento sensible, los datos de referencia curados y los envíos autorizados
+            permanecen bajo control del entorno analítico.
+        </p>
+
+    </section>
+
 
 </main>
 
