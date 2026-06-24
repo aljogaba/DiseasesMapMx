@@ -1835,3 +1835,47 @@ canvas {
   overflow-wrap: anywhere;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
+
+
+/* =========================================================
+   DISEASESMAPMX — NAVBAR POLISH FOR SEQUENCE ANALYSIS LINK
+   Adds safe wrapping and tighter spacing now that the menu includes
+   the sequence-analysis module in both languages.
+   ========================================================= */
+
+.navbar ul {
+    flex-wrap: wrap;
+    column-gap: clamp(18px, 3vw, 34px);
+    row-gap: 10px;
+}
+
+.navbar a {
+    white-space: nowrap;
+}
+
+.language-switch {
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .navbar ul {
+        column-gap: 22px;
+        row-gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar a {
+        white-space: normal;
+    }
+
+    .language-switch {
+        justify-content: center;
+    }
+}
+
