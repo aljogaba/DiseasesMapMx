@@ -1730,3 +1730,44 @@
         width: 21px;
     }
 }
+
+
+/* v3.5.4 — consent-based local storage status */
+.analysis-storage-status {
+    margin-top: 18px;
+    padding: 15px 16px;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    background: #f8fbff;
+    color: #334155;
+}
+
+.analysis-storage-status.is-saved {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+    color: #14532d;
+}
+
+.analysis-storage-status.is-memory-only {
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+}
+
+.analysis-storage-status.is-error {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.analysis-storage-status strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.analysis-storage-status p {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.55;
+}

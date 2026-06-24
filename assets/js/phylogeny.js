@@ -221,6 +221,7 @@ function clearApiOutput() {
         `<tr><td colspan="7">Waiting for API response.</td></tr>`;
     resetTreeContextOutput();
     resetProteinAnalysisOutput();
+    resetStorageStatusOutput();
     document.getElementById("resultJson").textContent = "No API response yet.";
 }
 
@@ -1061,6 +1062,67 @@ function updateReportButtonState(enabled) {
     }
 }
 
+
+function resetStorageStatusOutput() {
+    const alert = document.getElementById("storageStatusAlert");
+    const title = document.getElementById("storageStatusTitle");
+    const text = document.getElementById("storageStatusText");
+
+    if (!alert || !title || !text) {
+        return;
+    }
+
+    alert.hidden = true;
+    alert.className = "analysis-storage-status";
+    title.textContent = "Storage status";
+    text.textContent = "Storage status will appear after analysis.";
+}
+
+function formatStorageLocations(locations = []) {
+    if (!Array.isArray(locations) || !locations.length) {
+        return "";
+    }
+
+    return locations
+        .map((location) => location.relative_folder || location.category || "")
+        .filter(Boolean)
+        .join("; ");
+}
+
+function renderStorageStatus(result = {}) {
+    const alert = document.getElementById("storageStatusAlert");
+    const title = document.getElementById("storageStatusTitle");
+    const text = document.getElementById("storageStatusText");
+
+    if (!alert || !title || !text) {
+        return;
+    }
+
+    const storage = result.storage_status || {};
+
+    alert.hidden = false;
+    alert.className = "analysis-storage-status";
+
+    if (storage.error) {
+        alert.classList.add("is-error");
+        title.textContent = "Authorized storage failed";
+        text.textContent = `${storage.message || "Authorized storage was requested, but the local storage step failed."} ${storage.error}`;
+        return;
+    }
+
+    if (storage.saved) {
+        const locations = formatStorageLocations(storage.saved_locations);
+        alert.classList.add("is-saved");
+        title.textContent = "Authorized submission saved";
+        text.textContent = `${storage.message || "Authorized submission saved for scientific review."}${locations ? ` Local queue: ${locations}.` : ""}`;
+        return;
+    }
+
+    alert.classList.add("is-memory-only");
+    title.textContent = "Memory-only analysis";
+    text.textContent = storage.message || "This request was analyzed in memory only and was not stored because private storage or future public release was not authorized.";
+}
+
 function setLineageCardState(result) {
     const lineageCard = document.querySelector(".analysis-lineage-card");
     if (!lineageCard) {
@@ -1530,12 +1592,18 @@ function renderLowIdentityStop(result) {
         : "not available";
     const thresholdText = formatPercent(minimumIdentity);
 
+    const storage = result.storage_status || {};
+    const storageText = storage.storage_requested
+        ? ` Storage status: ${storage.message || (storage.saved ? "Authorized submission saved for scientific review." : "Authorized storage was requested.")}`
+        : "";
+
     setApiStatus(
         "warning",
         "Sequence not suitable for PRRSV-2 ORF5 interpretation.",
-        `${result.interpretation || "The submitted sequence cannot be processed as PRRSV-2 ORF5 because its closest-reference nucleotide identity is below the minimum threshold required for interpretation against the curated ORF5 reference panel."} Closest-reference identity detected: ${identityText}. Minimum required identity: ${thresholdText}.`
+        `${result.interpretation || "The submitted sequence cannot be processed as PRRSV-2 ORF5 because its closest-reference nucleotide identity is below the minimum threshold required for interpretation against the curated ORF5 reference panel."} Closest-reference identity detected: ${identityText}. Minimum required identity: ${thresholdText}.${storageText}`
     );
 
+    resetStorageStatusOutput();
     document.getElementById("resultJson").textContent = JSON.stringify(result, null, 2);
 }
 
@@ -1612,6 +1680,7 @@ function renderApiResult(result) {
     renderTopMatches(result.top_matches || []);
     renderTreeContext(result);
     renderProteinAnalysis(result);
+    renderStorageStatus(result);
     document.getElementById("resultJson").textContent = JSON.stringify(result, null, 2);
 
     const warnings = qc.warnings && qc.warnings.length ? ` Warnings: ${qc.warnings.join(" ")}` : "";
@@ -1626,6 +1695,7 @@ function renderApiError(error) {
     latestAnalysisResult = null;
     setInterpretationWorkflowVisibility(false);
     updateReportButtonState(false);
+    resetStorageStatusOutput();
     setApiStatus(
         "error",
         "The analysis engine could not complete the request.",
