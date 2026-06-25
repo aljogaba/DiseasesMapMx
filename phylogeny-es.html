@@ -73,12 +73,14 @@
                 <h2>Análisis de Secuencias PRRSV-2 ORF5</h2>
                 <p>
                     Envíe una secuencia nucleotídica ORF5 y metadatos no identificantes de la muestra para
-                    evaluación preliminar de calidad, tamizaje por referencia cercana y contexto del árbol maestro.
+                    evaluación preliminar de calidad, tamizaje por referencia cercana y representación en 
+                    un árbol filogenético maestro.
                 </p>
                 <div class="analysis-hero-badges" aria-label="Alcance del análisis">
                     <span>PRRSV-2</span>
                     <span>ORF5</span>
                     <span>Tamizaje por referencia cercana</span>
+                    <span>Representación filogenética</span>
                 </div>
                 <div class="analysis-access-notice" role="note">
                     <strong>Acceso temporal para pruebas</strong>
@@ -94,8 +96,9 @@
                     <h2>Envío de secuencias y tamizaje por referencia</h2>
                     <p>
                         Este módulo captura metadatos estandarizados, valida la entrada nucleotídica
-                        y envía la solicitud a un motor de análisis en Python para comparación preliminar
-                        por referencia cercana y contexto local del árbol maestro contra referencias curadas de PRRSV-2 ORF5.
+                        y envía la solicitud a un motor de análisis en Python para realizar una comparación preliminar
+                        por referencia cercana de su secuencia, además, la ubica en un árbol filogenético maestro generado
+                        con referencias curadas y clasificadas de PRRSV-2 ORF5.
                     </p>
                 </div>
 
@@ -103,7 +106,11 @@
                     <span class="analysis-status-dot" aria-hidden="true"></span>
                     <div>
                         <strong>Estatus de interpretación</strong>
-                        <p>Este módulo proporciona un resultado preliminar de tamizaje por referencia cercana. No constituye una asignación filogenética formal de linaje y debe interpretarse considerando el panel de referencia actual y el contexto del árbol.</p>
+                        <p>Este módulo proporciona un resultado preliminar 
+                            de tamizaje por referencia cercana. 
+                            No constituye una asignación filogenética formal 
+                            de linaje y debe interpretarse como un resultado consensado
+                            con el panel de referencia actual que utiliza el motor de la plataforma.</p>
                     </div>
                 </div>
             </div>
@@ -120,7 +127,7 @@
                             <div>
                                 <p class="analysis-section-label">Información requerida</p>
                                 <h3 id="metadataHeading">Metadatos de la muestra</h3>
-                                <p>Los campos marcados con asterisco son obligatorios para la solicitud preliminar.</p>
+                                <p>Los campos marcados con asterisco son obligatorios.</p>
                             </div>
                         </div>
 
@@ -134,7 +141,7 @@
                                        placeholder="ej., GRANJA23-ORF5-01"
                                        autocomplete="off"
                                        required>
-                                <small>Utilice un código de laboratorio o proyecto que no identifique la granja.</small>
+                                <small>Utilice un código de laboratorio o proyecto que no exponga datos sensibles.</small>
                             </div>
 
                             <div class="analysis-field">
@@ -153,7 +160,7 @@
                             </div>
 
                             <div class="analysis-field">
-                                <label for="state">Estado / área administrativa <span aria-hidden="true">*</span></label>
+                                <label for="state">Estado<span aria-hidden="true">*</span></label>
                                 <input type="text"
                                        id="state"
                                        name="state"
@@ -190,8 +197,8 @@
                                 <select id="productionStage" name="productionStage">
                                     <option value="">No especificado</option>
                                     <option value="suckling">Lactancia</option>
-                                    <option value="nursery">Destete / transición</option>
-                                    <option value="grower">Crecimiento</option>
+                                    <option value="nursery">Destete</option>
+                                    <option value="grower">Crecimiento / Desarrollo</option>
                                     <option value="finisher">Finalización</option>
                                     <option value="breeding">Pie de cría</option>
                                     <option value="mixed">Mixta / múltiples etapas</option>
@@ -226,7 +233,7 @@
                                        id="contactEmail"
                                        name="contactEmail"
                                        maxlength="160"
-                                       placeholder="Optional; used only for request follow-up">
+                                       placeholder="Opcional; uselo solo si necesita dar seguimiento de la solicitud">
                             </div>
                         </div>
                     </section>
@@ -237,7 +244,10 @@
                             <div>
                                 <p class="analysis-section-label">Entrada nucleotídica</p>
                                 <h3 id="sequenceHeading">Secuencia ORF5</h3>
-                                <p>Pegue una secuencia en formato FASTA o únicamente caracteres nucleotídicos.</p>
+                                <p>Pegue una secuencia en formato FASTA o únicamente caracteres nucleotídicos.
+                                    El motor de análisis solo procesará una secuencia por solicitud. 
+                                    No se permite la entrada de múltiples secuencias.
+                                </p>
                             </div>
                         </div>
 
@@ -273,15 +283,15 @@
 
                             <div class="analysis-sequence-tools">
                                 <button type="button" id="exampleSequenceButton" class="analysis-button analysis-button-secondary">
-                                    Insertar ejemplo sintético
+                                    Insertar secuencia de ejemplo
                                 </button>
                                 <button type="button" id="clearSequenceButton" class="analysis-button analysis-button-ghost">
-                                    Limpiar secuencia
+                                    Limpiar
                                 </button>
                             </div>
 
                             <div id="sequenceFeedback" class="analysis-inline-feedback" aria-live="polite">
-                                Accepted characters: A, C, G, T, and N. FASTA headers beginning with “&gt;” are allowed.
+                                Caracteres aceptados: A, C, G, T, y N. Los encabezados FASTA que comienzan con “&gt;” están permitidos.
                             </div>
                         </div>
                     </section>
@@ -290,9 +300,10 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number" aria-hidden="true">3</div>
                             <div>
-                                <p class="analysis-section-label">Gobernanza de datos</p>
-                                <h3 id="permissionsHeading">Permisos de análisis</h3>
-                                <p>El análisis y la liberación pública se tratan como decisiones separadas.</p>
+                                <p class="analysis-section-label">Gobierno de datos</p>
+                                <h3 id="permissionsHeading">Permisos para el análisis</h3>
+                                <p>El análisis, almacenamiento privado y el uso de la secuencia para alimentar 
+                                    la base de datos interna se tratan como decisiones separadas.</p>
                             </div>
                         </div>
 
@@ -300,7 +311,7 @@
                             <label class="analysis-checkbox-card">
                                 <input type="checkbox" id="analysisConsent" name="analysisConsent" required>
                                 <span>
-                                    <strong>Autorizo el análisis preliminar de esta secuencia. <span aria-hidden="true">*</span></strong>
+                                    <strong>Autorizo el análisis de esta secuencia. <span aria-hidden="true">*</span></strong>
                                     <small>La secuencia será procesada para validación y tamizaje por referencia cercana.</small>
                                 </span>
                             </label>
@@ -309,15 +320,18 @@
                                 <input type="checkbox" id="storageConsent" name="storageConsent">
                                 <span>
                                     <strong>Autorizo el almacenamiento privado de esta solicitud para revisión científica.</strong>
-                                    <small>Esto no autoriza la publicación ni la inclusión en la base pública de DiseasesMapMx.</small>
+                                    <small>Esto no autoriza la publicación ni la inclusión en la base pública de DiseasesMapMx. Si
+                                        usted está interesado/a en dar seguimiento, le sugerimos agregar arriba su correo electronico
+                                        y marcar también está casilla.
+                                    </small>
                                 </span>
                             </label>
 
                             <label class="analysis-checkbox-card">
                                 <input type="checkbox" id="publicationConsent" name="publicationConsent">
                                 <span>
-                                    <strong>Autorizo una posible liberación pública futura después de revisión científica.</strong>
-                                    <small>La inclusión pública permanecerá sujeta a revisión manual, verificación de metadatos y aprobación del curador.</small>
+                                    <strong>Autorizo la posible integración de la secuencia a la base de datos de DiseasesMapMx después de su revisión científica.</strong>
+                                    <small>La inclusión en la base de datos de DiseasesMapMx dependerá de la revisión manual, verificación de metadatos y aprobación del curador.</small>
                                 </span>
                             </label>
                         </div>
@@ -359,29 +373,33 @@
                         <div class="analysis-workflow-note">
                             <strong>Qué muestra este paso</strong>
                             <p>
-                                Este paso resume el control de calidad de la consulta y el resultado del tamizaje por referencia cercana:
-                                longitud de secuencia, cobertura ORF5, bases ambiguas, mejor referencia coincidente, identidad nucleotídica,
-                                orientación, nivel de soporte y referencias cercanas devueltas por el motor.
+                                Este paso resume el control de calidad de la consulta (primeras 4 tarjetas): 
+                                longitud de secuencia, cobertura del ORF5, presencia de bases ambiguas y el estatus de calidad. 
+                                También muestra el linaje asignado de la secuencia consultada basado en el resultado del tamizaje por referencia cercana y 
+                                la mejor referencia coincidente, % de identidad nucleotídica con la referencia,
+                                orientación y nivel de confianza del análisis.
+                                Además, genera una tabla con las 5 referencias cercanas devueltas por el motor. Las referencias se muestran
+                                con la accesión GenBank-Linaje (ej. PZ201037-L8D).
                             </p>
                         </div>
 
                         <div class="analysis-result-grid">
                             <article class="analysis-result-card">
-                                <span>Longitud válida de secuencia</span>
+                                <span>Longitud de la secuencia consultada</span>
                                 <strong id="resultLength">—</strong>
                                 <small>Después de retirar el encabezado FASTA y espacios</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Cobertura ORF5 estimada</span>
+                                <span>ORF5 Cobertura de la secuencia consultada</span>
                                 <strong id="resultCoverage">—</strong>
-                                <small>Relative to a 603 nt complete Secuencia ORF5</small>
+                                <small>Sobre los 603 nt de una secuencia completa ORF5</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Bases ambiguas</span>
                                 <strong id="resultAmbiguous">—</strong>
-                                <small>Número y porcentaje de caracteres N</small>
+                                <small>Número y porcentaje de caracteres ambiguos (N)</small>
                             </article>
 
                             <article class="analysis-result-card">
@@ -393,33 +411,37 @@
 
                         <div class="analysis-result-grid analysis-api-summary-grid" aria-label="Tamizaje por referencia cercana summary">
                             <article class="analysis-result-card analysis-lineage-card">
-                                <span>Resultado de tamizaje de linaje</span>
+                                <span>Linaje asignado por tamizaje</span>
                                 <strong id="resultLineage">—</strong>
-                                <small>Basado en el panel activo de referencias y los umbrales de soporte configurados</small>
+                                <small>Basado en el panel activo de referencias y los umbrales de soporte configurados en el motor</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Mejor referencia coincidente</span>
                                 <strong id="resultBestMatch">—</strong>
+                                <small>Los metadatos de la referencia aparecerán aquí:</small>
                                 <small id="resultBestMatchDetails">Los metadatos de la referencia aparecerán aquí</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Identidad nucleotídica</span>
+                                <span>Identidad nucleotídica entre la consulta y la referencia</span>
                                 <strong id="resultIdentity">—</strong>
+                                <small>Posiciones comparables y discrepancias:</small>
                                 <small id="resultIdentityDetails">Posiciones comparables y discrepancias</small>
                             </article>
 
                             <article class="analysis-result-card analysis-orientation-card">
                                 <span>Secuencia orientation</span>
                                 <strong id="resultOrientation">—</strong>
+                                <small>Orientación utilizada para el tamizaje por referencia cercana</small>
                                 <small id="resultOrientationDetails">Orientación utilizada para el tamizaje por referencia cercana</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Confianza</span>
                                 <strong id="resultConfidence">—</strong>
-                                <small id="resultGap">Diferencia respecto al linaje distinto más cercano</small>
+                                <small>Diferencia respecto al linaje distinto más cercano:</small>
+                                <small id="resultGap">Diferencia respecto al linaje distinto más cercano</small>                                
                             </article>
                         </div>
 
@@ -462,8 +484,11 @@
                         <div class="analysis-panel-header">
                             <div class="analysis-step-number analysis-step-tree" aria-hidden="true">5</div>
                             <div>
-                                <p class="analysis-section-label">Contexto del árbol maestro</p>
+                                <p class="analysis-section-label">Representación filogenética de la consulta</p>
                                 <h3 id="treeContextHeading">Contexto filogenético del árbol maestro PRRSV-2 ORF5</h3>
+                                <p >
+                                    El contexto del árbol aparecerá cuando la referencia más cercana esté representada en el árbol maestro PRRSV-2 ORF5.
+                                </p>
                                 <p id="treeContextSummary">
                                     El contexto del árbol aparecerá cuando la referencia más cercana esté representada en el árbol maestro PRRSV-2 ORF5.
                                 </p>
@@ -473,15 +498,17 @@
                         <div class="analysis-workflow-note analysis-workflow-note-tree">
                             <strong>Qué muestra este paso</strong>
                             <p>
-                                This step links the closest reference from the screening result to the PRRSV-2 ORF5 master tree.
-                                It reports whether that reference is represented in the tree and shows a reduced local view around it,
-                                not the full Newick tree, alignment, FASTA dataset, or curated metadata table.
+                                Este paso vincula la secuencia consultada mediante la referencia más cercana proveniente 
+                                del resultado del tamizaje al árbol maestro 
+                                del ORF5 del PRRSV-2. Informa si dicha referencia se encuentra representada en el árbol y muestra 
+                                una vista local reducida en torno a la misma, no el árbol Newick completo, el alineamiento, 
+                                el conjunto de datos FASTA ni la tabla de metadatos curados.
                             </p>
                         </div>
 
                         <div class="analysis-result-grid analysis-tree-context-grid">
                             <article class="analysis-result-card">
-                                <span>Referencia in master tree</span>
+                                <span>Referencia en el árbol maestro</span>
                                 <strong id="resultTreeRepresentation">—</strong>
                                 <small id="resultTreeRepresentationDetails">Presencia de la mejor referencia en el árbol maestro</small>
                             </article>
@@ -489,11 +516,12 @@
                             <article class="analysis-result-card">
                                 <span>Linaje en el árbol maestro</span>
                                 <strong id="resultTreeGroup">—</strong>
+                                <small>Tamaño del linaje en los metadatos de visualización:</small>
                                 <small id="resultTreeGroupSize">Linaje size in the visualization metadata</small>
                             </article>
 
                             <article class="analysis-result-card">
-                                <span>Etiqueta de referencia mostrada</span>
+                                <span>Referencia mostrada</span>
                                 <strong id="resultTreeLabel">—</strong>
                                 <small>Etiqueta pública para la referencia representada</small>
                             </article>
@@ -502,7 +530,10 @@
                         <div id="treeGraphicContainer" class="analysis-tree-graphic" hidden>
                             <div class="analysis-tree-graphic-header">
                                 <div>
-                                    <h5>Local phylogenetic context</h5>
+                                    <h5>Contexto filogenético local</h5>
+                                    <p>Vista local reducida del árbol en torno a la secuencia referencia que representa a la consulta. 
+                                        El árbol Newick completo, el alineamiento, el conjunto de datos FASTA y la tabla de metadatos 
+                                        curados no se encuentran expuestos.</p>
                                     <p id="treeGraphicCaption">Vista local reducida del árbol alrededor de la referencia más cercana.</p>
                                 </div>
                                 <span id="treeGraphicBadge">Vista local</span>
@@ -514,9 +545,12 @@
                         </div>
 
                         <div id="treeNeighborhoodContainer" class="analysis-tree-neighborhood" hidden>
-                            <h5>Displayed reference window</h5>
+                            <h5>Ventana de referencias mostrada</h5>
                             <p>
-                                Small capped reference window around the closest match. The graphical view above is reduced to the displayed references and does not expose the full tree, alignment, FASTA dataset, or curated metadata table.
+                                Ventana de referencias acotada en torno a la coincidencia más cercana. 
+                                La vista gráfica superior se reduce a las referencias mostradas y no 
+                                expone el árbol completo, el alineamiento, el conjunto de datos FASTA 
+                                ni la tabla de metadatos curados.
                             </p>
 
                             <div class="analysis-match-table-wrapper">
@@ -548,6 +582,11 @@
                             <div>
                                 <p class="analysis-section-label">Comparación de aminoácidos ORF5</p>
                                 <h3 id="proteinAnalysisHeading">Comparación traducida de GP5</h3>
+                                <p>La secuencia del ORF5 enviada fue traducida en el contexto de orientación 
+                                    y marco de lectura inferidos a partir del resultado del tamizaje. 
+                                    Las diferencias de aminoácidos representan cambios a nivel codificante 
+                                    y ayudan a distinguir la variación no sinónima de la variación 
+                                    nucleotídica sinónima.</p>
                                 <p id="proteinAnalysisSummary">
                                     La comparación de aminoácidos aparecerá después de traducir la secuencia en el marco codificante ORF5 inferido.
                                 </p>
@@ -557,10 +596,14 @@
                         <div class="analysis-workflow-note analysis-workflow-note-protein">
                             <strong>Qué muestra este paso</strong>
                             <p>
-                                This step translates the submitted Secuencia ORF5 into amino acids using the orientation and
-                                reference-frame context inferred by the nucleotide screening. It compares the derived GP5
-                                sequence against the closest reference and a fixed vaccine reference panel, helping separate
-                                coding-level amino acid changes from synonymous nucleotide variation.
+                                Después de traducir la secuencia enviada a aminoácidos, está se compara 
+                                frente a la referencia más cercana y un panel de referencia vacunal fijo, 
+                                lo que ayuda a identificar los cambios de aminoácidos. 
+                                El panel de refencia vacunal ofrece un contexto comparativo que sirve para 
+                                la interpretación biologica de la secuencia enviada, sin embargo, esto de deberá
+                                tomar con cautela al momento de asociar variable que este motor no considera. 
+                                Es responsabilidad del usuario interpretar los resultados de manera crítica 
+                                y en el contexto de la epidemiología y la biología del virus.
                             </p>
                         </div>
 
@@ -568,30 +611,35 @@
                             <article class="analysis-result-card">
                                 <span>Estatus de traducción</span>
                                 <strong id="resultProteinStatus">—</strong>
+                                <small>Contexto del marco codificante ORF5:</small>
                                 <small id="resultProteinFrame">Contexto del marco codificante ORF5</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Cobertura de AA</span>
                                 <strong id="resultProteinCoverage">—</strong>
+                                <small>Posiciones GP5 mostradas cubiertas por la consulta:</small>
                                 <small id="resultProteinRange">Posiciones GP5 mostradas cubiertas por la consulta</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Identidad AA vs mejor coincidencia</span>
                                 <strong id="resultProteinIdentity">—</strong>
+                                <small>Diferencias a nivel codificante respecto a la referencia más cercana:</small>
                                 <small id="resultProteinDifferences">Diferencias a nivel codificante respecto a la referencia más cercana</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>Referencia vacunal AA más cercana</span>
                                 <strong id="resultClosestVaccine">—</strong>
+                                <small>Panel fijo de referencias vacunales:</small>
                                 <small id="resultClosestVaccineDetails">Panel fijo de referencias vacunales</small>
                             </article>
 
                             <article class="analysis-result-card">
                                 <span>QC proteico</span>
                                 <strong id="resultProteinQc">—</strong>
+                                <small>Aminoácidos ambiguos y codones de paro internos:</small>
                                 <small id="resultProteinQcDetails">Aminoácidos ambiguos y codones de paro internos</small>
                             </article>
                         </div>
@@ -607,8 +655,10 @@
                                     <span class="analysis-placeholder-label">Vista proteica tipo Jalview</span>
                                     <h4>Visualizador de alineamiento de aminoácidos ORF5</h4>
                                     <p>
-                                        Rows include fixed vaccine references, the closest nucleotide reference, and the submitted
-                                        sequence translated into the ORF5 frame. Scroll horizontally to inspect positions 1–200.
+                                        Las filas incluyen las referencias vacunales fijas, 
+                                        la referencia de nucleótidos más cercana y la secuencia 
+                                        enviada traducida en el marco de lectura del ORF5. 
+                                        Desplácese horizontalmente para inspeccionar las posiciones 1–200.
                                     </p>
                                 </div>
                             </div>
@@ -635,7 +685,7 @@
                                         <tr>
                                             <th>Referencia vacunal</th>
                                             <th>Linaje</th>
-                                            <th>AA identity</th>
+                                            <th>% Identidad AA</th>
                                             <th>Diferencias AA</th>
                                             <th>AA comparables</th>
                                         </tr>
@@ -655,7 +705,7 @@
                             <div class="analysis-step-number analysis-step-report" aria-hidden="true">7</div>
                             <div>
                                 <p class="analysis-section-label">Reporte y trazabilidad</p>
-                                <h3 id="reportHeading">Reporte público de análisis</h3>
+                                <h3 id="reportHeading">Reporte público del análisis</h3>
                                 <p>
                                     Descargue un reporte HTML de archivo único o abra una vista optimizada para impresión/PDF después de completar el análisis.
                                 </p>
