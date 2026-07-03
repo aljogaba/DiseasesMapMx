@@ -1,6 +1,6 @@
 "use strict";
 
-const API_ENDPOINT = "https://marion-villa-sent-borough.trycloudflare.com/analyze";
+const API_ENDPOINT = "https://june-reload-journals-everything.trycloudflare.com/analyze";
 
 const form = document.getElementById("sequenceAnalysisForm");
 const sequenceInput = document.getElementById("sequenceInput");
