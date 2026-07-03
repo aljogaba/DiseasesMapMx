@@ -1,6 +1,6 @@
 "use strict";
 
-const API_ENDPOINT = "https://continued-background-behavior-ordering.trycloudflare.com/analyze";
+const API_ENDPOINT = "https://supplemental-decor-announcements-quest.trycloudflare.com";
 
 const form = document.getElementById("sequenceAnalysisForm");
 const sequenceInput = document.getElementById("sequenceInput");
