@@ -1,6 +1,6 @@
 "use strict";
 
-const API_ENDPOINT = "https://arrive-tanks-clubs-bill.trycloudflare.com/analyze";
+const API_ENDPOINT = "http://127.0.0.1:8000/analyze";
 
 const form = document.getElementById("sequenceAnalysisForm");
 const sequenceInput = document.getElementById("sequenceInput");
