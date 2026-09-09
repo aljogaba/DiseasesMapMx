@@ -1,472 +1,64 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>
-        DiseasesMapMx | Vigilancia Genómica Porcina de PRRSV y PCV2 en Jalisco
-    </title>
-
-    <meta name="description"
-          content="DiseasesMapMx es una plataforma interactiva de vigilancia genómica porcina enfocada en PRRSV, PCV2, epidemiología molecular, visualización epidemiológica y circulación de patógenos en Jalisco, México. Desarrollada por Alberto Jorge Galindo-Barboza.">
-
-    <meta name="author"
-          content="Alberto Jorge Galindo-Barboza">
-
-    <meta name="keywords"
-          content="DiseasesMapMx, Alberto Jorge Galindo Barboza, Alberto Jorge Galindo-Barboza, PRRSV, PCV2, enfermedades porcinas, vigilancia genómica porcina, vigilancia molecular porcina, epidemiología molecular porcina, epidemiología veterinaria, enfermedades porcinas México, PRRSV México, PCV2 México, PRRSV Jalisco, PCV2 Jalisco, Jalisco, INIFAP, swine genomic surveillance, molecular surveillance, molecular epidemiology, pig diseases Mexico">
-
-    <meta name="robots"
-          content="index, follow">
-
-    <link rel="canonical"
-          href="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
-
-    <link rel="alternate"
-          hreflang="en"
-          href="https://aljogaba.github.io/DiseasesMapMx/">
-
-    <link rel="alternate"
-          hreflang="es-MX"
-          href="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
-
-    <link rel="alternate"
-          hreflang="x-default"
-          href="https://aljogaba.github.io/DiseasesMapMx/">
-
-    <!-- Open Graph -->
-
-    <meta property="og:title"
-          content="DiseasesMapMx | Vigilancia Genómica Porcina de PRRSV y PCV2">
-
-    <meta property="og:description"
-          content="Plataforma interactiva para la vigilancia genómica de PRRSV y PCV2, epidemiología molecular y visualización de datos epidemiológicos en Jalisco, México. Desarrollada por Alberto Jorge Galindo-Barboza.">
-
-    <meta property="og:image"
-          content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
-
-    <meta property="og:url"
-          content="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
-
-    <meta property="og:type"
-          content="website">
-
-    <meta property="og:locale"
-          content="es_MX">
-
-    <meta property="og:locale:alternate"
-          content="en_US">
-
-    <!-- Twitter Card -->
-
-    <meta name="twitter:card"
-          content="summary_large_image">
-
-    <meta name="twitter:title"
-          content="DiseasesMapMx | Vigilancia Genómica Porcina de PRRSV y PCV2">
-
-    <meta name="twitter:description"
-          content="Plataforma interactiva de vigilancia genómica para la epidemiología molecular de PRRSV y PCV2 en Jalisco, México. Desarrollada por Alberto Jorge Galindo-Barboza.">
-
-    <meta name="twitter:image"
-          content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
-
-    <!-- Structured Data -->
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://aljogaba.github.io/#alberto-jorge-galindo-barboza",
-          "name": "Alberto Jorge Galindo Barboza",
-          "alternateName": [
-            "Alberto Jorge Galindo-Barboza",
-            "A. J. Galindo-Barboza",
-            "A.J. Galindo-Barboza",
-            "Jorge Galindo Barboza"
-          ],
-          "url": "https://aljogaba.github.io/",
-          "jobTitle": "Researcher",
-          "affiliation": {
-            "@type": "Organization",
-            "@id": "https://www.gob.mx/inifap#organization",
-            "name": "Instituto Nacional de Investigaciones Forestales, Agrícolas y Pecuarias",
-            "alternateName": "INIFAP",
-            "url": "https://www.gob.mx/inifap"
-          },
-          "sameAs": [
-            "https://orcid.org/0000-0003-4223-6161",
-            "https://scholar.google.com/citations?user=_pldFgEAAAAJ",
-            "https://www.scopus.com/authid/detail.uri?authorId=36666208000",
-            "https://www.semanticscholar.org/author/2327092786",
-            "https://www.researchgate.net/profile/Alberto-Jorge-Galindo-Barboza-2",
-            "https://sciprofiles.com/profile/galindo-barboza",
-            "https://www.3tres3.com/es-mx/usuarios/perfil/alberto-jorge-galindo-barboza",
-            "https://www.linkedin.com/in/alberto-jorge-galindo-barboza-89326515b/"
-          ],
-          "knowsAbout": [
-            "PRRSV",
-            "Porcine Reproductive and Respiratory Syndrome Virus",
-            "PCV2",
-            "Porcine Circovirus type 2",
-            "Swine molecular epidemiology",
-            "Epidemiología molecular porcina",
-            "Molecular surveillance",
-            "Vigilancia molecular porcina",
-            "Genomic surveillance",
-            "Vigilancia genómica porcina",
-            "Veterinary epidemiology",
-            "Epidemiological data visualization",
-            "Swine pathogen surveillance",
-            "Pig production systems",
-            "Animal health"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://aljogaba.github.io/DiseasesMapMx/#website-es",
-          "name": "DiseasesMapMx",
-          "alternateName": [
-            "Mapa de enfermedades porcinas México",
-            "Pig Diseases Map Mexico",
-            "Swine Diseases Map Mexico",
-            "DiseasesMapMx PRRSV PCV2"
-          ],
-          "url": "https://aljogaba.github.io/DiseasesMapMx/index-es.html",
-          "description": "DiseasesMapMx es una plataforma web para la vigilancia genómica porcina, la epidemiología molecular y la visualización de datos epidemiológicos de PRRSV y PCV2 en Jalisco, México.",
-          "inLanguage": "es-MX",
-          "creator": {
-            "@id": "https://aljogaba.github.io/#alberto-jorge-galindo-barboza"
-          },
-          "publisher": {
-            "@id": "https://aljogaba.github.io/#alberto-jorge-galindo-barboza"
-          },
-          "about": [
-            {
-              "@type": "Thing",
-              "name": "Epidemiología molecular de PRRSV"
-            },
-            {
-              "@type": "Thing",
-              "name": "Caracterización genética de PCV2"
-            },
-            {
-              "@type": "Thing",
-              "name": "Vigilancia genómica porcina"
-            },
-            {
-              "@type": "Thing",
-              "name": "Vigilancia molecular porcina"
-            },
-            {
-              "@type": "Thing",
-              "name": "Visualización de datos epidemiológicos"
-            },
-            {
-              "@type": "Thing",
-              "name": "Swine genomic surveillance"
-            },
-            {
-              "@type": "Thing",
-              "name": "Swine molecular epidemiology"
-            }
-          ],
-          "spatialCoverage": {
-            "@type": "Place",
-            "name": "Jalisco, México"
-          },
-          "hasPart": [
-            {
-              "@type": "WebPage",
-              "name": "Vigilancia de PRRSV",
-              "url": "https://aljogaba.github.io/DiseasesMapMx/prrsv-es.html"
-            },
-            {
-              "@type": "WebPage",
-              "name": "Vigilancia de PCV2",
-              "url": "https://aljogaba.github.io/DiseasesMapMx/pcv2-es.html"
-            },
-            {
-              "@type": "WebPage",
-              "name": "Tablero interactivo",
-              "url": "https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html"
-            },
-            {
-              "@type": "WebPage",
-              "name": "Acerca de DiseasesMapMx",
-              "url": "https://aljogaba.github.io/DiseasesMapMx/about-es.html"
-            }
-          ]
-        },
-        {
-          "@type": [
-            "WebApplication",
-            "CreativeWork"
-          ],
-          "@id": "https://aljogaba.github.io/DiseasesMapMx/#webapplication-es",
-          "name": "DiseasesMapMx",
-          "url": "https://aljogaba.github.io/DiseasesMapMx/index-es.html",
-          "applicationCategory": "Plataforma científica de visualización de datos",
-          "operatingSystem": "Web browser",
-          "isAccessibleForFree": true,
-          "description": "DiseasesMapMx es una plataforma web de vigilancia genómica y visualización de datos epidemiológicos para PRRSV y PCV2 en poblaciones porcinas de Jalisco, México.",
-          "creator": {
-            "@id": "https://aljogaba.github.io/#alberto-jorge-galindo-barboza"
-          },
-          "author": {
-            "@id": "https://aljogaba.github.io/#alberto-jorge-galindo-barboza"
-          },
-          "keywords": [
-            "DiseasesMapMx",
-            "Alberto Jorge Galindo Barboza",
-            "Alberto Jorge Galindo-Barboza",
-            "PRRSV",
-            "PCV2",
-            "vigilancia genómica porcina",
-            "epidemiología molecular porcina",
-            "vigilancia molecular porcina",
-            "visualización de datos epidemiológicos",
-            "swine genomic surveillance",
-            "swine molecular epidemiology",
-            "molecular surveillance",
-            "Jalisco",
-            "México",
-            "INIFAP"
-          ],
-          "audience": {
-            "@type": "Audience",
-            "audienceType": [
-              "Investigadores veterinarios",
-              "Profesionales de la salud porcina",
-              "Tomadores de decisiones en salud animal",
-              "Epidemiólogos"
-            ]
-          },
-          "spatialCoverage": {
-            "@type": "Place",
-            "name": "Jalisco, México"
-          },
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://aljogaba.github.io/DiseasesMapMx/index-es.html"
-          },
-          "potentialAction": {
-            "@type": "ViewAction",
-            "target": "https://aljogaba.github.io/DiseasesMapMx/dashboard-es.html"
-          }
-        }
-      ]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiseasesMapMx | Vigilancia Genómica Porcina</title>
+  <meta name="description" content="DiseasesMapMx es una plataforma de vigilancia genómica porcina para PRRSV, PCV2, epidemiología molecular, análisis de secuencias y visualización epidemiológica en México. La plataforma continúa ahora en su nuevo sitio de producción.">
+  <meta name="author" content="Alberto Jorge Galindo-Barboza">
+  <meta name="keywords" content="DiseasesMapMx, PRRSV, PCV2, vigilancia genómica porcina, epidemiología molecular porcina, epidemiología veterinaria, enfermedades porcinas México, PRRSV México, PCV2 México, Jalisco, Alberto Jorge Galindo-Barboza">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
+  <link rel="alternate" hreflang="en" href="https://aljogaba.github.io/DiseasesMapMx/">
+  <link rel="alternate" hreflang="es-MX" href="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
+  <link rel="alternate" hreflang="x-default" href="https://aljogaba.github.io/DiseasesMapMx/">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/transition.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DiseasesMapMx | Vigilancia Genómica Porcina">
+  <meta property="og:description" content="DiseasesMapMx continúa en su nueva plataforma de producción para vigilancia de PRRSV y PCV2, análisis de secuencias y visualización epidemiológica.">
+  <meta property="og:url" content="https://aljogaba.github.io/DiseasesMapMx/index-es.html">
+  <meta property="og:image" content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DiseasesMapMx | Vigilancia Genómica Porcina">
+  <meta name="twitter:description" content="Continúe a la nueva plataforma de producción de DiseasesMapMx.">
+  <meta name="twitter:image" content="https://aljogaba.github.io/DiseasesMapMx/assets/img/background.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DiseasesMapMx",
+    "url": "https://diseasesmapmx-web.diseasesmapmx.workers.dev/index-es.html",
+    "description": "Plataforma de vigilancia genómica porcina para PRRSV, PCV2, epidemiología molecular, análisis de secuencias y visualización epidemiológica.",
+    "inLanguage": ["es-MX", "en"],
+    "creator": {
+      "@type": "Person",
+      "name": "Alberto Jorge Galindo-Barboza",
+      "url": "https://aljogaba.github.io/"
     }
-    </script>
-
-    <!-- Favicon -->
-
-    <link rel="icon"
-          href="/DiseasesMapMx/favicon.png">
-
-    <!-- Styles -->
-
-    <link rel="stylesheet"
-          href="assets/css/style.css">
-
+  }
+  </script>
 </head>
-
 <body>
-
-    <!-- ====================== -->
-    <!-- HEADER -->
-    <!-- ====================== -->
-
-    <header class="main-header">
-
-        <div class="header-top">
-
-            <div class="header-logos">
-
-                <img src="assets/img/logos/header_inifap.png"
-                     alt="Logotipo de INIFAP"
-                     class="header-logo">
-
-                <img src="assets/img/logos/header_mexico.png"
-                     alt="Bandera de México"
-                     class="header-logo mexico-logo">
-
-            </div>
-
-            <div class="header-title">
-
-                <h1>DiseasesMapMx</h1>
-
-                <p>
-                    Plataforma de Vigilancia Genómica Porcina
-                </p>
-
-            </div>
-
-        </div>
-
-        <nav class="navbar">
-
-            <ul>
-
-                <li>
-                    <a href="index-es.html" class="active-page">Inicio</a>
-                </li>
-
-                <li>
-                    <a href="prrsv-es.html">PRRSV</a>
-                </li>
-
-                <li>
-                    <a href="pcv2-es.html">PCV2</a>
-                </li>
-
-                <li>
-                    <a href="dashboard-es.html">Tablero</a>
-                </li>
-
-                <li>
-                    <a href="phylogeny-es.html">Análisis de Secuencias</a>
-                </li>
-
-                <li>
-                    <a href="about-es.html">Acerca del proyecto</a>
-                </li>
-
-                <li class="language-switch">
-                    <a href="index-es.html" class="active">
-                        <img src="assets/img/flags/mx.png" alt="Español" class="flag-icon">
-                        ES
-                    </a>
-                    <span>|</span>
-                    <a href="index.html">
-                        <img src="assets/img/flags/us.png" alt="English" class="flag-icon">
-                        EN
-                    </a>
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </header>
-
-    <!-- ====================== -->
-    <!-- MAIN -->
-    <!-- ====================== -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <h2>
-                    Epidemiología Molecular y
-                    Vigilancia Genómica
-                </h2>
-
-                <p>
-
-                    Plataforma interactiva para la visualización de datos,
-                    la vigilancia molecular y análisis epidemiológico
-                    de patógenos virales porcinos en México, con énfasis
-                    inicial en la circulación de PRRSV y PCV2 en Jalisco.
-
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- ====================== -->
-    <!-- COLLABORATORS -->
-    <!-- ====================== -->
-
-    <section class="collaborators-section">
-
-        <h3>Instituciones Colaboradoras</h3>
-
-        <div class="collaborators-grid">
-
-            <img src="assets/img/logos/sponsor_1.png"
-                 alt="Institución colaboradora 1">
-
-            <img src="assets/img/logos/sponsor_2.png"
-                 alt="Institución colaboradora 2">
-
-            <img src="assets/img/logos/sponsor_3.png"
-                 alt="Institución colaboradora 3">
-
-            <img src="assets/img/logos/sponsor_4.png"
-                 alt="Institución colaboradora 4">
-
-        </div>
-
+  <main class="transition-shell">
+    <section class="transition-card" aria-labelledby="page-title">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="eyebrow">Vigilancia genómica porcina</p>
+      <h1 id="page-title">DiseasesMapMx continúa en una nueva plataforma</h1>
+      <p class="lead">El proyecto continúa en un nuevo sitio de producción con vigilancia de PRRSV y PCV2, visualización epidemiológica y análisis de secuencias PRRSV-2 ORF5.</p>
+      <div class="scope" aria-label="Alcance de la plataforma">
+        <span>PRRSV</span><span>PCV2</span><span>Epidemiología molecular</span><span>Análisis de secuencias</span>
+      </div>
+      <div class="actions">
+        <a class="button button-primary" href="https://diseasesmapmx-web.diseasesmapmx.workers.dev/index-es.html">Entrar a DiseasesMapMx</a>
+        <a class="button button-secondary" href="index.html" lang="en">View in English</a>
+      </div>
+      <p class="migration-note">Esta dirección permanece activa como punto de transición mientras los buscadores y las referencias externas actualizan la ubicación de la plataforma.</p>
     </section>
-
-    <!-- ====================== -->
-    <!-- FOOTER -->
-    <!-- ====================== -->
-
-    <footer class="main-footer">
-
-        <div class="footer-content">
-
-            <p>
-
-                © 2026 DiseasesMapMx.
-                Todos los derechos reservados.
-
-            </p>
-
-            <p>
-
-                Desarrollado por
-                Alberto Jorge Galindo Barboza
-
-            </p>
-
-            <!--
-            <p>
-
-                Instituto Nacional de Investigaciones Forestales,
-                Agrícolas y Pecuarias
-                (INIFAP)
-
-            </p>
-            -->
-
-            <p>
-
-                Médico Veterinario Zootecnista, MSc y candidato a Doctor,
-                con enfoque en epidemiología molecular y vigilancia de
-                patógenos virales en porcinos.
-
-            </p>
-
-            <p>
-
-                <a
-                class="professional-link" href="https://aljogaba.github.io/" target="_blank" rel="noopener noreferrer">
-                Sitio profesional
-                </a>
-
-            </p>
-
-        </div>
-
-    </footer>
-
+  </main>
+  <footer>
+    <span>DiseasesMapMx</span>
+    <span>Desarrollado por Alberto Jorge Galindo-Barboza</span>
+  </footer>
 </body>
-
 </html>
