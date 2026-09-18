@@ -2,24 +2,30 @@
 
 ## Current environment
 
-Academic Supabase environment:
+Supabase:
 - Organization: DiseasesMapMx
 - Project: DiseasesMapMx Production
+- PostgreSQL schemas used by this module: `molecular`, `staging`
 
-GitHub documentation repository:
-- aljogaba/DiseasesMapMx
+GitHub documentation:
+- `aljogaba/DiseasesMapMx`
 
-No passwords, database credentials, service-role keys, JWT secrets, private tokens, or other secrets are stored in this repository.
+No passwords, database credentials, service-role keys, JWT secrets, private tokens, or connection strings are stored in this repository.
 
-## Access model
+## Access boundary
 
-The molecular backend will use the existing academic Supabase project while remaining logically separated from the operational DiseasesMapMx data through a dedicated PostgreSQL schema.
+`molecular` and `staging` are internal schemas and are not intended for direct anonymous/authenticated Data API access.
 
-Administrative access to curation will be exposed only through authenticated administration workflows. Public DiseasesMapMx consumers should receive only explicitly published/approved data.
+Current foundation:
+- RLS is enabled on all new molecular/staging tables.
+- No permissive RLS policies are defined.
+- privileges for `anon` and `authenticated` are revoked on both schemas.
+- `service_role` has backend access for controlled server-side workflows.
+- trigger functions are not executable by `PUBLIC`.
+
+The future administration UI should reach curation operations through controlled backend/RPC/Edge Function endpoints rather than by exposing the complete molecular schema directly.
 
 ## Secrets
-
-Secrets belong only in secure runtime configuration or provider-managed environment variables.
 
 Never commit:
 - database passwords;
@@ -29,16 +35,16 @@ Never commit:
 - private connection strings;
 - user credentials.
 
-Documentation may name required environment variables, but must never contain their values.
+Only variable names and configuration requirements may be documented.
 
-## Database security
+## Operational separation
 
-- Keep Row Level Security enabled for tables exposed through the Supabase Data API.
-- Prefer private/non-exposed schemas for internal curation tables when direct client access is not needed.
-- Do not grant broad authenticated access without row- or role-level authorization rules.
-- Use migrations for durable schema changes and keep them under version control.
-- Record data-changing curation actions in an audit trail.
+The existing `public` / `private` DiseasesMapMx structures remain operationally independent from `molecular`.
+
+No current production table is repurposed as the molecular source of truth.
+
+A future publication/synchronization operation will copy or transform only approved/versioned fields required by DiseasesMapMx.
 
 ## Portability
 
-The scientific model should remain PostgreSQL-compatible and avoid unnecessary provider lock-in. If DiseasesMapMx is later institutionalized, the curated database should be transferable to an institutional PostgreSQL server while preserving stable identifiers, classifications, and provenance.
+The scientific model is PostgreSQL-based. Provider-specific application layers should remain thin enough that the curated repository can be exported or migrated without changing stable scientific identifiers, classifications, provenance, or dataset membership.
