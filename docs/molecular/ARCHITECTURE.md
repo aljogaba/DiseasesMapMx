@@ -1,49 +1,69 @@
 # Molecular backend architecture
 
-## Purpose
+## Decision
 
-The molecular backend is the curated scientific source of truth for sequence records, molecular classifications, reference roles, and analysis datasets used by DiseasesMapMx and other academic workflows.
-
-DiseasesMapMx is a consumer of curated molecular data. The public/operational application is not the master repository for scientific curation.
-
-## Boundary with the current DiseasesMapMx database
-
-The existing `public` tables in the Supabase project support the operational DiseasesMapMx workflow, including sequence submissions, reference versions, analyses, reports, imports, and audit events.
-
-The curated molecular repository will be implemented separately, under a dedicated PostgreSQL schema (planned name: `molecular`). Existing production tables must not be repurposed or altered as the molecular source of truth without an explicit migration plan.
-
-Conceptual flow:
+DiseasesMapMx uses a single Supabase project, `DiseasesMapMx Production`, with strong internal separation by PostgreSQL schema.
 
 ```
-molecular (curated source of truth)
+DiseasesMapMx Production
+|
++-- molecular   -> curated scientific source of truth
++-- staging     -> temporary import/validation workspace
++-- public      -> DiseasesMapMx operational/published layer
++-- private     -> existing non-public operational payloads
+```
+
+The `molecular` repository is broader than the public platform. It may contain international references, unpublished project sequences, complete genomes, multiple loci, historical classifications, manuscript datasets, and material that will never be displayed by DiseasesMapMx.
+
+DiseasesMapMx consumes only explicitly approved/versioned products generated from `molecular`.
+
+## Data flow
+
+```
+FASTA/FAS + XLSX/CSV
         |
-        +--> DiseasesMapMx operational/public data
+        v
+     staging
+        |
+        | validation + curator decision
+        v
+    molecular
+        |
         +--> FASTA/FAS exports
-        +--> XLSX/CSV metadata exports
-        +--> iTOL annotation datasets
-        +--> R / Python / QGIS analyses
-        +--> manuscript-specific datasets
+        +--> XLSX/CSV metadata
+        +--> iTOL datasets
+        +--> R / Python / QGIS
+        +--> manuscript datasets
+        |
+        '--> approved/versioned publication
+                    |
+                    v
+              public/private
+              DiseasesMapMx
 ```
+
+There is no automatic live synchronization from every curated molecular record into the public application. Publication to DiseasesMapMx must be an explicit operation so scientific work-in-progress cannot silently change the operational platform.
 
 ## Core design principles
 
 1. Sequence identity and classification are separate.
 2. Accessions/internal IDs are stable identifiers; lineage/sublineage are versioned annotations.
-3. Identical nucleotide sequences may belong to different biological/documentary records and are not automatically deduplicated.
-4. Classification schemes must be versioned so historical and current assignments can coexist.
-5. Vaccine references, parental/prototype strains, lineage anchors, and field references are explicit roles rather than free-text labels.
-6. Manuscript or project datasets are reproducible subsets generated from the curated repository.
-7. Imports pass through validation and human curation before becoming authoritative.
-8. PostgreSQL remains the portable core so the system can later migrate from Supabase to an institutional PostgreSQL server.
+3. Identical nucleotide sequences may represent distinct biological/documentary records and are not automatically deduplicated.
+4. Classification schemes are versioned so historical and current assignments can coexist.
+5. Vaccine references, alternate vaccine references, parental/prototype strains, lineage anchors, and field references are explicit roles.
+6. Datasets are reproducible memberships/queries, not copied FASTA files.
+7. Imports enter `staging` and require validation plus curator approval before becoming authoritative.
+8. DiseasesMapMx receives approved/versioned subsets, not the complete molecular repository by default.
+9. PostgreSQL remains the portable core.
 
-## Initial scope
+## Initial production use case
 
-The first production use case is PRRSV-2 ORF5:
+PRRSV-2 ORF5 is the first collection:
 - import the curated anchor collection;
 - retain nucleotide sequence plus metadata;
-- create versioned molecular classifications;
+- version molecular classifications;
 - define reference roles;
 - create the Jalisco manuscript dataset;
 - export a reproducible FASTA and annotations for phylogenetic reconstruction.
 
-The schema is intentionally designed to expand later to complete genomes, additional PRRSV loci, and other viruses.
+The same structure is intended to expand to complete genomes, other PRRSV loci, additional PRRSV collections, and other viruses.
