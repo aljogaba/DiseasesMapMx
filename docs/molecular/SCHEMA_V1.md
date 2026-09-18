@@ -4,6 +4,9 @@ Implemented in Supabase migrations:
 - `20260918190958_molecular_core_v1`
 - `20260918191031_molecular_core_indexes_v1`
 - `20260918191253_molecular_aliases_and_typing_v1`
+- `20260918192600_molecular_promote_anchor_batch_v1`
+- `20260918194218_enable_pg_net_for_internal_jobs`
+- `20260918210503_molecular_dataset_export_v1`
 
 ## molecular
 
@@ -52,9 +55,25 @@ Reference roles:
 Typing system:
 - `PRRSV2_ORF5_RFLP / imported-v1`
 
-## Initial anchor-import preparation
+## Initial curated anchor collection
 
-The source pair was audited before database promotion:
+Source pair:
+- `Anclas_ORF5_PRRS_anotaciones.fas`
+- `Anclas_ORF5_PRRS_anotaciones.xlsx`
+
+Import batch:
+- `20260918_PRRSV2_ORF5_ANCHORS_V1`
+
+Frozen reproducible dataset:
+- `PRRSV2_ORF5_ANCHORS_MASTER_20260918`
+
+Classification vocabularies:
+- `PRRSV2_ORF5_CURATED_ANCHOR_CLASSIFICATION / 2026-09-18-v1`: 31 source labels
+- `PRRSV2_ORF5_LEGACY_SL / imported-v1`: 12 legacy source labels
+
+The source label text is preserved without silently mapping it to a different literature classification scheme.
+
+### Source audit
 
 - FASTA records: 1,118
 - XLSX rows: 1,118
@@ -63,30 +82,59 @@ The source pair was audited before database promotion:
 - FASTA without XLSX metadata: 0
 - XLSX metadata without FASTA: 0
 - invalid nucleotide-character records: 0
-- exact nucleotide-identity groups: 51 (139 records)
-- nominal 603-nt records: 1,050
-- 600-nt records: 7
-- 606-nt records: 16
-- 609-nt records: 45
+- records without validation warnings: 919
+- records with informational warnings: 199
+- invalid records: 0
 
-Validation outcome:
-- 919 records without warnings
-- 199 records with informational warnings
-- 0 invalid records
+Warnings are limited to non-nominal ORF5 length and/or exact sequence identity shared with another accession. Neither condition causes automatic deletion or merging.
 
-Warnings are limited to non-nominal length and/or exact sequence identity shared with another accession. Neither condition causes automatic deletion.
+### Promoted curated records
 
-Prepared batch:
-- `20260918_PRRSV2_ORF5_ANCHORS_V1`
+- `sequence_records`: 1,118
+- `sequences`: 1,118
+- primary legacy FASTA aliases: 1,118
+- current lineage assignments: 1,118
+- historical source sublineage assignments: 37
+- RFLP typing assignments: 1,108
+- frozen dataset members: 1,118
 
-Prepared reproducible dataset:
-- `PRRSV2_ORF5_ANCHORS_MASTER_20260918`
+Post-promotion pairwise validation produced zero mismatches for:
+- accession;
+- historical FASTA alias;
+- nucleotide sequence;
+- preserved source metadata;
+- lineage;
+- source sublineage;
+- normalized RFLP.
 
-Imported classification vocabularies:
-- `PRRSV2_ORF5_CURATED_ANCHOR_CLASSIFICATION / 2026-09-18-v1`: 31 source labels
-- `PRRSV2_ORF5_LEGACY_SL / imported-v1`: 12 legacy source labels
+### Molecular sequence audit
 
-The label text is preserved from the workbook without silently mapping it to a literature scheme. Formal provenance can be curated later.
+- 600 nt: 7
+- 603 nt: 1,050
+- 606 nt: 16
+- 609 nt: 45
+- unique nucleotide sequences: 1,030
+- exact-identity groups: 51
+- records in exact-identity groups: 139
+
+Distinct accessions remain distinct biological/documentary records even when their ORF5 nucleotide strings are identical.
+
+## Reproducible FASTA export
+
+The permanent function:
+
+`molecular.export_dataset_fasta(dataset_code)`
+
+returns a canonical single-line FASTA for a reproducible dataset, ordered by dataset display order.
+
+For `PRRSV2_ORF5_ANCHORS_MASTER_20260918`:
+
+- exported FASTA characters: 691,315
+- source canonical FASTA MD5: `13d38cbfd3d38628d2c457e749e14df4`
+- database-export FASTA MD5: `13d38cbfd3d38628d2c457e749e14df4`
+- exact canonical FASTA match: **true**
+
+This verifies that the curated database reproduces the source anchor FASTA without sequence or identifier loss.
 
 ## Integrity rules
 
@@ -99,8 +147,8 @@ The label text is preserved from the workbook without silently mapping it to a l
 - only one `current` classification per sequence/classification scheme;
 - RFLP is stored as a typing result, not embedded in sequence identity;
 - datasets reference existing sequences instead of copying them;
-- all new tables have RLS enabled and remain non-public by default.
+- all molecular/staging tables have RLS enabled and remain non-public by default.
 
 ## Current state
 
-The schema, vocabularies, import batch, and anchor snapshot definition are persisted. The 1,118 source sequences have **not yet been promoted into curated molecular tables**; the batch remains in validation preparation so the import path can be completed through `staging` rather than bypassed.
+The initial PRRSV-2 ORF5 anchor collection is fully imported, curated, validated, and frozen as a reproducible dataset. It is ready to receive the Jalisco study sequences as a separate import batch and to generate study-specific FASTA subsets without manual FASTA/XLSX synchronization.
