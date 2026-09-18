@@ -8,6 +8,19 @@ Initial curator inputs:
 
 SQL is a backend implementation detail, not a user import format.
 
+## Storage ingress
+
+A private Supabase Storage bucket named `molecular-imports` is reserved for future curator uploads from the administration interface.
+
+Current bucket properties:
+- private;
+- empty;
+- 50 MB per-file limit;
+- accepts text/plain, CSV, JSON, XLS/XLSX and generic binary uploads;
+- no anonymous or authenticated client-upload policy is currently enabled.
+
+This means the bucket exists as infrastructure, but it is not yet exposed to the frontend. Future upload access should be added only through authenticated administration workflows.
+
 ## Workflow
 
 ```
@@ -78,4 +91,16 @@ Each dataset can retain:
 - version/status;
 - provenance.
 
-The first target dataset will be the PRRSV-2 ORF5 Jalisco manuscript dataset used to rebuild Figure 1.
+FASTA output is generated from database membership using `molecular.export_dataset_fasta(dataset_code)`.
+
+## First completed import
+
+The first completed curated import is:
+- batch: `20260918_PRRSV2_ORF5_ANCHORS_V1`;
+- frozen dataset: `PRRSV2_ORF5_ANCHORS_MASTER_20260918`;
+- records: 1,118;
+- invalid records: 0;
+- source-to-curated mismatches: 0;
+- canonical FASTA MD5: `13d38cbfd3d38628d2c457e749e14df4`.
+
+The next intended batch is the 63 Jalisco PRRSV-2 ORF5 study sequences used for the manuscript Figure 1 workflow.
