@@ -7,6 +7,7 @@ Implemented in Supabase migrations:
 - `20260918192600_molecular_promote_anchor_batch_v1`
 - `20260918194218_enable_pg_net_for_internal_jobs`
 - `20260918210503_molecular_dataset_export_v1`
+- `molecular_dataset_export_label_override_v1` — dataset-specific FASTA labels without altering sequence identity
 
 ## molecular
 
